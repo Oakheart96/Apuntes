@@ -1,0 +1,226 @@
+\documentclass[a4paper,10pt]{book}
+\usepackage[utf8x]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, amsthm, epsf, graphicx, amscd, amsfonts}
+\usepackage[colorlinks]{hyperref}
+\usepackage{xmpincl}
+
+\addto\captionsspanish{ \renewcommand{\chaptername}{Tema} }
+
+\newtheorem{thm}{Teorema}[chapter]
+\newtheorem{cor}[thm]{Corolario}
+\newtheorem{lem}[thm]{Lema}
+\newtheorem{prop}[thm]{Proposición}
+\newtheorem{defn}[thm]{Definición}
+\newtheorem{rem}[thm]{Observaciones}
+\newtheorem{eje}[thm]{Ejemplos}
+
+\newtheorem{ejercicio}{Ejercicio}[chapter]
+
+\newcommand{\RR}{\mathbb R}
+\newcommand{\RRR}{\RR^3}
+\newcommand{\CC}{\mathbb C}
+\newcommand{\AAA}{\mathbb A}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\Ank}{\AAA^n_k}
+\newcommand{\Pnk}{\PP^n_k}
+\newcommand{\Pmk}{\PP^m_k}
+\newcommand{\Amk}{\AAA^m_k}
+\newcommand{\calA}{{\mathcal A}}
+\newcommand{\II}{{\mathcal I}}
+\newcommand{\VV}{{\mathcal V}}
+\newcommand{\KK}{{\mathcal K}}
+\newcommand{\OO}{{\mathcal O}}
+\newcommand{\mm}{{\mathfrak m}}
+\newcommand{\ov}{\overline{v}}
+\newcommand{\UX}{(U,\textbf{x})}
+\newcommand{\VY}{(V,\textbf{y})}
+
+\newenvironment{subproof}[1][\proofname]{%
+	\renewcommand{\qedsymbol}{$\blacksquare$}%
+	\begin{proof}[#1]%
+	}{%
+	\end{proof}%
+}
+
+\title{Demostraciones Geometría Aplicada}
+\author{Jesús Camacho Moro}
+
+\begin{document}
+
+\maketitle
+
+\chapter{Aplicaciones entre Superficies}
+
+\begin{prop}
+La definición de función diferenciable no depende de la superficie simple tomada.
+\end{prop}
+
+\begin{proof}
+Supongamos que existen dos superficies simples $(U,\textbf{X})$ y $(V,\textbf{Y})$ de $M$ con $p\in \textbf{X}(U)$ un punto cualquiera y $f \circ \textbf{X}$ diferenciable en $p'=\textbf{X}^{-1}(p)$.\\
+Queremos probar que $f \circ \textbf{Y}$ es diferenciable en $p''=\textbf{Y}^{-1}(p)$. Como ambas son superficies simples podemos tomar $\textbf{X}^{-1}\circ\textbf{Y}$ en la intersección de los entornos del punto donde esté bien definido. Esta aplicación es diferenciable, por lo que si componemos $f \circ \textbf{X}\circ\textbf{X}^{-1}\circ\textbf{Y}$ sigue siendo una función diferenciable.
+\end{proof}
+
+\begin{prop} Sean $f:\RRR\longrightarrow\RR$ una función diferenciable y $M$ una superficie regular en $\RRR$. Entonces $f|_M:M\longrightarrow \RR$ es diferenciable.
+\end{prop}
+
+\begin{proof}Comprobemos la definición\\
+Continuidad. Sea $I\subset\RR$ un abierto, como $f:\RRR\longrightarrow\RR$ es continua sabemos que $f^{-1}(I)\subset\RRR$ es abierto. Si tomamos la restricción
+\[(f|_M)^{-1}(I)=f^{-1}(I)\cap M \]
+Es abierto de $M$.\\
+Superficie Simple. Sea $p\in M$ y $(U,\textbf{X})$ una superficie simple de $M$ con $p\in \textbf{X}^{-1}(U)$.\\
+Diferenciable. Por construcción $f\circ \textbf{X}=f|_M \circ \textbf{X}$, que es diferencible.
+\end{proof} 
+
+\begin{prop}La definición de función diferenciable entre dos superficies regulares no depende de las superficies simples escogidas.
+\end{prop}
+
+\begin{proof}
+La demostración es análoga a la hecha previamente. Basta tomar otras dos superficies simples en $M$ y $N$ a las que denotaremos $(U',\textbf{X'})$ y $(V',\textbf{Y'})$, y probar que $\textbf{Y'}^{-1}\circ f\circ \textbf{X'}$ en un entorno de la antiimagen de $p$. De nuevo, usaremos la diferenciabilidad de nuestras superficies iniciales para componer en los entornos donde tenga sentido sus definiciones.
+\end{proof}
+
+\begin{thm}
+Sean $f:\RRR\longrightarrow \RRR$ una aplicación diferenciable. Sean $M$ y $N$ superficies regulares tales que $f(M)\subset N$. Entonces $f|_M:M\longrightarrow N$ es también diferenciable.
+\end{thm}
+
+\begin{proof}
+Continuidad. Sea $H\subset N$ abierto, entonces existe $W\subset \RRR$ tal que $H=W\cap N$. Consideramos $f^{-1}(H)=f^{-1}(W\cap N)=f^{-1}(W)\cap f^{-1}(N)=f^{-1}(W)\cap M$ ambos abiertos en sus topologías.\\
+Diferenciable. Consideramos $\textbf{Y}^{-1}\circ f|_M \circ \textbf{X}=\textbf{Y}\circ f \circ \textbf{X}$ en la intersección de los entornos donde tenga sentido ($\textbf{X}^{-1}(\textbf{X}(U)\cap f^{-1}(\textbf{Y}(V)))$. 
+\end{proof}
+
+\section{La Diferencial o Aplicación Tangente}
+\begin{thm}
+Sean $f:M\longrightarrow N$ diferenciable y $p\in M$:
+\begin{enumerate}
+\item[a)] $f_{*p}:T_p(M)\longrightarrow T_{f(p)}(N)$ no depende de la curva derivable elegida, es lineal y la matriz asociada es $J_{p'}(\textbf{X}^{-1}\circ f \circ \textbf{X})$, con $p'=\textbf{x}^{-1}(p)$.
+\item[b)]Si f es regular en $p$, entonces $f_{*p}$ es un isomorfismo.
+\end{enumerate}
+
+
+\end{thm}
+\begin{proof}
+\begin{enumerate}
+\item [a)]Sean $M$ y $N$ dos superficies regulares y sea $f:M\longrightarrow N$ una aplicación diferenciable con $p\in M$ y $\overline{v}\in T_p(M)$.\\
+Sea $(U,\textbf{X})$ una superficie simple en $M$ con $p\in \textbf{X}(U)$, entonces $T_p(M)$ es el espacio vectorial generado por $\{\textbf{x}_1(u_0^1,u_0^2),\textbf{x}_2(u_0^1,u_0^2)\}$ con $p=\textbf{x}(u_0^1,u_0^2)$.\\
+Como $p\in T_p(M)$, existen $\lambda_1,\lambda_2$ tales que $\overline{v}$ se escribe como combinación de los parámetros de $\textbf{X}$ y dichas constantes.\\
+Por otra parte, existe $\gamma(-\epsilon,\epsilon)\longrightarrow\RRR$ curva diferenciable en $M$ tal que $\gamma(0)=p$ y $\gamma'(0)=\overline{v}$. Además, podemos suponer que dicha curva está contenida en la superficie. Esto nos permite escribir la curva en función de los parámetros que llamaremos $u^1(t)$, $u^2(t)$.\\
+Basta imponer las condiciones exigidas inicialmente sobre $\gamma$ para llegar a $\lambda^i=\frac{du^i}{dt}|_{t=0}$ aplicando tan solo la regla de la cadena.\\
+Un proceso análogo se aplica a la imagen por $f$, teniendo en cuenta que la regla de la cadena se aplica a $\textbf{Y}^{-1}\circ f \circ \textbf{X}$, para obtener $\overline{\mu}=J_{p'}(\textbf{Y}^{-1}\circ f \circ \textbf{X})\overline{\lambda}$.
+\item [b)] Como la matriz jacobiana es regular, la transformación se trata de un isomorfismo.
+\end{enumerate}
+\end{proof}
+
+\begin{eje}
+	Consideramos la aplicación antipodal $f:S^2\longrightarrow S^2$, que se define por $f(p)=-p$ con $p\in S^2$. Calcular la aplicación tangente.
+	
+	Dado $p_0\in S^2$ podemos suponer que está en el hemisferio superior, entonces $f(p_0)=-p_0$ estará en el inferior.\\
+	Dado $\overline{v}\in T_{p_0}(S^2)$, consideramos la curva diferenciable en $S^2$ 
+	\[
+	\gamma(t)=(x(t),y(t),z(t))
+	\]
+	Con $\gamma(0)=p_0$ y $\gamma'(0)=\ov$. Calculamos la composición con $f$ dad por $f \circ \gamma (t)=(-x(t),-y(t),-z(t))$. Entonces, $f_{*p_0}(\ov)=(f\circ \gamma)'(0)=-\ov$.\\
+	Sean $\UX$ y $\VY$ las superficies simples dadas por el disco $U=V=\{(u^1,u^2)\in\mathbb(R^2):(u^1)^2+(u^2)^2=1\}$ con $\mathbf{X}$ hemisferio norte y $\mathbf{Y}$ hemisferio sur.
+	\[
+	J_{p'_0}(\mathbf{Y}^{-1}\circ f\circ \mathbf{X})=-Id
+	\]
+	Teniendo en cuenta que $\mathbf{Y}^{-1}\circ f\circ \mathbf{X}=(-u^1,-u^2)=(v^1,v^2)$.
+\end{eje}
+
+\section{Isometrías}
+\begin{prop}
+Las isometrías conservan las longitudes de las curvas
+\end{prop}
+
+\begin{proof}
+Queremos probar que dado una curva diferenciable $\alpha:I\longrightarrow M$ y dados $t_0,t_1\in I$ con $t_0>t_1$, se tiene que $L^{t_1}_{t_0}(\alpha)=L^{t_1}_{t_0}(f\circ\alpha) $.\\
+Como $\alpha$ es una curva diferenciable en $M$, $\alpha'\in T_{\alpha}(M)$ y por tanto $|\alpha'(t)|^2=I_\alpha(\alpha',\alpha')=I_{f(\alpha)}(f_{*\alpha}(\alpha'),f_{*\alpha}(\alpha'))=I_{f(\alpha)}((f\circ \alpha)',(f\circ \alpha)')=|f\circ \alpha|^2$
+\end{proof}
+
+\begin{thm}
+Sean $M$, $N$ superficies regulares. Se verifica que $M$ es localmente isométrica a $N$ si y solo si $\forall p\in M$, existen $U$ abierto en $\mathbb{R}^2$, $\mathbf{X}:U\longrightarrow \mathbb{R}^3$ siperficie simple en $M$ con $p\in \mathbf{X}(U)$ e $\mathbf{Y}:U\longrightarrow \mathbb{R}^3$ superficie simple en $N$ tales que los coeficientes métricos $g_{ij}$ de $\mathbf{X}$ y los $h_{ij}$ de $\mathbf{Y}$ coinciden
+\[
+g_{ij}(u^1,u^2)=h_{ij}(u^1,u^2), \quad \forall (u^1,u^2)\in U
+\]
+\end{thm}
+
+\begin{proof}\item 
+	\begin{subproof}[$\implies$]
+ Supongamos que $M$ es localmente isométrica a $N$. Por definición, dado $p\in N$ existen $U'$ entorno abierto de $p$ en $M$, $V'$ abierto en $N$ y $f:u?\longrightarrow V'$ una isometría.\\
+Sea $\UX$ una superficie simple en $M$ con $p\in \mathbf{X}(U)\subset U'$. Definimos $\mathbf{Y}=f\circ \mathbf{X}$, la cual tenemos que ver que es superficie simple al aplicarse a $U$.\\
+\begin{itemize}
+\item $\mathbf{Y}(U)=f\circ \mathbf{X}(U)\subset f(U')=V'\subset N$
+\item $\mathbf{Y}$ es inyectiva y diferenciable por composición.
+\item Veamos que $\mathbf{Y}\times \mathbf{Y}\neq 0$ en $U$. Calculamos en las curvas $u^1$ paramétricas $f_{*p}\mathbf{X}_1=(f\circ \alpha)'(u_0^1)=\mathbf{Y}_1(u_0^1,u_0^2)$. Análogamente ocurre con las curvas $u^2$ paramétricas.\\
+Al ser $\mathbf{X}$ una superficie simple, tenemos que no se anula en $U$, i.e., $\{\mathbf{X}_1,\mathbf{X}_2\}$ son linealmente independientes. Como $f$ es regular, $f_{*p}$ es isomorfismo y la independencia se mantiene en la imagen. 
+\end{itemize}
+Esto prueba que $(U,\mathbf{Y})$ es superficie simple. Basta ver que los coeficientes métricos coinciden.\\
+Al ser $f_{*p}$ isometría tenemos que
+\[
+g_{ij}=I_p(\mathbf{X}_i,\mathbf{X}_j)=I_{f(p)}(f_{*p}\mathbf{X}_i,f_{*p}\mathbf{X}_j)=I_{f(p)}(\mathbf{Y}_i,\mathbf{Y}_j)=h_{ij}
+\]
+\end{subproof}
+\begin{subproof}[$\impliedby$]
+ Veamos que $M$ es localmente isometrica a $N$. Sea $p\in M$, por hipótesis existen un abierto $U\subseteq \mathbb{R}^2$ una superficie simple $\mathbf{x}:U\to \mathbb{R}^3$ de $M$ con $p\in \mathbf{x} \in U$ y una superficie simple $\mathbf{y}:U\to \mathbb{R}^3$ e $N$ tales que los coeficientes métricos coinciden.\\
+Consideramos $U'=\mathbf{x} (U)$ que es un abierto de $M$ con $p\in U'$, $V'=\mathbf{y}(U)$, que es abierto en $N$, y definimos $f:U'\to V'$ como $f=\mathbf{y}\circ \mathbf{x}^{-1}$.
+
+Veamos que $f$ es isometría:
+\begin{itemize}
+\item $f$ es biyectiva y continua por composición.
+\item $f$ es diferenciable en $q\in U'$ un punto cualquiera ya que al considerar las superfieices simpls $\UX$ de $U'$ y $(U,\mathbf{Y})$ de $V'$, obtenemos
+\[
+\mathbf{y}^{-1}\circ f\circ \mathbf{x} =\mathbf{y}^{-1} \circ (\mathbf{y}\circ \mathbf{x}^{-1})\circ \mathbf{x}=id\in\mathcal{C}^\infty
+\]
+\item $f$ es regular en $q\in U'$ ya que $J_{q'}(\mathbf{y}^{-1}\circ f\circ \mathbf{x})=id$ con $q'=\mathbf{x}^{-1}(q)$.
+\item $f_{*q}$ es isometría si $I_q(\overline{v},\overline{v})=I_{f(q)}(f_{*q}\overline{v},f_{*q}\overline{v})$. Sea $q\in U'$ y $\overline{v}\in T_q(U')$, entonces existen $\lambda^1,\lambda^2$ tales que $\overline{v}=\lambda^1\mathbf{x}_1+\lambda^2\mathbf{x}_2$ donde $q=\mathbf{x}(u_0^1,u_0^2)$.\\
+\begin{align*}
+I_q(\overline{v},\overline{v})&=I_q(\lambda^1\mathbf{x}_1+\lambda^2\mathbf{x}_2,\lambda^1\mathbf{x}_1+\lambda^2\mathbf{x}_2)\\
+&=(\lambda^1)^2g_{11}+(\lambda^2)^2g_{22}+2\lambda^1\lambda^2g_{12}\\
+&=(\mu^1)^2h_{11}+(\mu^2)^2h_{22}+2mu^1\mu^2_{12}\\
+&=I_{f(q)}(\mu^1\mathbf{y}_1+\mu^2\mathbf{y}_2,\mu^1\mathbf{y}_1+\mu^2\mathbf{y}_2)\\
+&=I_{f(q)}(f_{*q}\overline{v},f_{*q}\overline{v})
+\end{align*}
+\end{itemize}
+\end{subproof}
+\end{proof}
+
+\begin{lem}
+Si $f:M\to N$ es una aplicación conforme entre dos superficies regulares, entonces $f$ conserva los ángulos.
+\end{lem}
+\begin{proof}
+Sean $\alpha:(a,b)\to \mathbb{R}^3$ y $\beta:(c,d)\to \mathbb{R}^3$ dos curvas diferenciables en $M$ que se cortan en un punto $p=\alpha(t_0)=\beta(t'_0)$. El ángulo que forman estas curvas en $p$ es el ángulo $\theta$ entre los vercotres tangentes $\alpha'(t_0)$ y $\beta'(t'_0)$ que se obtiene con la fórmula del coseno.
+
+Las curvas $f\circ \alpha:(a,b)\to \mathbb{R}^3$ y $f\circ \beta:(c,d)\to \mathbb{R}^3$ son curvas diferenciables en $N$ que se cortan en el punto imagen. De igual forma podemos calcular el ángulo que forman estas curvas en dicho punto con el coseno y la primera forma fundamental.
+
+Si aplicamos que son conformes
+\[
+|(f\circ \alpha)'|^2=I_{f(p)}(f\circ \alpha,f\circ \alpha)=\lambda^2(p)I_p(\alpha',\alpha')=\lambda^2(p)|\alpha'|^2
+\]
+Basta sustituir en las fórmulas del coseno para ver que coinciden.
+\end{proof}
+
+\begin{thm}[Caracterización de superficies localmente compatibles]
+Texto
+\end{thm}
+\begin{proof}
+Análogo al teorema de caracterización.
+\end{proof}
+
+\begin{rem}
+Dadas $M$ y $N$ superficies regulares y $p\in M$, construiremos:
+\begin{itemize}
+\item $U$ abierto en $\mathbb{R}^2$.
+\item $\mathbf{x}:U\to \mathbb{R}^3$ superficie simple (hay que probarlo) en $M$ con $p\in \mathbf{x}(U)$.
+\item $\mathbf{y}:U\to \mathbb{R}^3$ superficie simple (hay que probarlo)en $N$
+\end{itemize}
+y consideramos la función $f=\mathbf{y}\circ \mathbf{x}^{-1}$ tenemos que:
+\begin{itemize}
+\item $f$ biyectiva y continua.
+\item $f$ es diferenciable, por ser $\mathbf{y}^{-1}\circ f\circ  \mathbf{x}=id\in \mathcal{C}^\infty$.
+\item $f$ es regular, pues $J_{q'}(\mathbf{y}^{-1}\circ f\circ  \mathbf{x})=id$.
+\end{itemize}
+y calculamos los coeficientes métricos $g_{ij}$ de $\UX$ y $h_{ij}$ de $(U,\mathbf{y})$ y comparándolos decidimos si son localmente isométricos si son iguales, localmente conformes si tienen un factor de proporcionalidad o isoárea si el determinante de los coeficientes métricos son iguales.
+\end{rem}
+
+\chapter{Herramientas algoritmicas}
+
+\end{document}

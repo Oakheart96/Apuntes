@@ -1,0 +1,137 @@
+%\documentclass[a4paper,10pt]{book}
+
+\documentclass[ebook,oneside]{memoir}
+% https://tex.stackexchange.com/questions/1551/use-latex-to-produce-epub
+% tex4ebook -f mobi filename.tex
+
+\usepackage[utf8x]{inputenc}
+
+%\usepackage{polyglossia}
+%\setdefaultlanguage{spanish}
+\usepackage[spanish]{babel}
+
+\usepackage{amsmath, amssymb, amsthm, epsf, amsfonts, thmtools, mathtools}
+\usepackage{cool}
+\usepackage{physics} % Paquete para derivadas
+\usepackage[colorlinks]{hyperref}
+\usepackage{xpatch}
+ 
+\usepackage{graphicx}
+\graphicspath{{figures/}} % Carpeta de figura, para escribir texto usar \caption{text}
+
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+% \usepackage{pgfplots}
+\usetikzlibrary{decorations.markings,arrows, shapes.geometric}
+% Permite añadir símbolos de relación centrados en lugar de flechas
+\tikzset{
+	symbol/.style={
+		draw=none,
+		every to/.append style={
+			edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+	}
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead[\thepage]{\rightmark}
+\rhead[\leftmark]{\thepage}
+\cfoot[]{}
+
+\DeclareMathOperator{\sub}{\subset}
+\DeclareMathOperator{\subeq}{\subseteq}
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\chaptername}{Tema}
+
+% Definimos proposiciones, lemas y demas
+\newtheorem{thm}{Teorema}[chapter]
+\newtheorem{cor}[thm]{Corolario}
+\newtheorem{lem}[thm]{Lema}
+\newtheorem{prop}[thm]{Proposición}
+\newtheorem{defn}[thm]{Definición}
+\newtheorem{rem}[thm]{Observaciones}
+\newtheorem{eje}[thm]{Ejemplos}
+\newtheorem{ejercicio}{Ejercicio}[chapter]
+
+% Podemos dar una lista de las definiciones principales y demás
+\renewcommand{\listtheoremname}{Lista de Teoremas}
+\xpatchcmd{\listoftheorems}{\@fileswfalse}{}{\typeout{yes}}{\typeout{no}}
+
+\newcommand{\Restrict}[2]{{% we make the whole thing an ordinary symbol
+		\left.\kern-\nulldelimiterspace{}% automatically resize the bar with \right
+		#1 % the function
+		\vphantom{\big|} % pretend it's a little taller at normal size
+		\right|_{#2} % this is the delimiter
+}} % Source: https://tex.stackexchange.com/questions/22252
+
+
+\newenvironment{subproof}[1][\proofname]{%
+	\renewcommand{\qedsymbol}{$\blacksquare$}%
+	\begin{proof}[#1]%
+	}{%
+	\end{proof}%
+}
+
+\title{Archivo genérico}
+\author{Jesús Camacho Moro}
+\date{\today}
+
+\begin{document}
+	
+\maketitle
+
+\tableofcontents
+
+\listoftheorems[ignore=thm]
+
+\chapter{Nuevos comandos}
+Ahora el comando $\backslash$\text{varphi} escribe la función $\phi$. 
+
+\section{Diagramas}
+Para insertar un diagrama de composición de funciones:
+
+\begin{tikzcd}
+	A \arrow[rd] \arrow[r, "\phi"] & B \\
+	& C
+\end{tikzcd}
+
+
+\section{Fórmulas}
+
+\begin{thm}\label{vínculo}
+Podemos escribir parciales con el comando $\dv{f(x)}{x}$ o bien $\pdv{f}{y}{x}$
+\end{thm}
+
+\begin{proof}
+Una prueba se puede dividir en varios:
+\begin{subproof}[$\implies$]
+Una dirección.
+\end{subproof}
+\begin{subproof}[$\impliedby$]
+La otra dirección usando el propio teorema \ref{vínculo}.
+\end{subproof}
+\end{proof}
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzcd}
+		U \arrow[r, ""] \arrow[d, ""']
+		& W \arrow[d, ""] \\
+		\varphi(U) \arrow[r, ""]
+		& \psi(W)
+	\end{tikzcd}
+	\caption{Texto}
+	\label{fig:texto}
+\end{figure}
+
+
+
+
+\begin{thebibliography}{}
+	
+\bibitem[T]{t} N. Apellido. \textit{Titulo.} Edición , Editorial.
+	
+\end{thebibliography}
+
+\end{document}

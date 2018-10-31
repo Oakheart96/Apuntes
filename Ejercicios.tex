@@ -1,0 +1,178 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, amsthm, epsf, graphicx, amscd, amsfonts, thmtools,exercise}
+\usepackage{xmpincl}
+\usepackage{fancyhdr}
+
+\cfoot[\leftmark]{\thepage}
+
+\addto\captionsspanish{ \renewcommand{\chaptername}{Tema} }
+
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+% \usepackage{pgfplots}
+\usetikzlibrary{decorations.markings,arrows, shapes.geometric}
+% Permite añadir símbolos de relación centrados en lugar de flechas
+\tikzset{
+	symbol/.style={
+		draw=none,
+		every to/.append style={
+			edge node={node [sloped, allow upside down, auto=false]{$#1$}}}
+	}
+}
+
+\renewcommand{\phi}{\varphi}
+
+\newtheorem{thm}{Teorema}
+\newtheorem{cor}[thm]{Corolario}
+\newtheorem{lem}[thm]{Lema}
+\newtheorem{prop}[thm]{Proposición}
+\newtheorem{defn}[thm]{Definición}
+\newtheorem{rem}[thm]{Observaciones}
+\newtheorem{eje}[thm]{Ejemplos}
+
+\newtheorem{ejercicio}{Ejercicio}[section]
+
+\title{Problemas de Geometría Aplicada}
+\author{Jesús Camacho Moro}
+
+\begin{document}
+
+\maketitle
+
+\section{Aplicaciones entre superficies}
+\begin{ejercicio}
+	Sea $f:M\longrightarrow N$ una aplicación biyectiva, diferenciable y regular. Probar que $f$ es una isometría si y sólo si conserva las longitudes de las curvas. ¿Qué puede decirse si conserva los ángulos?\\
+	$\Longrightarrow$. Supongamos que $f$ es una isometría
+\end{ejercicio}
+
+\newpage
+
+\begin{ejercicio}[1.2]
+Enunciado
+
+$\mathbf{x}$ es superficie simple por hipótesis y $\tilde{\mathbf{x}}$ también por construcción (simplemente le camciamos el signo a las componenttes, por lo que conserva las propiedades de $\mathbf{x}$).\\
+
+Si llamamos $f=\tilde{\mathbf{x}}\circ \mathbf{x}$ tenemos que probar:
+\begin{itemize}
+\item Biyectiva por composición de biyectivas.
+\item Diferenciable. $\tilde{\mathbf{x}}^{-1}\circ f\circ \mathbf{x}=id$
+\item Regular. Su matriz asociada es la identidad
+\item $g_{ij}=h_{ij}$ por lo que la caracterización nos asegura que es isométrica.
+\end{itemize}
+
+En el segundo apartado es un caso similar en el que se vuelve a cumplir la caracterizción.
+\end{ejercicio}
+
+\begin{ejercicio}[1.3]
+Enunciado
+
+Hay que probar que $F$ es isometría, es decir:
+\begin{itemize}
+	\item Biyectiva
+	\item Diferenciable
+	\item Algo
+	\item $F_{*p}$ isometrica
+\end{itemize}
+Los tres primeros se cumplen al ser $\mathbf{x}$ y su composición $\mathbf{y}=F\circ \mathbf{x}$ superficies simples.\\
+\begin{itemize}
+\item Inyectiva. Se cumple por composición de inyectivas.
+\item $\mathbf{y}$ diferenciable.
+\item $\mathbf{y}_1\times \mathbf{y}_2\neq 0$.\\
+ $\mathbf{x}_1\times \mathbf{x}_2\neq 0$\\
+ El que realmente no es evidente es el primero:
+ \[
+ |\mathbf{y}_1\times \mathbf{y}_2|=|A|\cdot|\mathbf{x}_1\times \mathbf{x}_2|\neq 0
+ \]
+ Siendo $A$ la matriz del movimiento rígido.
+\end{itemize}
+
+Por último tenemos que probar que $F_{*p}$ es isométrica. Para ello tomamos un punto $p\in \mathbf{x}(U)$ cualquiera y estudiamos la forma fundamental junto con sus coeficientes métricos.\\
+$\mathbf{y}^{-1}\circ F\circ \mathbf{x}=id \Rightarrow I_p(\mathbf{y}^{-1}\circ F\circ \mathbf{x})=Id$ de lo que se deduce de forma directa que la representación en parámetros es $\mu_i=\lambda_i$.
+\end{ejercicio}
+
+\begin{ejercicio}[1.4]
+	Enunciado
+	
+	\begin{itemize}
+\item $\pi$ es biyectiva por composición de biyectivas.
+\item $\pi$ es diferenciable dado que
+\[
+\mathbf{x}^{-1}\circ \pi \circ \mathbf{y}=\mathbf{x}^{-1}\circ \mathbf{x}\circ \mathbf{y}^{-1}\circ \mathbf{y}=id
+\]
+\item $\pi$ es regular porque su matriz asociada es de nuevo la identidad.
+	\end{itemize}
+
+Ahora imponemos que $\pi$ sa isometría local, esto se cumple si y solo si los coeficientes métricos coinciden.\\
+Tenemos que $g_{11}=1,\; g_{12}=0,\;g_{22}=1$ y $h_{11}=1`+z_x^2,\;h_{12}=z_xz_y,\;h_{22}=1+z_y^2$. Igualamos el sistema y queda $z_x=z_y=0$, por lo que la superficie se trata de un plano paralelo a la superficie original.\\
+
+Para la segunda parte imponemos las condiciones de localmente conforme si y solo si $g_{ij}=\lambda^2h_{ij}$ que obliga a que sea de nuevo un plano. Por otro lado, $\pi$ es localmente conforme si y solo si $g_{11}g_{22}-g_{12}^2=h_{11}h_{22}-h_{12}^2$ que de nuevo obliga a ser un plano.
+\end{ejercicio}
+
+\begin{ejercicio}[1.5]
+Enunciado
+
+Primero escribimos la superficie como carta de Monge $\mathbf{x}(x,y)=(x,y,x^2+y^2)$, $\mathbf{y}(x,y)=(x,y,2xy)$. Llamamos $f=\mathbf{y}\circ \mathbf{x}^{-1}$ que cumple:
+\begin{itemize}
+\item $f$ biyectiva por composición.
+\item $f$ diferenciable por $\mathbf{y}^{-1}\circ f\circ \mathbf{x}=id$
+\item $f$ regular porque de hecho su matriz es la identidad que tiene determinante no nulo.
+\end{itemize}
+Al ser superficies regulares podemos extender los resultados locales, es decir, podemos usar las caracterizaciones para isométrica e isoárea. Los coeficientes métricos son $g_{11}=1+4x^2,\; g_{22}=1+4y^2,\;g_{12}=4xy$ y $h_{11}=1+4y^2,\;h_{22}=1+4x^2,\;h_{12}=4xy$ que al igualar dan solución para isoárea pero no para isométrica.
+
+El problema ahora es ver que no existe ninguna otra función que sea isométrica.\\
+Calculamos la curvatura de Gauss
+\[
+K_x=\frac{4}{(1+4x^2+4y^2)^2},\quad K_y=\frac{-4}{(1+4x^2+4y^2)^2}
+\]
+Como $K_x<0$ y $K_y>0$ no son isométricas. (Aplicando la nota 26)
+\end{ejercicio}
+
+\begin{ejercicio}[1.6]
+Enunciado\\
+
+Los coeficientes de ambas superficies dan $g_{12}=0,\;g_{11}=1+1/u^2,\;g_{22}=u^2$ por parte de la $\mathbf{x}$ y por otro lado $h_{12}=0,\;h_{11}=1,\;h_{22}=u^2-1$ de $\mathbf{y}$.\\
+Tenemos que las curvatura son:
+\[
+K_x=\frac{-1}{(1+u^2)^2},\quad K_y=\frac{-1}{(1+u^2)^2}
+\]
+Este es un ejemplo de que el reciproco de la Nota 26 no es cierto, dado que no se cumple el teorema de caracterización Teorema 22.
+\end{ejercicio}
+
+\begin{ejercicio}[1.7]
+Enunciado\\
+
+Recordemos que una parametrización del cono es $\mathbf{x}(t,\theta)=(at\cos(\theta),at\sin(\theta),ht)$ y del cilindro $\mathbf{y}(t,\theta)=(a\cos(\theta),a\sin(\theta),ht)$.\\
+
+Calculamos la proyección horizontal sobre el cilindro de un punto del cono imponiendo que la recta pasa por el punto de altura $z$ que pase por el eje central y el del cono. Resolviendo el sistema obtenemos $f(x,y,z)=(\frac{hx}{z},\frac{hy}{z},z)$ escogiendo el punto del cilindro que pertenece al mismo octante que el del cono.
+\begin{itemize}
+	\item Bien definida dado que el domino del cono no incluye el $(0,0,0)$.
+	\item Biyectiva. Porque hay uno y solo un punto del cono por cada punto del cilindro si nos restringimos a los octantes (Una recta que pasa por dos puntos corta  una superficie en un tercero)
+	\item Diferenciable. Puesto que la parametrización no cubre toda la superficie habría que tomar dos distintas dependiendo de donde queramos probar la diferenciabilidad, que como ya sabemos es un concepto local. Dado que la composición de las funciones nodepende realmente de la parametrización siempre nos da la identidad.
+	\item Regular. Como la composición era la identidad, su matriz asociada también lo es. 
+\end{itemize}
+Una vez visto que la función tiene sentido basta ver que los coeficientes métricos no coincide y como no es isométrica, tampoco conforme. (Nota 39)
+\end{ejercicio}
+
+\begin{ejercicio}[1.8]
+Enunciado\\
+
+Vamos a buscar $f$ de la siguiente forma:
+
+\begin{figure}[h]
+	\centering
+	\begin{tikzcd}
+		S^2(r) \arrow[r, "f"]
+		& S^2(R) \\
+		U\arrow[u,"\mathbf{x}"] \arrow[ru, "\mathbf{y}=f\circ \mathbf{x}" ']&
+	\end{tikzcd}
+	\caption{Texto}
+	\label{fig:texto}
+\end{figure}
+
+Definimos $\mathbf{x}(u,v)=(r\cos u\cos v,r\cos u\sin v,r\sin u)$ y $\mathbf{y}(u,v)=(R\cos u\cos v,R\cos u\sin v,R\sin u)$, por lo que $f(x,y,z)=(\frac{Rx}{r},\frac{Ry}{r},\frac{Rz}{r})$.\\
+Para probar que son conformes aplicamos el Teorema 32 de caracterización, calculando los coeficientes métricos y viendo si existe tal $\lambda$. Tenemos $g_{11}=r^2,\;g_{12}=0,\;g_{22}=r^2\cos^2 u$ y $h_{11}=R^2,\;h_{12}=0,\;h_{22}=R^2\cos^2 u$ que al igualarlos con un cierto coeficiente $\lambda>0$ obliga a $\lambda=R/r$ que es claramente diferenciable. 
+\end{ejercicio}
+
+\end{document}

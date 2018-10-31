@@ -1,0 +1,955 @@
+\documentclass[a4paper]{amsart}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage[colorlinks]{hyperref}
+\usepackage[all]{xy}
+\usepackage{graphicx}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}
+\newtheorem{definition}{Definición}
+\newtheorem{corollary}{Corolario}
+\newtheorem{lemma}{Lema}
+\newtheorem{proposition}{Proposición}
+\newtheorem{axiom}{Axioma}
+\newtheorem{nota}{Nota}
+\newtheorem{example}{Ejemplo}
+
+\title{Geometría no Euclídea}
+\author{Jesús Camacho}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Introducción}
+El propósito de este texto es indagar en la geometría no euclídea, tanto en su historia como sus diferentes tipos dependiendo de los axiomas que se asuman. Históricamente sus desarrolladores fueron Bolyai y Lobachevsky, aunque como en la mayoría de hallazgos científicos se debió a la suma de muchos otro matemáticos que fueron aportando pequeños avances hasta lo que se conoce hoy día.\\
+
+Para comprender mejor el avance de la geometría no euclídea hay que poner en contexto la situación de los diferentes precursores de la misma. Por esto haremos primero una breve introducción histórica antes de entrar en materia.\\
+
+Es claro que no podemos hablar de geometría no euclídea sin antes hablar de la persona por la cual lleva su nombre, que no es otro que Euclides de Alexandría. Es poco conocida la vida de este hombre, dado que muchos textos se han perdido y ni si quiera se tiene claro su lugar de origen. El texto que nos ocupa es los Elementos, uno de los libros más conocidos por nombre, pero no por contenido. La mayoría de la gente piensa que este trata tan solo de geometría a pesar de que su propio nombre indica es una introducción a los elementos básicos de las matemáticas.\\
+Siendo un texto tan antiguo es normal encontrar ciertas definiciones con falta de rigurosidad al usar elementos que no se han definido previamente y que pueden parecer intuitivos. Nosotros intentaremos evitar ese tipo de problemas basándonos en textos más recientes o simplemente predefiniendo de forma rigurosa cada objeto matemático usado.
+
+Si seguimos un orden temporal, habría que destacar la labor de Omar Khayyam. Fue el primero en tomar en consideración lo que hoy se conoce como cuadrilátero de Saccheri \ref{Saccheri} y aunque no tuvo la repercusión que quizás merecía, creemos que es digno de mención. Esta construcción del cuadrilátero le permitió probar que el caso del ángulo recto es el previamente conocido y aunque rechazó los otros dos casos por pensar que eran antinaturales y llevaban a contradicción, implícitamente había iniciado las nueva ramas de la geometría no euclídea tal y como la conocemos hoy día.\\
+
+Como hemos dicho anteriormente, Saccheri tendrá un gran valor en este texto por sus aportes dentro de la aritmética y por ser el primero en plantearse que pasaría si se niega el quinto postulado de Euclides. Por desgracia sus conclusiones se vieron modificadas o mermadas por la época en la que vivió. Recordemos que Saccheri era un Jesuita que vio como muchos científicos contemporáneos fueron perseguidos por la Iglesia al publicar cosas que fueran contra la naturaleza (Galileo).\\
+
+Lobachevsky.
+
+Bolyai padre vs hijo.
+
+
+\section{Axiomática}
+
+\begin{axiom}[Euclides]\label{Euclides}
+Si una línea que corta a otras dos líneas hace los ángulos interiores de un mismo lado menores que dos ángulos rectos, entonces estas dos líneas se cortarán si se extienden lo suficiente. 
+\end{axiom}
+
+\begin{axiom}[Aristóteles]\label{Aristoteles}
+Dado un angulo $BAC$ y un segmento $DE$, existe un punto $F$ en la recta $AB$ tal que la perpendicular $FG$ por $F$ a la recta $AC$ es mayor que el segmento $DE$.
+\end{axiom}
+
+\begin{axiom}[Playfair]\label{Playfair}
+Dos líneas rectas que se cortan no pueden ser ambas paralelas a una tercera. 
+\end{axiom}
+
+Playfair estaba interesado en el problema del quinto postulado de Euclides. Pensaba que el postulado de Euclides debía ser probado, no tomado como axioma. Para ello dio tres métodos:
+\begin{enumerate}
+\item [(1)] Tomando una nueva definición de paralelas;
+\item [(2)] Introduciendo un nuevo axioma sobre líneas paralelas mas obvio que el de Euclides;
+\item [(3)] Razonando de la definición de paralelas y de las propiedades ya demostradas anteriormente.
+\end{enumerate}
+
+
+
+El postulado de las paralelas fue muy discutido por que se pensaba que había que demostrarlo. Más tarde varios matemáticos como Saccheri o Legendre supusieron falso el postulado para ver si se llegaba o no a un absurdo. Por último, Bolyai y Lobachevsky confirmaron la creación de nuevas geometrías en función de diferentes modelos axiomáticos basados en los enumerados anteriormente.
+
+\begin{axiom}[Arquímedes]\label{Arquimedes}
+Dados dos segmentos existe un entero múltiplo del primero que será mayor que el segundo.
+\end{axiom}
+
+\begin{axiom}\label{incidencia}
+Los axiomas de incidencia que vamos a necesitar son:
+\begin{enumerate}
+\item [(I1)] Para dos puntos distintos $A$ y $B$ existe una única línea que contiene a $A$ y $B$.
+\item [(I2)] Toda línea contiene al menos dos puntos.
+\item [(I3)] Existen tres puntos no colineales.
+\end{enumerate}
+\end{axiom}
+
+\begin{axiom}\label{posicion}
+Axiomas de posición que vamos a necesitar:
+\begin{enumerate}
+\item [(P1)] Si $B$ está entre $A$ y $C$ ($A*B*C$), entonces $A$, $B$, $C$ son tres puntos distintos en una línea y se cumple $C*B*A$.
+\item [(P2)] Para dos puntos distintos $A$, $B$, existe un ponto $C$ tal que $A*B*C$.
+\item [(P3)] Dados tres puntos en una línea, uno y solo uno está en medio de los otros dos.
+\item [(P4)] Sean $A$, $B$, $C$ tres puntos no colineales y $l$ una línea que no contiene a $A$, $B$ o $C$. Si contiene un punto entre $A$ y $B$, entonces tiene que contener un punto entre $A$ y $C$ o entre $B$ y $C$, pero no ambos.
+\end{enumerate}
+\end{axiom}
+
+\begin{axiom}\label{congruencia}
+Axiomas de congruencia entre segmentos y ángulos que vamos a utilizar:
+\begin{enumerate}
+\item [(C1)] Dado un segmento $AB$ y una semirrecta orientada a un punto $C$, existe un único punto $D$ en la semirrecta tal que $AB \cong CD$.
+\item [(C2)] Si $AB \cong CD$ y $AB \cong EF$. Entonces $CD \cong EF$. Cualquier segmento es congruente consigo mismo.
+\item [(C3)] Dados tres puntos $A$, $B$, $C$ satisfaciendo $A*B*C$ y otros tres puntos $D$, $E$, $F$ tales que $D*E*F$, si $AB \cong DE$ y $BC \cong EF$, entonces $AC \cong DF$.
+\item [(C4)] Dado un angulo $\angle BAC$ y una semirrecta $DF$, existe una única semirrecta $DE$ tal que $\angle BAC \cong \angle EDF$.
+\item [(C5)] Para cualesquiera tres ángulos $\alpha$, $\beta$, $\gamma$, si $\alpha \cong \beta$ y $\alpha \cong \gamma$ entonces $\beta \cong \gamma$. Cualquier ángulo es congruente consigo mismo.
+\end{enumerate}
+\end{axiom}
+
+\section{Geometría neutral}
+
+\begin{definition}
+Una geometría neutral es aquella que satisface los axiomas de Hilbert que son el Axioma \ref{incidencia} de incidencia, el Axioma \ref{posicion} de posición y el Axioma \ref{congruencia} de congruencia sin afirmar el Axioma \ref{Euclides} de las paralelas.
+\end{definition}
+
+\begin{nota}
+Una geometría neutral es lo mismo que un plano de Hilbert pero enfatizando que no asumimos el Axioma \ref{Euclides}
+\end{nota}
+
+\begin{definition}
+Un plano de Hilbert donde no se sostiene el Axioma \ref{Euclides} se denomina geometría no euclídea.
+\end{definition}
+
+\begin{proposition}\label{Saccheri}
+En un plano de Hilbert, sean $AB$ un segmento y $AC$ y $BD$ segmentos perpendiculares al segmento $AB$ en sus extremos. Por último, unimos el segmento $CD$. Entonces los ángulos en $C$ y $D$ son iguales, y además la línea que une los puntos medios de $AB$ y $CD$ es perpendicular a ambos.
+\end{proposition}
+
+\begin{proof}
+Dado  $ABCD$, tomamos $E$ como el punto medio de $AB$ y $l$ la perpendicular a $AB$ por $E$. Como $l$ es el bisector perpendicular a $AB$, $A$ y $C$ quedan a un lado mientras que $B$ y $D$ al otro. Llamamos $F$ al punto de corte de l y $CD$. Los triángulos $FAE$ y $BEF$ son congruentes. Por lo tanto, los ángulos $\angle FAE$ y $\angle FBE$ son iguales y $AF=FB$.
+
+Substrayendo los ángulos rectos de $A$ y $B$ encontramos que $\angle CAF$ y $\angle DBF$ son iguales. Por tanto, los triángulos $CAF$ y $DBF$ son congruentes. Esto muestra que los ángulos en $C$ y en $D$ son iguales y que $F$ es el punto medio de $CD$.
+
+Las dos parejas de triángulos congruentes también implica que los ángulos $\angle CFE$ y $\angle DFE$ son iguales. Así que por definición,  ambos ángulos son ángulos rectos.
+\end{proof}
+
+\begin{nota}
+A este cuadrilátero en particular se le llama cuadrilátero de Saccheri 
+\end{nota}
+
+\begin{theorem}[Saccheri]
+En cualquier plano de Hilbert, si un cuadrilátero de Saccheri tiene sus dos ángulos superiores $(C\; \textit{y}\; D)$ agudos, todos los cuadriláteros los tienen. Lo mismo ocurre si tiene ángulo recto u obtuso.
+\end{theorem}
+
+\begin{proof}
+Daremos la demostración en el caso agudo ya que los otros casos son iguales.
+
+Suponemos un cuadrilátero de Saccheri como el de la Proposición 1 con ángulo agudo. Si $A'B'C'D'$ es otro cuadrilátero de Saccheri con el mismo segmento bisector $EF$ perpendicular a $AB$ y $CD$, podemos hacer con movimientos rígidos que ambas líneas bisectoras coincidan. Suponemos que $AB<A'B'$, entonces $BD<B'D'$ y el ángulo $\alpha$ en $D'$ es agudo. Luego todos los cuadriláteros de Saccheri con línea bisectora igual a $EF$ son agudos.
+
+Ahora veamos que para cualquier otro segmento existe un cuadrilátero de Saccheri con ángulos agudos y línea bisectora ese segmento.
+
+Sea el segmento dado $EG$ en la línea $EB$. Sea h la intersección entre $CD$ y la perpendicular a $AB$ por $G$. Reflejamos $F$ y $H$ en $EF$ y obtenemos $G_1$ y $H_1$.  Reflejamos $F$ y $H$ en $AB$ y obtenemos $G_2$ y $H_2$. $G_1GH_1H$ es un cuadrilátero de Saccheri con línea media $EF$ agudo. Entonces $FF_2HH_2$ es otro cuadrilátero de Saccheri con línea media $EF$ y el mismo ángulo agudo que los otros cuadrilátero.
+\end{proof}
+
+\begin{proposition}
+Dado un triángulo $ABC$, existe un cuadrilátero de Saccheri donde la suma de sus dos ángulos superiores es igual a la suma de los tres ángulos del triángulo.
+\end{proposition}
+
+\begin{proof}
+Sean $D$ y $E$ los puntos medios de $AB$ y $AC$. A $DE$ lo llamamos la línea media del triángulo. Construimos las perpendiculares $BF$, $AG$ y $CH$ a $DE$.
+
+por construcción, los triángulos $ADG$ y $BDF$ son congruentes. Lo mismo ocurre con $AEG$ y $CEH$. De esto se deduce que $BF=AG=CH$. El cuadrilátero $FHBC$ tiene ángulos rectos en $F$ y $H$, luego es un cuadrilátero de Saccheri. Los ángulos del cuadrilátero en $B$ y $C$ son la suma de los ángulos $B$ y $C$ del triángulo más ángulos congruentes con las dos partes del ángulo en $A$, dividido por $AG$.
+\end{proof}
+
+\begin{definition}
+En un plano de Hilbert:
+\begin{enumerate}
+\item [(a)] Si los ángulos de triángulos suman menos de dos ángulos rectos, se dice que la geometría es semihiperbólica
+\item[(b)] Si los ángulos de triángulos suman dos ángulos rectos, se dice que la geometría es semieuclídea
+\item[(c)] Si los ángulos de triángulos suman más de dos ángulos rectos, se dice que la geometría es semielíptica
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+Si la suma de un triángulo es distinta de dos ángulos rectos, se dice que es no euclídeo. En ese caso se define el defecto ($\delta$) domo la diferencia entre dos ángulos rectos y la suma de los ángulos del triángulo.
+\end{definition}
+
+Sabemos que en un plano de Hilbert donde se satisface la existencia de paralelas, dada una línea $l$ y un punto $P$ que no esté en $l$, existe una única paralela a $l$ que pase por $P$. Pero en el caso no euclídeo podría haber más de una.
+
+De ahora en adelante denotaremos una semirrecta como $Aa$ donde $A$ es el punto final y $a$ es la línea que sigue la semirrecta.
+
+\begin{definition}
+$Aa$ se dice paralela limitante a $Bb$ si son coincidentes, o si ellas son distintas a la línea $AB$, no se cortan, y cualquier semirrecta en el interior del ángulo $BAa$ corta a la semirrecta $Bb$. Lo denotamos como $Aa|||Bb$.
+\end{definition}
+
+Lo curioso de esta definición es que ser paralela limitante es relación de equivalencia tomando la propiedad reflexiva como coincidentes.
+
+\section{Geometría arquimediana neutral}
+
+Si añadimos el Axioma \ref{Arquimedes} a la geometría neutral, tenemos el hecho de que la suma de los ángulos de un triángulo es siempre menor o igual que dos ángulos rectos. El objetivo de esta sección es probar este hecho.
+
+\begin{lemma}
+En un plano de Hilbert con el Axioma \ref{Arquimedes}, sean $\alpha$ y $\beta$ ángulos dados. Entonces existe un entero $n>0$ tal que $n\alpha>\beta$ o $n\alpha$ está indefinido por superar los dos ángulos rectos.
+\end{lemma}
+
+\begin{theorem}[Saccheri-Legendre]
+En un plano de Hilbert con el Axioma \ref{Arquimedes}, la suma de los ángulos de un triángulo es menor o igual a dos ángulos rectos.
+\end{theorem}
+
+\begin{proof}
+Aplicando reducción al absurdo, supongamos que existe un triángulo $\triangle ABC$ en el cual la suma de sus ángulos es mayor que dos ángulos rectos, digamos dos ángulos rectos mas $\epsilon$. Tratamos de encontrar un triángulo con un ángulo $\alpha<\epsilon$ y por tanto los otros dos sumarían más de dos ángulos rectos
+
+Sea $\gamma$ el ángulo en $B$ y $\delta$ el ángulo en $C$. Sea $D$ el punto medio de $BC$. Sea $E$ el punto en la linea de $AD$ con $AD=DE$. Por construcción, $\beta=\angle BAD=\angle DEC$ y $\gamma=\angle ABD=\angle DCE$, además $BD=DC$, luego $\triangle ABD$ y $\triangle ECD$ son congruentes.
+
+El nuevo triángulo $\triangle AEC$ tiene la misma suma de ángulos que el original igual a $\alpha+\beta+\gamma+\delta$ pero uno de los nuevos ángulos cumple que es menor o igual que la mitad del ángulo en A.
+
+Si aplicamos este proceso un número $n\in \mathbb{N}$ de veces obtenemos un triángulo al que denominaremos $T_n$ con un ángulo menor o igual que $1/2^n(\angle A)$. Usando el Lema 1 sabemos que existe un $n_0\in \mathbb{N}$ tal que para todo $n\in \mathbb{N}$, $T_n$ tendrá un ángulo menor que $\epsilon$, lo que nos lleva a la contradicción.
+\end{proof}
+
+De este teorema se deduce entre otras cosas que en un plano de Hilbert con el Axioma \ref{Arquimedes}, si todo triángulo es euclídeo entonces se cumple el Axioma \ref{Playfair}. Con estos conocimientos, Legendre sugirió un nuevo postulado  con el que poder probar el Axioma \ref{Euclides}.
+
+\begin{axiom}[Legendre]\label{Legendre}
+Dado un ángulo $\alpha$ y dado un punto $P$ en el interior del ángulo $\alpha$, existe una línea $l$ que pasa por $P$ y corta a ambos lados del ángulo.
+\end{axiom}
+
+\section{Área no euclídea}
+
+Para tratar de forma rigurosa el área de una figura seguiremos el método de Hilbert. Alguna de la terminología que usaremos es que dos figuras se dicen equidescomponibles si se pueden escribir como unión de triángulos congruentes y que dos figuras tienen el mismo contenido si podemos unirles figuras equidescomponibles y todo se vuelva equidescomponible.
+
+Para cuantificar el área de una figura, vamos a definir un grupo abeliano ordenado en función de sus ángulos. Definimos el conjunto
+\[
+A=\{0 \} \cup \{\mbox{ángulos menores que un ángulo recto}\}
+\]
+y tomamos
+\[
+G=\mathbb{Z}\cup A
+\]
+Definimos la suma en G como
+\[
+(n_1,\alpha _1)+(n_2,\alpha _2)=
+\begin{cases}
+ (n_1 + n_2, \alpha _1 + \alpha _2) & si\; \alpha _1 + \alpha _2 < AR \\
+ (n_1 + n_2 +1, \alpha _1 + \alpha _2- AR) & si\; \alpha _1 + \alpha _2 \geq AR
+\end{cases}
+\]
+Siendo $AR$ un ángulo recto.
+
+Definimos el orden en el conjunto $G$ de tal forma
+\[
+(n_1,\alpha_1)<(n_2,\alpha_2)
+\]
+Si $n_1<n_2$, ó $n_1=n_2$ y $\alpha_1<\alpha_2$
+
+\begin{proposition}
+En cualquier plano de Hilbert, el conjunto G, con la operación suma y la relación $<$, es un grupo abeliano ordenado.
+\end{proposition}
+
+\begin{proof}
+Es evidente que el $(0,0)$ actúa como elemento neutro. El elemento inverso de $(n,\alpha)$ es $(-n,0)$ si $\alpha=0$, en otro caso, es $(-n-1,AR-\alpha)$. La tricotomía para la relación de orden se sigue de las propiedades conocidas de los ángulos.
+\end{proof}
+
+\begin{proposition}
+En un plano de Hilbert, cualquier triángulo tiene el mismo contenido que un cuadrilátero de Saccheri. Si además asumimos el Axioma \ref{Arquimedes}, los dos son equidescomponibles.
+\end{proposition}
+
+\begin{proof}
+Partimos de la construcción usada en la Proposición 2 que nos da que el triángulo $ABC$ es equidescomponible con el cuadrilátero de Saccheri $FHBC$.
+
+Si asumimos el Axioma \ref{Arquimedes}, y tenemos $ABC$ un triángulo cualquiera con $FHBC$ como cuadrilátero asociado. Uniendo $CD$ y extendiendo a $A'$ con $CD=DA'$. Entonces los triángulos $ACD$ y $BA'D$ son congruentes. Por construcción, $ACD$ y $A'BC$ tienen la misma línea media, el mismo cuadrilátero de Saccheri y $D'D=DE=\frac{1}{2}FH$.
+
+Repitiendo este proceso un número finito de veces, y usando el Axioma \ref{Arquimedes}, transformamos el triángulo $ABC$ en $A^*BC$ tal que el pie $G^*$ de la perpendicular a $FH$ que pasa por $A^*$  está entre $F$ y $H$. Entonces aplicando la Proposición 2 tenemos una disección del cuadrilátero de Saccheri.
+\end{proof}
+
+Teniendo en cuanta nuestra definición de $G$, existe un homomorfismo natural entre el grupo $G$ y el grupo $R$ de rotaciones alrededor de un punto. Este se define a partir de un segmento $OA$ al que se le traza la perpendicular $OC$. Para cualquier ángulo $\alpha<AR$, se escoge un segmento $OB$ con ese ángulo. Entonces se manda $(1,0)\in G$ a la rotación que manda $A$ a $C$ y $(0,\alpha)\in G$ a la que manda $A$ a $B$ y se extiende por linealidad.  Llamaremos por tanto a $G$ el \textbf{unwound circle group} $G$ del plano.
+
+\begin{theorem}
+En un plano semihiperbólico de Hilbert hay una función $\alpha$ de cantidad de área con valores en el \textbf{unwound circle group} $G$ del plano. Esta unívocamente determinado por la condición adicional de que para cualquier triángulo $T$, su valor es igual a su defecto $\delta$.
+\end{theorem}
+
+Nos centramos en las aplicaciones de este teorema, por lo que dejamos a un lado la prueba que se trata simplemente de comprobar que dada $P$ un figura descompuesta en triángulos $T_i$, la función $\alpha(P)=\Sigma\delta(T_i)$  está bien definida.
+
+\begin{theorem}
+En un plano semihiperbólico de Hilbert con el Axioma \ref{Euclides}, dos figuras rectilíneas cualesquiera con el mismo área tienen el mismo contenido. Si además asumimos el Axioma \ref{Arquimedes}, son equidescomponibles.
+\end{theorem}
+
+\begin{proof}
+Supuestas dos figuras $P$ y $P'$ con el mismo área. Cada una puede ser escrita como unión finita de triángulos. Podemos asumir que para algún, ambas figuras están divididas en $2^n$ triángulos. Tomando los triángulos de dos en dos, podemos encontrar otros triángulos tales que $P=2\cup_{i=1}^{2^n-1}T'_j$
+
+Repitiendo este proceso n veces con $P$ y $P'$ sus contenidos serán $2^nT_0$ y $2^nT'_0$ respectivamente. Como $P$ y $P'$ tienen el mismo área, se sigue que $T_0$ y $T'_0$ tiene el mismo área y por tanto el mismo contenido. Por tanto $P$ y $P'$ tiene el mismo contenido.
+
+Si asumimos el Axioma \ref{Arquimedes}, la misma prueba sirve para equidescomponibles.
+\end{proof}
+
+Hemos llegado por tanto a una relación directa entre el contenido de dos figuras rectilíneas en cualquier plano semihiperbólico de Hilbert y sus áreas.
+
+\section{Inversión circular}
+
+En esta sección vamos a estudiar la inversión circular. Mientras que su estudio pertenece al contexto de la geometría euclídea, Euclides no usó esta técnica debido a que las transformaciones del plano no estaban muy arraigadas en el pensamiento griego. 
+
+Nosotros trataremos de dar ciertas nociones sobre las inversiones circulares y algunas propiedades que nos serán de utilidad a lo largo de este estudio.
+
+\begin{definition}
+Dado un círculo $\Gamma$ con centro $O$ y $A\neq O$. Dibujamos la línea $OA$ y sea $A'$ el único punto en la línea $OA$ que cumple que $OA\cdot OA'=r^2$ . Decimos que $A'$ es el inverso de $A$ y viceversa.
+\end{definition}
+
+Primero vamos a ver un método para construir el inverso de cualquier punto.
+
+\begin{proposition}
+Sea $A$ un punto dentro del círculo $\Gamma$. Sea $PQ$ la cuerda del círculo perpendicular a $OA$ por $A$. Entonces las tangentes a $\Gamma$ en $P$ y $Q$ se cortarán en la línea $OA$ en el punto $A'$ que es el inverso de $A$ respecto de $\Gamma$.
+\end{proposition}
+
+\begin{proof}
+Como los triángulos $OAP$ y $OA'P$ tienen el ángulo en $O$ común, son similares. Por tanto sus lados son proporcionales.
+\[
+\frac{OA}{OP}=\frac{OP}{OA'}
+\]
+Multiplicando obtenemos
+\[
+OA\cdot OA'=OP^2=r^2
+\]
+\end{proof}
+
+Lo siguiente que vamos a estudiar es lo que las inversiones circulares hacen con lineas y círculos en el plano.
+
+\begin{proposition}
+Una línea que pasa por $O$ se transforma en sí misma con una inversión circular. Una línea que no pasa por $O$ se transformara en un círculo que pasará por $O$ y viceversa.
+\end{proposition}
+
+\begin{proof}
+La primera parte es por definición de inversión circular.
+
+Ahora sea $l$ la una línea que no pasa por $O$. Sea $OA$ la perpendicular por $O$ a $l$. Sea $A'$ el inverso de $A$, y sea $\gamma$ el círculo de diámetro $OA'$. Para comprobar que este es el círculo que buscamos, sea $B$ un punto en $l$. Sea $B'$ la intersección entre $\gamma$ y $OB$. Entonces los triángulos $OB'A'$ y $OAB$ son triángulos rectos similares. Por tanto sus lados son proporcionales:
+\[
+\frac{OB'}{OA'}=\frac{OA}{OB}
+\]
+Multiplicando obtenemos
+\[
+OB\cdot OB'=OA\cdot OA'=r^2
+\]
+Por ser $A$ y $A'$ inversos.
+\end{proof}
+
+\begin{definition}
+Cuando dos círculos se cortan con un ángulo entre ellos, nos referimos al ángulo entres sus tangentes en ese punto.
+\end{definition}
+
+Lo mismo que pasa con las rectas, ocurre con los círculos. En este caso si el círculo es perpendicular a $\Gamma$ entonces el círculo se queda fijo bajo la inversión. Si no, el círculo se transformará en otro círculo. Además si un círculo contiene un punto y su inverso, este es perpendicular a $\Gamma$.
+
+Una vez visto que las inversiones circulares preservan líneas y círculos, veamos que también preservan los ángulos.
+
+\begin{proposition}
+Cuando dos curvas se cortan, sus transformaciones bajo una inversión circular se cortan de nuevo con el mismo ángulo.
+\end{proposition}
+
+\begin{proof}
+Supongamos que el punto de corte de las dos curvas $P$ no pertenece a $\Gamma$ y tiene las líneas tangentes $l$ y $m$. Sea $P'$ el inverso de $P$. Entonces podemos encontrar un círculo $\gamma_1$ que pase por $P$ y $P'$ y además tenga por tangente a $m$. Lo mismo pasa con $\gamma_2$ y $l$. Ambos círculos se transforman en si mismos. Por otro lado, las curvas originales se transforman en curvas en $P'$ tangentes a $\gamma_1$ y $\gamma_2$, así que forman el mismo ángulo que en $P$. 
+\end{proof}
+
+El último elemento que vamos a nombrar que se preserva en las inversiones circulares es la razón doble generalizada.
+
+\begin{definition}
+Sean $A$,$B$,$P$,$Q$ cuatro puntos distintos en el plano cartesiano. Su razón doble generalizada se define como la proporción de relaciones
+\[
+(AB,PQ)=\frac{AP}{AQ}\div \frac{BP}{BQ}
+\]
+\end{definition}
+
+El significado geométrico de la razón doble generalizada es algo confuso por lo que solo lo nombramos por encima. En geometría proyectiva es muy usado porque una proyección no preserva las distancias pero si la razón doble que tiene la misma definición pero los cuatro puntos escogidos deben estar alineados.
+
+Una de las aplicaciones de las inversiones circulares es la de determinar un círculo dado por tres condiciones. Los tres tipos de condiciones que se pueden imponer son:
+\begin{enumerate}
+\item [(P)] El círculo pasa por un punto $A$.
+\item [(L)] El círculo es tangente a una recta $l$.
+\item [(C)] El círculo es tangente a otro círculo $\gamma$.
+\end{enumerate}
+Con estos elementos, todas las combinaciones que se pueden hacer para determinar un círculo son:
+$PPP$ conocido como la circunferencia circunscrita, $LLL$ conocida como la circunferencia inscrita, $PPL$, $PPC$, $PLC$, $PCC$, $LLC$, $LCC$ y $CCC$ conocido como el problema de Apolonio.
+
+Una técnica muy usada para transformar un problema en otro ya resuelto es expandir o contraer las figuras modificando sus radios. 
+
+\begin{example}
+$LLC$ se puede transformar en $PLL$. Basta reducir el radio de $C$ a 0 para convertirlo en un punto $P$ y desplazando a su vez las rectas con la misma distancia del radio de $C$.
+\end{example}
+
+Para terminar esta sección, daremos la construcción de uno de ellos, basada en inversiones circulares.
+
+\begin{example}[Problema PPP]
+Llamaremos a los tres puntos $A$, $B$, $C$.
+\begin{enumerate}
+\item [1.] Construir el círculo de centro $B$ y radio $BC$.
+\item [2.] Construir el círculo de centro $A$ y mismo radio. Obtenemos $E$ y $D$.
+\item [3.] Dibujar la línea $ED$.
+\item [4.] Construir el círculo de centro $C$ y mismo radio. Obtenemos $F$ y $G$.
+\item [5.] Dibujar la línea $FG$. Obtenemos $O$.
+\item [6.] El círculo de centro $O$ y radio $OA$ pasa por $B$ y $C$.
+\end{enumerate}
+\end{example}
+
+(SE puede añadir las curvas especiales de geodésicas)
+
+(La inversión circular se puede extender a $S^n$)
+
+\section{Modelo de Poincaré}
+
+En esta sección vamos a mostrar la existencia de una geometría no euclídea, y por lo tanto la consistencia de los axiomas de la geometría no euclídea. Este modelo irónicamente está construido a través de los conocimientos en geometría euclídea.\\
+Además veremos que una vez construido un modelo en la geometría hiperbólica, cualquier otro modelo será equivalente haciendo las transformaciones correspondientes. (Repasar)
+
+\begin{definition}
+Sea $\Pi$ el plano cartesiano sobre un  euclídeo ordenado $F$. En este plano fijamos un círculo $\Gamma$ con centro $O$. Los puntos de $\Pi$ dentro de $\Gamma$ los llamaremos P-\textit{puntos}. Una P-\textit{línea} será el conjunto de P-\textit{puntos} en un círculo $\gamma$ que es ortogonal a $\Gamma$ o que pasa por $O$.
+\end{definition}
+
+El P-\textit{modelo} satisface el Axioma \ref{incidencia} completo.
+
+\begin{proposition}
+El Axioma \ref{Euclides} no se mantiene en el P-\textit{modelo}: Hay una P-\textit{línea} $\gamma$ y un P-\textit{punto} $A$ tales que hay mas de una P-\textit{línea} que pasa por $A$ y es paralela a $\gamma$
+\end{proposition}
+
+\begin{proof}
+Sea $A$ un P-\textit{punto} que no esté en la P-\textit{línea} $\gamma$. Sea $A'$ el inverso de $A$. Cualquier círculo que pasa por $A$ y $A'$ será ortogonal a $\Gamma$, esto nos da una P-\textit{línea} que pasa por $A$. Hay muchas de ellas que no cortan a $\gamma$, y son todas P-\textit{línea} que pasan por $A$ y P-\textit{paralelas} a $\gamma$.
+\end{proof}
+
+\begin{definition}
+Si $A$, $B$, $C$ son p-\textit{puntos} en una P-\textit{línea} $\gamma$, definimos la relación posición $A*B*C$ como sigue. Tomamos $O'$ el centro de $\gamma$, dibujamos la línea $PQ$ con $P$ y $Q$ los puntos de corte de $\gamma$ y $\Gamma$. Proyectamos los punto $A$, $B$, $C$ en puntos $A'$, $B'$, $C'$ $\in PQ$ respecto de $O'$. Entonces decimos que $A*B*C$ si y solo si $A'*B'*C'$ como la posición usual.
+\end{definition}
+
+Esta noción de P-posición satisface el Axioma \ref{posicion} completo
+
+\begin{definition}
+Definimos la congruencia en nuestro P-\textit{modelo} de la siguiente manera. Dos P-\textit{ángulos} son P-\textit{congruentes} si los ángulos euclídeos que definen son congruentes en el sentido normal.
+Para segmentos procedemos de la siguiente forma. Dados dos P-\textit{puntos}, sea la P-\textit{línea} que los une por el círculo $\gamma$ perpendicular a $\Gamma$. Los puntos de corte con $\Gamma$ los llamaremos $P$ y $Q$ con $P$ el mas cercano a $A$ uno de los puntos dados. Diremos que $A'B'$ es P-\textit{congruente} a $AB$ si la razón doble generalizada $(AB,PQ)$ es igual a la de $(A'B',P'Q')$.
+\end{definition}
+
+La P-\textit{congruencia} satisface el Axioma \ref{congruencia}. Por tanto cumple todos los axiomas de un plano de Hilbert y hemos demostrado anteriormente que no cumple el Axioma \ref{Euclides} por lo que se trata de una geometría no euclídea.
+
+\begin{proposition}[Existencia de movimientos rígidos para el modelo de Poincaré]
+Hay suficientes movimientos rígidos en el modelo de Poincaré con los que:\\
+\begin{enumerate}
+\item [(1)] Para cualesquiera dos P-\textit{puntos} $A,A'$, hay un P-\textit{movimiento rígido} que manda $A$ en $A'$.
+\item [(2)] Dados los P-\textit{puntos} $A,B,B'$, hay un P-\textit{movimiento rígido} que deja $A$ fijado y manda la semirrecta $AB$ a la semirrecta $AB'$.
+\item [(3)] Para cualesquiera P-\textit{líneas} hay un P-\textit{movimiento rígido} que deja todos los puntos de $\gamma$ fijos e intercambio los dos lados de $\gamma$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Empezamos por la última propiedad. Dada una P-\textit{línea} $\gamma$, llamemos $\rho_\gamma$ a la inversión circular en $\gamma$. Como $\Gamma$ es ortogonal a $\gamma$,$\rho_\gamma$ manda $\Gamma $ en si misma. Además, el interior de $\Gamma$ es mandado en el interior de $\Gamma$, por tanto el P-\textit{plano} es mandado en sí mismo, en una forma biyectiva. Como las inversiones circulares mandan círculos en círculos, un círculo ortogonal a $\Gamma$   será mandado en otro círculo ortogonal a $\Gamma$, en otras palabras, $\rho_\gamma$ manda P-\textit{líneas} en P-\textit{líneas}.
+
+Las inversiones circulares claramente preservan la posición. Estas preservan P-\textit{congruencias} de ángulos porque es igual que la congruencia normal de ángulos y las inversiones cumplen la Proposición 7. Además, $\rho_\gamma$ preserva P-\textit{congruencias} de P-\textit{segmentos}, porque está definido por la razón doble generalizada, que es invariante bajo inversión circular. Finalmente, notar que $\rho_\gamma$ intercambia la parte del P-\textit{plano} que está dentro de $\gamma$ con la parte de fuera, luego $\rho_\gamma$ es un movimiento rígido como requería (3).
+
+Lo siguiente es mostrar que para cualquier $A\neq O$, hay un círculo ortogonal a $\Gamma$ tal que la P-\textit{reflexión} en $\gamma$ intercambia $O$ por $A$. Sea $A'$ el inverso de A; sea $\gamma$ el círculo con centro en $A'$ que es ortogonal a $\Gamma$. entonces la construcción para $\gamma$, usando el mismo diagrama, muestra que la inversión en $\gamma$ manda $A$ en $O$. Mientras que la P-\textit{reflexión} en $\gamma$ intercambia $A$ con $O$.
+
+Ahora, como una composición de P-\textit{movimientos rígidos} es de nuevo un P-\textit{movimiento rígido}, dados dos puntos $A$ y $A'$, podemos mandar primero $A$ a $O$ como antes, luego mandar $O$ a $A'$. La composición de dos reflexiones será un P-\textit{movimiento rígido} mandando $A$ en $A'$, lo que prueba (1).
+
+Ahora supongamos que tenemos tres punto $A,A',B$. Sea $\rho$ un P-\textit{movimiento rígido} que lleva $A$ en $O$, y sea $\rho(B)=C,\rho(B')=C'$. Si podemos resolver (2) para $O,C,C'$, podemos resolverlo para $A,A',B$.
+
+Sea $l$ el ángulo bisector del ángulo $COC'$. Entonces $l$ pasa por $O$, que es también una P-\textit{línea}. La reflexión ordinaria en $l$ es claramente un P-\textit{movimiento rígido} que deja $O$ fijado y manda $OC$ en $OC'$.
+\end{proof}
+
+\begin{proposition}[Fórmula de Bolyai]
+Supongamos que nos dan un punto $P$ en el modelo de Poincaré, un líneas $l$, la perpendicular $PQ$ a $l$, y la paralela limitante $m$, formando el ángulo $\alpha$ con $PQ$. Entonces:
+\[
+\tan\alpha/2=\mu(PQ)^{-1}
+\]
+\end{proposition}
+
+\begin{proof}
+Podemos asumir que el modelo de Poincaré está hecho con un círculo $\Gamma$ de radio 1. Podemos mover $P,Q,l,m$ para que $Q$ sea el centro de $\Gamma$, $l$ sea el radio $QA$, y $P$ sea un radio ortogonal a $QB$. La paralela limitante a través de $P$ a $l$ será parte del círculo $\Delta$, ortogonal a $\Gamma$ y a $A$. Su centro es en un punto $C=(1,c)$ en la línea $x=1$. Sea $P$ el punto $(0,y)$. Entonces $CP=CA$, luego
+\[
+c^2=(c-y)^2+1
+\]
+Por tanto,
+\[
+c=\frac{1+y^2}{2y}
+\]
+Dibujado el diámetro $EF$ de $\Delta$ paralelo al eje $x$. Entonces el ángulo $\alpha$ entre nuestra paralela limitante y $PQ$, llamado el ángulo de paralelismo del segmento $PQ$, es igual al ángulo $PCF$. Si dibujamos $EP$, entonces el ángulo $PEF=\alpha/2$. Ahora
+\[
+\tan\alpha/2=DP/DE=\frac{c-y}{c+1}
+\]
+Sustituyendo obtenemos
+\[
+\tan\alpha/2=\frac{1-y}{1+y}
+\]
+Por otro lado, la función de distancia multiplicativa es 
+\[
+\mu(PQ)=(PQ,BG)^{-1}=\Big(\frac{PB}{PG}\div\frac{QB}{QG}\Big)^{-1}
+\]\[
+=\Big(\frac{1-y}{1+y}\div\frac{1}{1}\Big)=
+\frac{1+y}{1-y}
+\]
+Igualando ambas fórmulas tenemos $\tan\alpha/2=\mu(PQ)^{-1}$
+\end{proof}
+
+(Añadir figura del modelo)
+
+\section{Geometría hiperbólica}
+
+Anteriormente hemos visto el desarrollo de una geometría neutral y mas tarde un ejemplo concreto de geometría no euclídea con el modelo de Poincaré. Para los desarrollos que hicieron Bolyai y Lobachebsky necesitamos las paralelas limitantes. El problema es que su existencia no se deduce de los axiomas de los que partimos inicialmente por tanto en esta sección vamos a seguir el camino de Hilbert y tomar la existencia de las paralelas limitantes como un axioma.
+
+\begin{axiom}\label{Hiperbolico}
+Por cada línea $l$ y cada punto $A$ que no está en $l$, existen dos semirrectas $Aa$ y $Aa'$ que no coinciden en la misma línea y que no cortan a $l$, tal que cualquier semirrecta $An$ en el interior del ángulo $aAa'$ corta a $l$.
+\end{axiom}
+
+\begin{definition}
+A un plano de Hilbert satisfaciendo el Axioma \ref{Hiperbolico} lo llamaremos plano hiperbólico o geometría hiperbólica.
+\end{definition}
+
+\begin{definition}
+Una semirrecta $Aa$ es paralela limitante a una semirrecta $Bb$ si son coincidentes o si perteneciendo a líneas distintas a la formada por $AB$,no se cortan y cada semirrecta en el interior del ángulo $BAa$ corta con la semirrecta $Bb$.
+\end{definition}
+
+\begin{definition}
+Para cualquier segmento $AB$, sea $b$ una línea perpendicular a $AB$ en $B$. Sea $Aa$ la paralela limitante a $Bb$, llamaremos $\alpha=\angle BAa$ el ángulo de paralelismo del segmento $AB$ y lo denotaremos $\alpha (AB)$.
+\end{definition}
+
+\begin{theorem}[ángulo exterior]
+Si $AB$ es un segmento, con paralelas limitantes que emanan de $A$ a $B$, entonces el ángulo exterior $\beta$ en $B$ es mayor que el ángulo interior $\alpha$ en $A$.
+\end{theorem}
+
+\begin{proof}
+Sabemos que $\alpha$ tiene que ser menor o igual que $\beta$ por la propia noción de paralela limitante. Vamos a comprobar que no es igual.
+Supongamos $\alpha=\beta$. Sea $a'$ y $b'$ las semirrectas opuestas a $a$ y $b$. Los ángulos suplementarios en $A$ y $B$ serán iguales. Como $AB$ es igual a si mismo, deducimos trivialmente que $a'$ es también paralela limitante a $b'$.
+Esto contradice el Axioma \ref{Hiperbolico} que dice que las dos paralelas limitantes desde $A$ no pertenecen a la misma línea.
+\end{proof}
+
+\begin{corollary}
+En un plano hiperbólico, la suma de los ángulos de cualquier triángulo es menor que dos ángulos rectos.
+\end{corollary}
+
+\begin{proof}
+De acuerdo con la Proposición 2, solo tenemos que probar que los dos ángulos superiores de cualquier cuadrilátero de Saccheri son agudos.
+Sea $ABCD$ el cuadrilátero de Saccheri con base $AB=l$, con final en el infinito $\omega$. Dibujamos las paralelas limitantes por $C$ y $D$. Entonces los ángulos de paralelismo $\alpha$ son iguales por ser $AC\cong BD$.
+Mirando el triángulo limitante $CD\omega$, por el Teorema 5, el ángulo $\beta=\angle DC\omega $ es menor que $\gamma$ el exterior  del triángulo $DC\omega$ en $D$. Por otro lado, los ángulos superiores $\alpha + \gamma$ la suma de ángulos en $C$ y $\delta$ el ángulo en $D$ son iguales. Concluimos con que $\alpha + \beta > \alpha +\gamma =\delta$ por lo que $\delta$ tiene que ser agudo.
+\end{proof}
+
+\begin{proposition}
+En un plano hiperbólico, el Axioma \ref{Aristoteles} se sostiene, es decir, dado un ángulo $\alpha$ y un segmento $AB$, existe un punto $C$ en un brazo del ángulo tal que la perpendicular $CD$ por $C$ hacia el otro brazo del ángulo es mayor que $AB$.
+\end{proposition}
+
+\begin{proof}
+Dado un ángulo $\alpha$ en $A$, sea $l$ una línea paralela limitante a uno de los brazos de $\alpha$ y que corta el otro brazo en ángulo recto en el punto $F$. Tomamos $E$ en $l$ tal que $EF=AB$. Dibujamos la perpendicular a $l$ en $E$, y dejamos que corte con el otro brazo del ángulo $\alpha$ en $C$. Dibujamos la perpendicular $CD$ por $C$ a $AF$. Consideramos el cuadrilátero $DFCE$. Aplicando el Corolario 1, el ángulo en $C$ tiene que ser agudo. Por tanto, $CD>EF=AB$, como queríamos.
+\end{proof}
+
+\section{Aritmética de Hilbert de finales}
+
+En esta sección vamos a tratar la creación de Hilbert de un cuerpo abstracto fuera de la geometría de un plano hiperbólico. Partiendo de las definiciones de suma y multiplicación podremos mostrar que un plano hiperbólico esta unívocamente determinado por su cuerpo asociado, y de hecho es isomorfo al modelo de Poincaré sobre ese cuerpo. Usando esto podremos probar resultados como la construcción de Bolyai de paralelas.
+
+Fijado un plano hiperbólico, la relación paralelas limitantes es una relación de equivalencia. Definiremos un final como una clase de equivalencia de paralelas limitantes. Fijamos una línea con finales en 0 e infinito. Definiremos $F$ como el conjunto de todos los finales diferentes de infinito y veremos que es un cuerpo ordenado con la operación suma y multiplicación. $F'$ será $F$ junto con el infinito.
+
+\begin{definition}
+Dados dos finales $\alpha$ y $\beta$ distintos de infinito, podemos definir su suma como sigue. Tomamos un punto cualquiera $C$ en la línea $(0,\infty)$. Sea $A$ su reflexión en la línea $(\alpha,\infty)$. Sea $B$ su reflexión en la línea $(\beta,\infty)$. Entonces $\alpha + \beta$ es el final del bisector perpendicular a $AB$.
+\end{definition}
+
+\begin{definition}
+Para definir la multiplicación de finales, primero fijamos una línea perpendicular a $(0,\infty)$, y que tenga final en 1. Por tanto su otro final estará en -1. 
+Dados dos finales $\alpha$, $\beta$, dibujamos las líneas $(\alpha,-\alpha)$ y $(\beta,\beta)$, que cortarán en ángulo recto a $(0,\infty)$ en $A$ y $B$. Sea $O$ el punto de corte de $(1,-1)$ con $(0,\infty)$. 
+Buscamos $C$ en $(0,\infty)$ tal que $OC=OA+OB$. La perpendicular por ese punto tendrá finales $\alpha\beta$ y $-\alpha\beta$.
+\end{definition}
+
+Con estas dos definiciones, además de ver que $F$ es un cuerpo ordenado con la suma y la multiplicación, también podremos introducir una distancia y con ella seguir los pasos de Bolyai en la construcción de sus paralelas.
+
+\begin{proposition}
+Sea $\Pi$ un plano hiperbólico y $F$ un cuerpo de finales. Describimos ahora varios movimientos rígidos y sus efectos en los finales.
+\begin{enumerate}
+\item [(a)] La reflexión en $(0,\infty)$ manda $x\in F'$ a $-x$. Lo escribimos como $x'=-x$.
+\item [(b)] La reflexión en $(1,-1)$ da $x'=1/x$.
+\item [(c)] Las traslaciones a través de $(0,\infty)$ se representa por $x'=ax$ para todo $a\in F$, $a>0$.
+\item [(d)] La rotación alrededor de $O$, que manda $0$ a un $a\in F$ viene dada por
+\[
+x'=\frac{x+a}{-ax+1}
+\]
+en los finales. La rotación alrededor de $O$ que manda 0 a infinito viene dada por $x'=-1/x$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a), (b), (c) Son consecuencias de las definiciones dadas anteriormente. (d) Se prueba fácilmente que hay un movimiento rígido que tiene ese efecto, porque la fórmula del enunciado se puede transformar numéricamente en otras que solo usan (a), (b) y (c). Si tenemos un movimiento rígido que lo cumple directamente hay una rotación que lo cumple.
+\end{proof}
+
+\begin{proposition}
+Para cualquier segmento $AB$ en el plano hiperbólico, pongamos un segmento $OC$ congruente en la semirrecta $O\infty$, y sea la línea perpendicular a $(0,\infty)$ en $C$ $(a,-a)$ con $a>0$. Definimos $\mu (AB)=a$. Entonces $\mu$ es una función de distancia multiplicativa en el plano con valores en el grupo multiplicativo de los elementos positivos del cuerpo $F$, es decir:
+\begin{enumerate}
+\item [(a)] $\mu (AB)>1$.
+\item [(b)] $AB\cong A'B'$ si y solo si $\mu (AB)\cong\mu (A'B')$.
+\item [(c)] $AB< A'B'$ si y solo si $\mu (AB)<\mu (A'B')$.
+\item [(d)] $\mu (AB+CD)=\mu(AB) \mu(CD)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Todas las propiedades se deducen de la definición dada anteriormente de la multiplicación en $F$.
+\end{proof}
+
+\begin{proposition}
+Para cualquier ángulo $\theta$ en el plano hiperbólico, ponemos uno igual centrado en $O$, y que va de 0 a $a$ en el lado positivo de $(0,\infty)$. Entonces definimos $tan(\theta /2)=a$. Esta función tangente tiene las siguientes propiedades:
+\begin{enumerate}
+\item [(a)] $tan(\theta /2)\in F$ y $tan(\theta /2)>0$.
+\item [(b)] $tan(\theta /2)=tan(\psi /2)$ si y solo si $\theta=\psi$.
+\item [(c)] Si $\theta<\psi$ entonces $tan(\theta /2)<tan(\psi /2)$.
+\item [(d)] Si $\theta=RA$, $tan(\theta /2)=1$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Las propiedades son inmediatas por la propia construcción.
+\end{proof}
+
+\begin{proposition}[Fórmula de Bolyai]
+Si $\alpha$ es el ángulo de paralelismo de un segmento $AB$, entonces usando la función de distancia y la función tangente, tenemos que
+\[
+tan\big(\frac{\alpha}{2}\big)=\mu(AB)^{-1}
+\]
+\end{proposition}
+
+\begin{proof}
+Colocamos el ángulo $\alpha$ como $0Oa$. Entonces la línea $(a,-a)$ cortará con la semirrecta $O0$ con ángulo recto en el punto $C$, y $\alpha$ será el ángulo de paralelismo del segmento $OC$ igual a $AB$. Para encontrar $\mu(OC)$, reflejamos en la línea $(1,-1)$ obteniendo $OD$ y la línea $(a^{-1},-a^{-1})$. Entonces $\mu(AB)=a^{-1}$ y $tan\:\alpha/2=a$, lo que nos da el resultado deseado.
+\end{proof}
+
+Antes de dar la construcción de las paralelas debemos introducir un Lema que nos será útil.
+
+\begin{lemma}
+Dos líneas $(u_1,u_2)$ y $(v_1,v_2)$ en un plano hiperbólico cortan la línea $(0,\infty)$ en el mismo punto si y solo si $u_1u_2=v_1v_2$, y $u_1,u_2$ es negativo.
+\end{lemma}
+
+\begin{proposition}[Construcción de las paralelas de Bolyai]
+Supongamos que tenemos una línea $l$ y un punto $P$ que no está en $l$, todo ello en el plano hiperbólico. Sea $PQ$ la perpendicular a $l$. Sea $m$ la línea que pasa por $P$ perpendicular a $PQ$.
+Escogemos un punto cualquiera $R$ en $l$, y sea $RS$ la perpendicular a $m$. Entonces el círculo de radio $QR$ alrededor de $P$ cortará el segmento $RS$ en el punto $T$, y la semirrecta dada al extender $n=PT$ será paralela limitante a $l$ en $P$. 
+\end{proposition}
+
+\begin{proof}
+Podemos suponer sin perdida de generalidad que $P$ es el centro de nuestro sistema coordenado, $PQ$ la línea $(0,\infty)$ y $PS$ la línea $(1,-1)$. Tomamos n como la paralela limitante a $l$ y cortamos $RS$ en $T$. Tenemos que probar que $QR=PT$.
+Empezamos con el segmento $PT$. Llamaremos a los finales de $l=QR$ $a$ y $-a$. Los de $RS$ serán $b$ y $-b$. Entonces $n$ es la línea $(a,-a^{-1})$. Usamos primero la rotación alrededor de $P$ que manda $a$ en $0$. Por la Proposición 10 tenemos 
+\[
+x'=\frac{x+a}{-ax+1}
+\]
+Mientras que $(b,b^{-1})$ lo manda en 
+\[
+(u_1,u_2)=\Big(\frac{b-a}{ab+1},\frac{b^{-1}-a}{ab^{-1}+1}\Big)
+\]
+La imagen de $T$ será el punto donde esta línea corta con la línea $(0,\infty)$. Con el objetivo de aplicar el Lema 2, calculamos
+\[
+(u_1,u_2)=\Big(\frac{b-a}{ab+1}\Big)\Big(\frac{b^{-1}-a}{ab^{-1}+1}\Big)=\frac{(b-a)(1-ab)}{(1+ab)(a+b)}
+\]
+Ahora consideramos el segmento $QR$. Primero hacemos una traslación a lo largo de $(0,\infty)$ que manda $Q$ a $P$. Esto produce un efecto en los finales de $x'=a^{-1}x$, por lo que mandará $(b,b^{-1})$ en la línea $(a^{-1}b,a^{-1}b^{-1})$ y la línea $(a,a^{-1})$ en $(1,-1)$. 
+Lo siguiente es hacer una rotación alrededor de $P$ que mande $1$ a $0$, que tendrá como efecto en los finales
+\[
+x'=\frac{x-1}{x+1}
+\]
+Así que la línea $(a^{-1}b,a^{-1}b^{-1})$ pasará a ser
+\[
+(v_1,v_2)=\Big(\frac{a^{-1}b-1}{a^{-1}b+1},\frac{a^{-1}b^{-1}-1}{a^{-1}b^{-1}+1}\Big)
+\]
+La imagen de $R$ bajo dos movimientos rígidos será la intersección de $(v_1,v_2)$ con $(0,\infty)$. Así que calculamos
+\[
+(v_1,v_2)=\Big(\frac{a^{-1}b-1}{a^{-1}b+1}\Big)\Big(\frac{a^{-1}b^{-1}-1}{a^{-1}b^{-1}+1}\Big)=\frac{(b-a)(1-ab)}{(1+ab)(a+b)}
+\]
+Como $u_1u_2=v_1v_2$ y $u_1u_2<0$, usando el Lema 2, concluimos que $QR\cong PT$.
+\end{proof}
+
+\begin{proposition}
+Si $(u_1,u_2)$ y $(v_1,v_2)$ son cualesquiera dos líneas que se cortan en el plano, y si $\alpha$ es el ángulo entre las rectas $u_1$ y $v_1$, entonces
+\[
+\tan \alpha/2=\sqrt{-(v_1,v_2,u_1,u_2)}
+\]
+donde la expresión bajo el radicando es la razón doble generalizada definida como
+\[
+(v_1,v_2,u_1,u_2)=\frac{v_1-u_1}{v_1-u_2}\frac{v_2-u_2}{v_2-u_1}
+\]
+\end{proposition}
+
+\begin{proof}
+Primero consideramos el caso $(u_1,u_2)=(0,\infty)$ y $(v_1,v_2)=(a,-a^{-1})$. Por definición sabemos que $\tan \alpha/2=a$. Haciendo la razón doble nos da $-a^2$.
+
+En el caso general, consideramos el movimiento rígido que toma $(u_1,u_2)$ en $(0,\infty)$ y $(v_1,v_2)$ en $(a,-a^{-1})$. Los movimientos rígidos conservan los ángulos y también las razones dobles generalizadas de finales, por lo que ya lo tenemos.
+\end{proof}
+
+\section{Trigonometría Hiperbólica}
+La trigonometría usual que aprendemos en el instituto puede ser descrita como una colección de relaciones entre lados y ángulos de un triángulo.
+Para ser más precisos, sea $ABC$ un triángulo rectángulo, con ángulos $\alpha$ y $\beta$ en $A$ y $B$, y los lados $a$, $b$ y $c$ opuestos a $A$, $B$, y $C$, tenemos las relaciones
+\[
+\sin (\alpha)=\frac{a}{c},
+\]
+\[
+\cos (\alpha)=\frac{b}{c},
+\]
+\[
+\tan (\alpha)=\frac{a}{b},
+\]
+y identidades trigonométricas como
+\[
+\sin^2(\alpha)+\cos^2(\alpha)=1
+\]
+\[
+\sin(RA-\alpha)=\cos(\alpha)
+\]
+Usando estas relaciones, dados dos lados de un triángulo o un lado y un ángulo, podemos encontrar el resto de lados y ángulos del triángulo. Si además sustituimos las fórmulas del $\sin$ y $\cos$ en $\sin^2(\alpha)+\cos^2(\alpha)=1$ tenemos el Teorema de Pitágoras $a^2+b^2=c^2$.
+
+La trigonometría hiperbólica que vamos a desarrollar en esta sección hace lo mismo pero en el plano hiperbólico. Conseguiremos que dadas dos cantidades $a,b,c,\alpha,\beta$, se puedan encontrar el resto. Este resultado es algo más fuerte que en el caso euclídeo porque solo sabemos que $\alpha +\beta<RA$ y no el valor exacto.
+
+Para derivar las fórmulas de la trigonometría hiperbólica, ponemos un triángulo rectángulo en una posición especial, con $A$ en el centro de nuestro sistema de coordenadas y $C$ en la línea $(0,\infty)$. Entonces el lado $AB$ describe un ángulo $\alpha$, tal que forma la línea $(t,-t^{-1})$, donde $t=\tan(\alpha /2)$. Definimos entonces $a,b,c$ como los representantes de las longitudes multiplicativas de los lados opuestos $A,B,C$, tales que $BC$ esté en la línea $(b^{-1},-b^{-1})$.
+
+Vamos a usar una serie de movimientos rígidos para intercambiar las longitudes $a$ y $c$ en valores de $b$ y $t$. Para $a$, hacemos una traslación a lo largo de $(0,\infty)$ para mover $C$ a $C$. Lo que convierte $x'=bx$ en los finales, luego la línea $(t,-t^{-1})$ pasa a ser $(bt,-bt^{-1})$. Ahora hacemos la rotación en el ángulo recto para mandar $1$ a $\infty$, y $0$ a $1$. Esto actúa en los finales como $x'=(x+1)/(-x+1)$, así que la línea $(bt,-bt^{-1})$ pasa a ser
+\[
+(u_1,u_2)=\Big( \frac{bt+1}{-bt+1},\frac{-bt^{-1}+1}{bt^{-1}+1}\Big)
+\]
+Esta línea cortará $(0,\infty)$ en el punto que es imagen de $B$. Para encontrar la longitud multiplicativa de $a$ del segmento $BC$, necesitamos encontrar la línea $(a,-a)$ que corta $(0,\infty)$ en el punto $(u_1,u_2)$. Sabemos por el Lema 2 que $u_1u_2=-a^2$. Sustituyendo $u_1$ y $u_2$ obtenemos
+\[
+a^2=\frac{(1+bt)(b-t)}{(1-bt)(b+t)}
+\]
+Lo siguiente es encontrar $c$. Hacemos una rotación alrededor de $A$ que mande $t$ a $0$. Esto actúa como $x'=(x-t)(tx+1)$ en los finales, luego la línea $(b^{-1},-b^{-1})$ pasa a ser
+\[
+(v_1,v_2)=\Big(\frac{b^{-1}-t}{b^{-1}t+1},\frac{-b^{-1}-t}{-b^{-1}t+1}\Big)
+\]
+Usando nuevamente el Lema 2, $v_1v_2=-c^2$, de lo que se obtiene
+\[
+c^2=\frac{(b+t)(b-t)}{(1+bt)(1-bt)}
+\]
+Por último calculamos el ángulo $\beta$ usando la Proposición 15. Si $s=\tan \beta/2$, entonces $-s^2=(b^{-1},-b^{-1}:t,-t^{-1})$. Si los escribimos como razón doble generalizada
+\[
+s^2=\frac{(1-bt)(b-t)}{(b+t)(1+bt)}
+\]
+Las tres fórmulas descritas anteriormente cumple nuestro objetivo de relacionar todas las cantidades.
+
+\begin{definition}
+Para cualquier ángulo $\alpha$, si $t=\tan\alpha /2$, definimos
+\[
+\sin \alpha=\frac{2t}{1+t^2}
+\]
+\[
+\cos \alpha = \frac{1-t^2}{1+t^2}
+\]
+\end{definition}
+
+\begin{proposition}
+Con estas definiciones, las funciones $\sin$ y $\cos$ para ángulos en el plano hiperbólico encajan con las identidades usuales de las funciones trigonométricas. En particular,
+\begin{enumerate}
+\item [(a)] $\tan\alpha=(\sin\alpha)/(\cos\alpha)$
+\item [(b)] $\sin^2\alpha + \cos^2 \alpha=1$
+\end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+En el plano hiperbólico, sea $ABC$ un triángulo rectángulo, con ángulos $\alpha,\beta$ en $A,B$, y sea $\overline{a},\overline{b},\overline{c}$ los ángulos de paralelismo de los lados opuestos $A, B, C$.Entonces:
+\begin{enumerate}
+\item [(a)] $\tan \alpha = \cos \overline{a}\tan \overline{b}$
+\item [(b)] $\cos \overline{b}=\cos\alpha\cos \overline{c}$
+\item [(c)] $\sin \alpha =\cos \beta \sin \overline{b}$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Por la Proposición 13, tenemos que $\tan \overline{a}/2=a^{-1}$. Por tanto,
+\[
+\sin \overline{a}=\frac{2a^{-1}}{1+a^{-2}}=\frac{2a}{1+a^2}
+\]
+\[
+\cos \overline{a}=\frac{1-a^{-2}}{1+a^2}=\frac{a^2-1}{a^2+1}
+\]
+\[
+\tan \overline{a}=\frac{2a^{-1}}{1-a^{-2}}=\frac{2a}{a^2-1}
+\]
+\end{proof}
+
+\begin{proposition}
+Con la misma hipótesis que la Proposición 17 tenemos las siguientes relaciones:
+\begin{enumerate}
+\item [(d)] $\tan \overline{c}=\sin\alpha\tan\overline{a}$
+\item [(e)] $\sin\overline{c}=\tan\alpha\tan\beta$
+\item [(f)] $\sin\overline{c}=\sin\overline{a}\sin\overline{b}$
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Vamos a probar (f), las demás son análogas. Primero multiplicamos (a) y (b)
+\[
+\sin \alpha=\cos\overline{a}\sin\overline{b}\cos^{-1}\overline{c}
+\]
+Sustituimos esta expresión en $\sin^2\alpha + \cos^2 \alpha=1$
+\[
+\cos^2 \overline{b}\cos^{-2}\overline{c}+\cos^2 \overline{a}\sin^2 \overline{b}\cos^2\overline{c}=1
+\]
+Multiplicamos por $\cos^2\overline{c}$
+\[
+\cos^2 \overline{b}+\cos^2 \overline{a}\sin^2 \overline{b}=\cos^2\overline{c}
+\]
+Ahora usamos $\cos^2=1-\sin ^2$ en $\overline{a},\overline{b},\overline{c}$. Obtenemos
+\[
+1-\sin^2\overline{b}+(1-\sin^2\overline{a})\sin^2\overline{b}=1-\sin^2\overline{c}
+\]
+Y simplificando obtenemos lo que queremos.
+\end{proof}
+Con estos resultados hemos conseguido nuestro objetivo, dados dos elementos de entre $a,b,c,\alpha,\beta$, podemos calcular los restantes. Esto se debe a que dado cualquier subconjunto de tres de ellos, existe una ecuación que los relaciona.
+
+\section{Caracterización de los Planos de Hilbert}
+En esta sección vamos a tratar de ver una caracterización de los planos de Hilbert satisfaciendo el Axioma \ref{Hiperbolico}, el cual llamamos plano hiperbólico. Vamos a probar un conjunto de teoremas análogos al caso euclídeo en el que si se sostiene el Axioma \ref{Playfair}, se tiene que dos planos de Hilbert son isomorfos, como geometría abstracta, si y solo si sus cuerpos asociados son isomorfos, como cuerpos ordenados.
+
+\begin{proposition}
+Dado un plano hiperbólico $\Pi$, el cuerpo de los finales está unívocamente determinado, hasta ser un isomorfismo. Dos planos hiperbólicos $\Pi_1$ y $\Pi_2$ son isomorfos como planos de Hilbert si y sólo si los cuerpos asociados $F_1$ y $F_2$ son isomorfos como cuerpos ordenados.
+\end{proposition}
+
+\begin{proof}
+Por supuesto, el conjunto de finales en el plano $\Pi$ está unívocamente determinado. Pero con el fin de definir la estructura de cuerpos en este conjunto, escogemos dos líneas ortogonales, y sus finales $0,\infty,1,-1$. Si hacemos una elección diferente nos sale una estructura diferente, luego claramente no es única. Pero nosotros vamos a mostrar que el cuerpo es único bajo isomorfismo.
+
+Supongamos $l,m$ dos líneas ortogonales con finales en $0,\infty,1,-1$, dando lugar a una estructura de cuerpo $F$ en el conjunto de finales. Supuesto otras líneas ortogonales con distinto final podemos encontrar un movimiento rígido del plano que lleve uno en otro. Este movimiento rígido induce una correspondencia uno en uno en el conjunto de los finales de $\Pi$ en sí mismo, lo que efectivamente nos da una correspondencia de uno en uno de los elementos de $F$ en el otro cuerpo  $G$. Las construcciones que usamos para definir la suma y la multiplicación en $F$ se convierten en las correspondientes construcciones en $G$, y el orden se preserva. Por tanto, nuestro movimiento induce un isomorfismo de $F$ y $G$ como cuerpos ordenados, lo que muestra que el cuerpo asociado a $\Pi$ es único bajo isomorfismo.
+
+Ahora supongamos que $\Pi_1$ y $\Pi_2$ son isomorfos planos hiperbólicos. Si $\varphi :\Pi_1\rightarrow\Pi_2$ es un isomorfismo, podemos escoger líneas $l_1$ y $m_1$ en $\Pi_1$ con los que construir el cuerpo de finales $F_1$. Luego tomar $l_2=\varphi(l_1)$, $m_2=\varphi(m_1)$ para construir el cuerpo de finales $F_2$. Entonces está claro que la aplicación inducida por $\varphi':F_1\rightarrow F_2$ en los finales nos dará un isomorfismo de cuerpo.
+
+Finalmente, sea $\Pi_1$ y $\Pi_2$ planos hiperbólicos, y supongamos que tenemos un isomorfismo $\psi:F_1\rightarrow F_2 $ de los cuerpos de finales asociados. Queremos mostrar que nuestros planos son planos isomorfos de Hilbert. Lo que es lo mismo, hay una aplicación $\varphi:\Pi_1\rightarrow \Pi_2$ de los puntos que lleva uno en uno, que preserva las líneas, posición, y la congruencia de segmentos y ángulos.
+
+Construimos $\varphi$ de la siguiente forma. Primero extendemos la aplicación $\psi$ a todo el conjunto de finales haciendo $\psi(\infty_1)=\infty_2$. Cualquier línea de $\Pi_1$ está dada por un par $(\alpha,\beta)$ de elementos distintos de $F'_1=f_1\cup\{\infty_1\}$. Un punto está determinado por el conjunto de todas las líneas que pasan por él, y su conjunto de líneas satisface una ecuación de la forma
+\[
+u_1u_2-b(u_1+u_2)+a^2=0
+\]
+con $a,b\in F_1$. Como $\psi$ es un isomorfismo de cuerpos ordenados, el conjunto de imágenes a través de $\varphi$ de las líneas que contienen a $P$ satisfacen una ecuación similar en $F_2$, y ello nos define un único punto que denotamos $\varphi(P)$. Entonces por construcción $\varphi$  es una aplicación biyectiva en el conjunto de los puntos $\Pi_2$ mandando líneas en líneas.
+
+Como la posición de los puntos puede ser expresado en términos del orden del cuerpo de finales, y $\psi$ es un isomorfismo de cuerpos ordenados, $\varphi$ preserva la posición.
+
+La congruencia entre segmentos puede ser medida con la función de distancia multiplicativa $\mu$ (Proposición 11), y la congruencia de ángulos puede ser medida con la función tangente (Proposición 12).
+\end{proof}
+
+\begin{theorem}
+Sea $F$ un cuerpo euclídeo ordenado, y sea $\Pi$ un modelo de Poincaré sobre el cuerpo $F$. Sea $F_1$ el cuerpo de finales de $\Pi$. Entonces $F$ y $F_1$ son cuerpos isomorfos ordenados.
+\end{theorem}
+
+\begin{proof}
+Escojamos el eje $x$ e $y$ como las líneas ortogonales usadas en la construcción del cuerpo de finales $F_1$. Se sigue que los finales del modelo de Poincaré $\Pi$ son exactamente los puntos Cartesianos del círculo $\Gamma$. Nosotros fijamos los finales de nuestros dos ejes así
+\[
+0_1=(-1,0),
+\]
+\[
+\infty_1=(1,0),
+\]
+\[
+1_1=(0,1),
+\]
+\[
+-1_1=(0,-1),
+\]
+en las coordenadas Cartesianas.
+
+El siguiente paso es dar una aplicación de conjuntos entre elementos de los cuerpos $F$ y $F_1$. Los elementos de $F_1$ son todos los puntos del círculo $\Gamma$ excepto $\infty=(1,0)$. Definimos la aplicación $\varphi:F_1\rightarrow F$ de la siguiente forma. Primero establecemos $\varphi (0_1)=0$. Luego, para cualquier final en el semicírculo superior, establecemos $\varphi(\alpha)=\tan\theta/2$ donde $\theta$ es el ángulo de $0_1$ a $\alpha$ contenido en el centro del círculo. Si $-\alpha$ es la reflexión de un punto en el eje $x$, establecemos $\varphi(-\alpha)=-\varphi(\alpha)$. Mientras que $\alpha$ recorre el semicírculo superior, $\theta$ recorre todos los posibles ángulos, así que la función $\tan \theta/2$ recorre todos los elementos positivos del cuerpo $F$. Dado un elemento $a\in F,a>0$ hay un ángulo $\theta$ tal que $\tan\theta/2=a$, luego esta aplicación $\varphi$ es una biyección entre el conjunto $F_1$ y $F$. Claramente $\varphi$ preserva el orden de los dos conjuntos.
+
+Ahora tenemos que mostrar que $\varphi$ es compatible con las operaciones de suma y multiplicación en los dos cuerpos. Empezamos computando las coordenadas Cartesianas en un final $\alpha\in F_1$, que es un punto del círculo $\Gamma$, en términos de $\varphi(\alpha)$. Vamos a hacer todos nuestros cálculos para todos los puntos en el semicírculo superior, los resultados negativos son análogos.
+
+Sea $\alpha\in F_1, \alpha>0$. Sea $\varphi(\alpha)=a=\tan\theta/2$. Se sigue que las coordenadas Cartesianas $(x,y)$ de $\alpha$ vienen dadas por
+\[
+x=-\cos \theta=\frac{a^2-1}{1+a^2}
+\]
+\[
+y=\sin\theta=\frac{2a}{1+a^2}
+\]
+Para estudiar la suma, vamos a conmutar una reflexión $\sigma_{\alpha}$ en la línea $(\alpha,\infty)$. En el modelo de Poincaré, las reflexiones vienen dadas por inversiones circulares en el correspondiente círculo Cartesiano (Proposición 9). Dado un punto $\alpha$ en $\Gamma$, sea $\Delta$ la P-\textit{línea} $(\alpha,\infty)$, que es un círculo ortogonales a $\Gamma$ en el punto $\alpha$ y en $\infty$. Sea $A$ el centro de este círculo. Entonces por geometría Euclídea elemental vemos que el ángulo $OA\infty_1$ es igual que $\theta/2$, luego las coordenadas de $A$ son $(1,a^{-1})$.
+
+La P-\textit{reflexión} en $\Delta$ es una inversión circular en $\Delta$ en el plano Cartesiano. Para estudiar los efectos en los finales, sea $\beta$ un final cualquiera, y sea $\gamma$ su imagen bajo reflexión. Como $\Gamma$ y $\Delta$ son círculos ortogonales, $\gamma$ es la intersección de la línea $A\beta$ con $\Gamma$. Sea $\varphi(\beta)=b$ y $\varphi(\gamma)=c$. Entonces $\beta$ y $\gamma$ tienen estas coordenadas Cartesianas
+\[
+\beta=\Big(\frac{b^2-1}{1+b^2},\frac{2b}{1+b^2}\Big)
+\]
+\[
+\gamma=\Big(\frac{c^2-1}{1+c^2},\frac{2c}{1+c^2}\Big)
+\]
+Para expresar el hecho de que $A,\beta,\gamma$ son colineales, hacemos que las pendientes de $A\beta$ y $A\gamma$ sean iguales. Esto nos da
+\[
+\frac{\frac{2b}{1+b^2}-a^{-1}}{\frac{b^2-1}{1+b^2}-1}=
+\frac{\frac{2c}{1+c^2}-a^{-1}}{\frac{c^2-1}{1+c^2}-1}
+\]
+Simplificando nos queda
+\[
+2a(b-c)=b^2-c^2
+\]
+Asumiendo que $\beta\neq\gamma$, luego $b\neq c$
+\[
+c=2a-b
+\]
+Por tanto la reflexión en $\Delta$, que es $\sigma_\alpha$, tiene efecto en los finales de $F_1$, que es transformado por $\varphi$ en la transformación
+\[
+x'=2\varphi(\alpha)-x
+\]
+para elementos de $F$.
+
+Recalcar que la suma de finales viene caracterizada por
+\[
+\sigma_{\alpha+\beta}=\sigma_\beta\sigma_0\sigma_\alpha
+\]
+
+usando reflexiones. A través de la función $\varphi:F_1\rightarrow F$, $\sigma_{\alpha+\beta}$ se convierte en
+\[
+x'=2\varphi(\alpha+\beta)-x.
+\]
+Por otro lado, $\sigma_\beta\sigma_0\sigma_\alpha$ pasa a ser una transformación que primero manda $x$ en 
+\[
+2\varphi(\alpha)-x
+\]
+luego
+\[
+2\varphi(0)-(2\varphi(\alpha)-x)
+\]
+luego
+\[
+2\varphi(\beta)-[2\varphi(0)-(2\varphi(\alpha)-x)]=2\varphi(\beta)+2\varphi(\alpha)-x
+\]
+Concluimos que
+\[
+\varphi(\alpha+\beta)=\varphi(\alpha)+\varphi(\beta)
+\]
+así que $\varphi$ es un homomorfismo para la suma.
+
+Ahora vamos a considerar la multiplicación. Para hacer esto, consideramos la reflexión $\sigma_\alpha$ en la línea $(\alpha,-\alpha$ en el modelo de Poincaré. Esto e dado por la inversión circular en un círculo $\Delta$, ortogonal a $\Gamma$, que pasa por los puntos $\alpha$ y $-\alpha$. Sea $A$ el centro de este círculo. Entonces el ángulo $OA\alpha$ es igual a $\theta-RA$ en nuestro diagrama. Así $OA=-1/\cos\theta$. Si $\varphi(\alpha)=a=\tan\theta/2$, entonces
+\[
+A=\Big(\frac{1+a^2}{a^2-1},0\Big)
+\]
+Ahora sea $\beta$ otro final, y $\gamma$ su imagen bajo $\sigma_\alpha$, que es una inversión circular en $\Delta$. Entonces $A,\beta,\gamma$ son colineales. Poniendo $\varphi(\beta)=b$ y $\varphi(\gamma)=c$ como antes, expresamos la colinealidad igualando las pendientes de las líneas $A\alpha$ y $A\gamma$. Esto nos lleva a
+\[
+\frac{\frac{2b}{1+b^2}}{\frac{b^2-1}{1+b^2}-\frac{1+a^2}{a^2-1}}=
+\frac{\frac{2c}{1+c^2}}{\frac{c^2-1}{1+c^2}-\frac{1+a^2}{a^2-1}}
+\]
+simplificando
+\[
+bc(b-c)=a^2(b-c)
+\]
+Asumiendo que $b\neq c$, obtenemos
+\[
+c=a^2b^{-1}
+\]
+Así la reflexión $\sigma_\alpha$ es transformada por $\varphi$ en una transformación
+\[
+x'=\varphi(\alpha)^2x^{-1}
+\]
+en $F$.
+
+Volviendo al plano hiperbólico, es fácil ver que la composición de $\sigma_\alpha\sigma_1$ es igual que la traslación a lo largo de $(0,\infty)$ que manda $1$ en $\alpha$. Por otro lado, la multiplicación está definida como composición de traslaciones. Luego la multiplicación está caracterizada por la fórmula
+\[
+\sigma_{\alpha\beta}\sigma_1=\sigma_{\beta}\sigma_1\sigma_\alpha\sigma_1
+\]
+o simplemente
+\[
+\sigma_{\alpha\beta}=\sigma_{\beta}\sigma_1\sigma_\alpha
+\]
+Transportando esto por $\varphi$, encontramos que para los elementos de $F$, la transformación
+\[
+x'=\varphi(\alpha\beta)^2x^{-1}
+\]
+es igual
+\[
+x'=\varphi(\beta)^2\varphi(\alpha)^2x^{-1}.
+\]
+Podemos concluir que $\varphi(\alpha\beta)=\varphi(\alpha)\varphi(\beta)$
+\end{proof}
+
+
+\newpage
+
+\section{Modelos clásicos de geometría hiperbólica}
+Modelo de semiplano de Poincare\\
+Modelo de disco de Klein\\
+Modelo de disco de Poincare\\
+Modelo del hiperboloide\\
+(Explicar las relaciones entre modelos y los cambios necesarios para pasar de unos a otros)
+
+
+
+\tableofcontents
+
+\begin{thebibliography}{}
+
+\bibitem[H]{h} R. Hartshorne. \textit{Geometry: Euclid and Beyond.} Undergraduate Texts in Mathematics , Springer.
+
+\bibitem[B]{b} Uta C. Merzbach and Carl B. Boyer. \textit{A History of Mathematics.} Third Edition, Wiley.
+
+\bibitem[L]{l} Nikolai I. Lobachevsky. \textit{Pangeometry.} A. Papadopoulos, European Mathematical Society.
+
+\end{thebibliography}
+
+\end{document}

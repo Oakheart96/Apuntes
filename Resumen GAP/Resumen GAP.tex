@@ -1,0 +1,3532 @@
+\documentclass[ebook,oneside]{memoir}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsthm, epsf, amsfonts, thmtools, mathtools}
+\usepackage{cool}
+\usepackage{physics} % Paquete para derivadas
+\usepackage[colorlinks]{hyperref}
+\usepackage{xpatch}
+
+\usepackage{graphicx}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead[\thepage]{\rightmark}
+\rhead[\leftmark]{\thepage}
+\cfoot[]{}
+
+\renewcommand{\chaptername}{Tema}
+
+\newtheorem{thm}{Teorema}[chapter]
+\newtheorem{coro}[thm]{Corolario}
+\newtheorem{lema}[thm]{Lema}
+\newtheorem{prop}[thm]{Proposición}
+\newtheorem{defn}[thm]{Definición}
+\newtheorem{rem}[thm]{Observaciones}
+\newtheorem{eje}[thm]{Ejemplos}
+
+\newtheorem{ejercicio}{Ejercicio}[chapter]
+
+% Podemos dar una lista de las definiciones principales y dem�s
+\renewcommand{\listtheoremname}{Lista de Teoremas}
+\xpatchcmd{\listoftheorems}{\@fileswfalse}{}{\typeout{yes}}{\typeout{no}}
+
+\newcommand{\Restrict}[2]{{% we make the whole thing an ordinary symbol
+		\left.\kern-\nulldelimiterspace{}% automatically resize the bar with \right
+		#1 % the function
+		\vphantom{\big|} % pretend it's a little taller at normal size
+		\right|_{#2} % this is the delimiter
+}} % Source: https://tex.stackexchange.com/questions/22252
+
+\newenvironment{subproof}[1][\proofname]{%
+	\renewcommand{\qedsymbol}{$\blacksquare$}%
+	\begin{proof}[#1]%
+	}{%
+	\end{proof}%
+}
+
+\newcommand{\rojo}[1]{\textcolor{red}{#1}}
+\newcommand{\azul}[1]{\textcolor{blue}{#1}}
+\newcommand{\verde}[1]{\textcolor{green}{#1}}
+\newcommand{\amarillo}[1]{\textcolor{yellow}{#1}}
+\newcommand{\celeste}[1]{\textcolor{cyan}{#1}}
+\newcommand{\magenta}[1]{\textcolor{magenta}{#1}}
+\def\dx{\,{ d}x}
+\newcommand{\fracc}[2]{{\displaystyle\frac{#1}{#2}}}
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\bolds}[1]{\boldsymbol{#1}}
+
+\title{\textsc{Resumen de la asignatura\\ Geometría aplicada.}}
+\author{\textsc{Ismael Ruiz Donaire}}
+\date{Curso 2012/2013}
+
+
+%\newtheorem{thm}{Teorema}
+
+%\theoremstyle{definition}
+%\newtheorem{df}[thm]{Definici\'on}
+%\newtheorem{nt}[thm]{Nota}
+%\newtheorem{obs}[thm]{Observaci\'on}
+%\newtheorem{ej}[thm]{Ejemplos}
+%\newtheorem{reco}[thm]{Recordatorio}
+
+%\theoremstyle{Teorema}
+%\newtheorem{propo}[thm]{Proposici\'on}
+%\newtheorem{coro}[thm]{Corolario}
+%\newtheorem{lema}[thm]{Lema}
+%\newtheorem{lemaa}[thm]{Lema A}
+%\newtheorem{lemab}[thm]{Lema B}
+%\newtheorem{lemac}[thm]{Lema C}
+
+
+
+
+\begin{document}
+
+
+\maketitle
+
+\tableofcontents
+
+\listoftheorems[ignore=example]
+
+
+\chapter{Aplicaciones entre Superficies}
+
+Vamos a introducir las definiciones, enunciados de teoremas y ejemplos, con el fin de poder usar este documento en el examen de la asignatura.
+
+\begin{defn}[función diferenciable]
+Sea $M$ una superficie regular (sup.reg.) en $\mathbb{R}^3$. Una $\textbf{funci\'on}$ continua $f: M \rightarrow \mathbb{R}$ se dice $\textbf{diferenciable}$ en un punto $p \in M$ si existe una superficie simple $(U,\textbf{x})$ en $M$ tal que  $p \in U$ y $ f\circ \textbf{x}$ es diferenciable en $p' = \textbf{x}^{-1}(p)$. f ser\'a diferenciable en $M$ si lo es en todo punto de $M$.
+\end{defn}
+
+\begin{prop}
+La \textup{\textbf{Definici\'on 1}} no depende de la superficie simple tomada.
+\end{prop}
+
+\begin{prop}
+Sean $f: \mathbb{R}^3 \rightarrow \mathbb{R}$ una funci\'on diferenciable y $M$ una sup.reg. en $\mathbb{R}^3$. Entonces $f\vert_M : M \rightarrow \mathbb{R}$ es diferenciable.
+\end{prop}
+
+\begin{rem}
+La \textbf{Proposici\'on 3} vale tambi\'en si tomamos $f: G \subseteq \mathbb{R}^3 \rightarrow \mathbb{R}$ con $G$ abierto y $M\subseteq G$.
+\end{rem}
+
+\begin{eje}
+
+\
+
+\begin{enumerate}
+\item \textbf{Distancia a un punto (al cuadrado).}
+
+
+Sean $p_0=(x_0,y_0,z_0)$ un punto de $\mathbb{R}^3$ y $f: \mathbb{R}^3 \rightarrow \mathbb{R}$ tal que $f(x,y,z)=(x-x_0)^2+(y-y_0)^2+(z-z_0)
+^2$. Entonces $f\vert_M$ es diferenciable con $M$ superficie regular de $\mathbb{R}^3$.
+
+\item \textbf{Distancia a un punto. }
+
+Sean $p_0=(x_0,y_0,z_0)$ un punto de $\mathbb{R}^3$
+y $f: \mathbb{R}^3 \setminus\lbrace p_0\rbrace \rightarrow \mathbb{R}$ tal que $f(x,y,z)=\sqrt{(x-x_0)^2+(y-y_0)^2+(z-z_0)
+^2}$. Entonces  $f\vert_M$ es diferenciable con $M$ superficie regular de $\mathbb{R}^3$ tal que $p_0 \notin M$.
+
+\item \textbf{Funci\'on altura sobre un plano  $\pi_0$.}
+
+Sean $\pi_0$ un plano de $\mathbb{R}^3$ que pasa por $p_0=(x_0,y_0,z_0)$, con vector caracter\'{\i}stico unitario $\overrightarrow{v}=(a,b,c)$, y $f: \mathbb{R}^3 \rightarrow \mathbb{R}$ tal que $f(q)=(q-p_0)\overrightarrow{v}$ (distancia signada a $\pi_0$). As\'{\i}, $f(x,y,z)=a(x-x_0)+b(y-y_0)+c(z-z_0)$. Entonces, si $M$ es sup.reg. de $\mathbb{R}^3$, $f\vert_M$ es diferenciable.
+\end{enumerate}
+\end{eje}
+
+\begin{defn}
+Una aplicaci\'on $f: M \rightarrow \mathbb{R}^n$ es \textbf{diferenciable} si $\pi_i \circ f: M \rightarrow \mathbb{R}$ es diferenciable $\forall i =1,...,n$, siendo $\pi_i : \mathbb{R}^n \rightarrow \mathbb{R}$ la proyecci\'on i-\'esima.
+\end{defn}
+
+\begin{defn}
+Sean $M$,$N$ sup.reg. y $f: M\rightarrow N$ una aplicaci\'on continua. Se dice que $f$ es \textbf{diferenciable} en $p\in M$  si existen $(U,\textbf{x})$ en $M$ con $p \in \textbf{x}(U)$ y $(V,\textbf{y})$ en $N$ con $f(p) \in \textbf{y}(V)$ tales que $\textbf{y}^{-1}\circ f \circ \textbf{x}$ es diferenciable en $p' = \textbf{x}^{-1}(p)$.
+\end{defn}
+
+\begin{rem}
+$f$ es diferenciable en $M$ si $f$ es diferenciable en $p$, $\forall p \in M$.
+\end{rem}
+
+\begin{prop}
+La \textup{\textbf{Definici\'on 7}} no depende de las superficies simples.
+\end{prop}
+
+\begin{thm}
+Sean  $f: \mathbb{R}^3 \rightarrow \mathbb{R}^3$ diferenciable, $M$,$N$ sup.reg. tales que $f(M) \subseteq N$. Entonces $f\vert_M : M \rightarrow N$ es tambi\'en diferenciable.(Se puede cambiar $f: G \subseteq \mathbb{R}^3 \rightarrow \mathbb{R}^3$ con $G$ abierto y $M\subseteq G$).
+\end{thm}
+
+\begin{eje}
+
+\
+
+\begin{enumerate}
+\item
+Si $M$ es \textbf{superficie sim\'etrica respecto del plano $XY$}, entonces $f: M \rightarrow M$ tal que $f(x,y,z)=(x,y,-z)$ es diferenciable, por ser restricci\'on de $\widehat{f} : \mathbb{R}^3 \rightarrow \mathbb{R}^3$ ($M$ = catenoide, $S^2$, cilindro,...).
+
+\item Si $M$ es de \textbf{revoluci\'on respecto del eje $OZ$}, la rotaci\'on de \'angulo $\theta$ respecto a Z, $f_{\theta}: M\rightarrow M$, es diferenciable, por ser restricci\'on de $f_{\theta}: \mathbb{R}^3 \rightarrow \mathbb{R}^3$, dada por $f(x,y,z)=(x\cos\theta - y\sin\theta, x\sin\theta+ y\cos\theta,z)$.
+
+\item
+Como $f: \mathbb{R}^3 \rightarrow \mathbb{R}^3:(x,y,z)\longmapsto(ax,by,cz)$ con $a$,$b$,$c >0$ ctes, es diferenciable, entonces su restricci\'on a $S^2$, $f\vert_{S^2}: S^2 \rightarrow E$, tambi\'en es diferenciable, siendo $E$ el elipsoide de semiejes $a,b,c$.
+
+\item
+Como $f: \mathbb{R}^3 \rightarrow \mathbb{R}^3$, $f(p)= Ap + T$, con $A$ matriz ortogonal y $T$ traslaci\'on, es diferenciable, entonces $f\vert_{M}: M \rightarrow f(M)$ tambi\'en lo es.
+
+\item \textbf{Aplicaci\'on antipodal.}
+$f: \mathbb{R}^3 \rightarrow \mathbb{R}^3:(x,y,z) \longmapsto (-x,-y,-z)$ es diferenciable. Entonces $f\vert_{S^2}: S^2 \rightarrow S^2$ tambi\'en lo es. (Es un caso particular del ejemplo 4, tomando $A= -$Id, $T=0$, es decir, la \textbf{simetr\'ia central respecto del origen}).
+\end{enumerate}
+\end{eje}
+
+
+\begin{defn}
+Una aplicaci\'on $f: M\rightarrow N$ se dice \textbf{regular} en $p\in M$ si existen $(U,\textbf{x})$ en $M$ con $p \in \textbf{x}(U)$ y $(V,\textbf{y})$ en $N$ con $f(p) \in \textbf{y}(V)$ tales que $\textbf{y}^{-1}\circ f \circ \textbf{x}$ es regular en $p' = \textbf{x}^{-1}(p)$, i.e., $J_{p'}(\textbf{y}^{-1}\circ f \circ \textbf{x})$ es una matriz regular.
+\end{defn}
+
+\begin{rem}
+La \textup{\textbf{Definici\'on 12}} no depende de las superficies simples.
+\end{rem}
+
+\begin{rem}
+$f$ biyectiva y regular $\Leftrightarrow$ $f$ difeomorfismo.
+\end{rem}
+
+\section{La Diferencial o Aplicaci\'on Tangente}
+
+\begin{defn}
+Dados $f:M \to N$ diferenciable y $p\in M$, se define la \textbf{diferencial de $f$ en $p$} como la aplicaci\'on $f_{*p}: T_p (M)\rightarrow T_{f(p)}(N)$ dada por $f_{*p}\overrightarrow{v}=(f\circ\gamma)'(0)$, $\forall \overrightarrow{v}\in T_p(M)$, siendo $\gamma:(-\varepsilon,\varepsilon)\to M$ una curva diferenciable tal que $\gamma(0)=p$ y $\gamma'(0)=\overrightarrow{v}$.
+\end{defn}
+
+
+\begin{thm}
+Sean $f:M\rightarrow N$ diferenciable y $p\in M$.
+\begin{itemize}
+
+\item [a)]
+$f_{*p}: T_p (M)\rightarrow T_{f(p)}(N)$ no depende de la curva tomada, es lineal y ``su" matriz es $J_{p'}(\textbf{y}^{-1}\circ f \circ \textbf{x})$, con $p'= \textbf{x}^{-1}(p)$.
+\item [b)]
+Si $f$ es regular en $p$, entonces $f_{*p}$ es un isomorfismo (aplicaci\'on lineal y biyectiva).
+\end{itemize}
+\end{thm}
+
+\section{Isometr\'ias}
+
+\begin{defn}
+ Dadas $M$,$N$ sup.reg., una aplicaci\'on diferenciable $f:M \longrightarrow N$ se dice \textbf{isometr\'ia} si $f$ es biyectiva, regular y  $f_{*p}$ es isomet\'ia $\forall p \in M$.
+\end{defn}
+
+
+\begin{rem}
+
+\
+
+\begin{enumerate}
+\item \textbf{Toda isometr\'ia es difeomorfismo}.
+
+\item
+Que $f_{*p}: T_p (M)\rightarrow T_{f(p)}(N)$ sea isometr\'{\i}a quiere decir que $$I_p (\overrightarrow{v_1},\overrightarrow{v_2}) = I_{f(p)}(f_{*p}\overrightarrow{v_1},f_{*p}\overrightarrow{v_2}),$$ $\forall p \in M$, $\forall \overrightarrow{v_1},\overrightarrow{v_2} \in T_p(M)$, siendo $I_p$ (resp. $I_{f(p)}$) la Primera Forma Fundamental en $p$ (resp. $f(p)$).
+\item \textbf{Las isometr\'ias conservan las longitudes de las curvas}.
+\end{enumerate}
+\end{rem}
+
+
+\begin{defn}
+Se dice que $M$ es \textbf{localmente isom\'etrica}
+ a $N$ si $\forall p \in M$, existen $U'$ entorno abierto de $p$ en $M$, $V'$ abierto en $N$ y $f: U' \rightarrow V'$ isometr\'ia. Si $M$ es localmente isom\'etrica a $N$ y $N$ es localmente isom\'etrica a $M$, se dice que son localmente isom\'etricas.
+\end{defn}
+
+
+\begin{eje}
+El catenoide y el helicoide \textbf{completos} son localmente isom\'etricos, pero \textbf{NO} isom\'etricos, pues no son homeomorfos (el catenoide no es simplemente conexo y el helicoide s\'{\i} lo es).
+\end{eje}
+
+\begin{thm}[\textbf{Caracterizaci\'on de superficies localmente isom\'etricas}]
+Sean $M$, $N$ sup.reg. Entonces $M$ es localmente isom\'etrica a $N$ $\Leftrightarrow$ $\forall p \in M$, existen $U$ abierto en $\mathbb{R}^2$, $\textbf{x}: U\rightarrow \mathbb{R}^3$ sup. simple en $M$ con $p\in \textbf{x}(U)$ e $\textbf{y}: U\rightarrow \mathbb{R}^3$ sup. simple en $N$ tales que los coeficientes m\'etricos $g_{ij}$ de $\textbf{x}$ y los $h_{ij}$ de $\textbf{y}$ coinciden: $$g_{ij}(u^1,u^2)= h_{ij}(u^1,u^2), \qquad \forall (u^1,u^2) \in U.$$
+
+\end{thm}
+
+\begin{coro}
+Si  $M$, $N$ son localmente isom\'etricas, entonces tienen la misma geometr\'ia intr\'inseca (depende de la $1^a$FF) en puntos correspondientes.
+%
+%En particular tendr\'an la misma curvatura de Gauss.
+\end{coro}
+
+\begin{rem}
+Por el \textbf{Corolario 22} se deduce que los mapas est\'an ``mal hechos", pues $K(S^2)= \dfrac{1}{r^2} >0$ y $K(\mathbb{R}^2)=0$ (no tienen la misma curvatura de Gauss).
+\end{rem}
+
+\begin{eje}
+El \textbf{cilindro} es localmente isom\'etrico al plano, pero no es isom\'etrico (pues no es homeomorfo).
+\end{eje}
+
+\begin{rem}
+Si dos superficies $M$,$N$ son isom\'etricas (local. isom\'etricas), entonces $K_M = K_N$.
+El rec\'{\i}proco no es cierto en general.
+\end{rem}
+
+\begin{thm}[\textbf{Teorema de Minding}]
+Dos superficies cualesquiera con la misma curvatura de Gauss constante son localmente isom\'etricas.
+
+\end{thm}
+
+\begin{coro}
+Sea $M$ una sup. reg. con $K_M=c=$cte:
+\begin{enumerate}
+\item Si $c>0$ $\Rightarrow M$ es localmente isom\'etrica a una esfera de radio $\frac{1}{\sqrt{c}}$.
+
+\item si $c=0$ $\Rightarrow M$ es localmente isom\'etrica al plano eucl\'ideo.
+
+\item si $c<0$ $\Rightarrow M$ es localmente isom\'etrica a una pseudoesfera.
+
+\end{enumerate}
+\end{coro}
+
+\begin{defn}
+Una aplicaci\'on diferenciable $f: M \longrightarrow N$ se dice \textbf{conforme} si es biyectiva, regular y $$I_p (\overrightarrow{v_1},\overrightarrow{v_2}) = \lambda^2(p)I_{f(p)}(f_{*p}\overrightarrow{v_1},f_{*p}\overrightarrow{v_2}),$$ $\forall p \in M$, $\forall \overrightarrow{v_1},\overrightarrow{v_2} \in T_p(M)$, siendo $\lambda^2$ una funci\'on diferenciable en M, no nula en cada punto.
+\end{defn}
+
+\begin{defn}
+Se dice que $M$ es \textbf{localmente conforme} a N si $\forall p \in M$, existen $U'$ entorno abierto de $p$ en $M$, $V'$ abierto en $N$ y $f: U' \rightarrow V'$ conforme.
+\end{defn}
+
+\begin{rem}
+
+\
+
+\begin{enumerate}
+\item Las aplicaciones conformes son una generalizaci\'on obvia de las isometr\'ias ($\lambda^2=1$).
+\item Una aplicaci\'on conforme preserva los \'angulos.
+\end{enumerate}
+\end{rem}
+
+\begin{thm}[\textbf{Caracterizaci\'on de superficies localmente conformes}]
+Sean $M$,$N$ sup.reg. Entonces $M$ es localmente conforme a $N$ $\Leftrightarrow$ $\forall p \in M$, existen $U$ abierto en $\mathbb{R}^2$, $\textbf{x}: U\rightarrow \mathbb{R}^3$ sup. simple en $M$ con $p\in \textbf{x}(U)$ e $\textbf{y}: U\rightarrow \mathbb{R}^3$ sup. simple en $N$ tales que los coeficientes m\'etricos $g_{ij}$ de $\textbf{x}$ y los $h_{ij}$ de $\textbf{y}$ verifican
+$$ g_{ij}(u^1,u^2) = \lambda^2(u^1,u^2)h_{ij}(u^1,u^2) \, \, \, \, \, \, \, \forall (u^1,u^2)\in U,$$
+siendo $\lambda > 0$ una funci\'on diferenciable en $U$.
+
+\end{thm}
+
+\begin{thm}[\textbf{Existencia de cartas isotermales}]
+Dado $p \in M$ cualquiera, existe una superficie simple $\textbf{x}: U\longrightarrow \mathbb{R}$ con $ p\in \textbf{x}(U) \subseteq M $ tal que:
+$$g_{11}= g_{22}= \lambda^2, \quad g_{12}=g_{21}=0.$$
+\end{thm}
+
+\begin{coro}
+Toda sup. reg. $M$ es localmente conforme al plano.
+\end{coro}
+
+\begin{defn}
+Una aplicaci\'on diferenciable $ f: M\longrightarrow N$ se dice \textbf{iso\'area} si es biyectiva, regular y verifica que tomada cualquier regi\'on $R$ sobre $M$, $R$ y $f(R)$ tienen la misma \'area.
+\end{defn}
+
+\begin{defn}
+Se dice que $M$ es \textbf{localmente iso\'area} a $N$ si $\forall p \in M$, existen $U'$ entorno abierto de $p$ en $M$, $V'$ abierto en $N$ y $f: U' \rightarrow V'$ iso\'area .
+\end{defn}
+
+\begin{rem}
+Sean $\textbf{x} : U\longrightarrow \mathbb{R}^3$ sup. simple y $R\subseteq \textbf{x}(U)$. Entonces: $$\mbox{\'Area}(R) = \int\!\!\!\!\int_{\textbf{x}^{-1}(R)} \sqrt{g_{11}g_{22}- g_{12}^2} du^1du^2.$$
+\end{rem}
+
+\begin{thm}[\textbf{Caracterizaci\'on de superficies localmente iso\'areas}]
+Sean $M$,$N$ sup. reg. Entonces $M$ es localmente iso\'area a $N$ $\Leftrightarrow$ $\forall p \in M$, existen $U$ abierto en $\mathbb{R}^2$, $\textbf{x}: U\rightarrow \mathbb{R}^3$ sup. simple en $M$ con $p\in \textbf{x}(U)$ e $\textbf{y}: U\rightarrow \mathbb{R}^3$ sup. simple en $N$ tales que los coeficientes m\'etricos $g_{ij}$ de $\textbf{x}$ y los $h_{ij}$ de $\textbf{y}$ verifican que: $$g_{11}g_{22}-g_{12}^2= h_{11}h_{22}-h_{12}^2.$$
+\end{thm}
+
+\begin{rem}
+$$\text{localmente isom\'etrica}
+\Leftrightarrow
+\left\{\begin{tabular}{c}
+localmente conforme\\
+y\\
+localmente iso\'area
+\end{tabular} \right.
+$$
+pero
+$$\left.\begin{tabular}{c}
+localmente conforme \\
+\'o \\
+localmente iso\'area
+\end{tabular}\right\}
+\nRightarrow
+\text{localmente isom\'etrica}$$
+\end{rem}
+
+\section{Rigidez de la Esfera}
+
+\begin{thm}[\textbf{Rigidez de la esfera}]
+Sea $f : \sum \longrightarrow \mathcal{S}$ una isometr\'ia de una esfera $\sum$ en una superficie regular $\mathcal{S}$. Entonces $\mathcal{S}$ es una esfera (del mismo radio).
+\end{thm}
+
+\begin{thm}
+Sea $\mathcal{S}$ una sup. reg., conexa y compacta, con curvatura de Gauss $K=$ cte. Entonces $\mathcal{S}$ es una esfera.
+\end{thm}
+
+\begin{lema}
+Sean $\mathcal{S}$ una sup. reg. y $p \in \mathcal{S}$. Si denotamos por $k_1\geq k_2$ las curvaturas principales y se verifica que
+$$
+\begin{array}{l c }
+1) & K(p)>0 \, \,(p\text{ es un punto el\'iptico}), \\
+2) & {\begin{array}{c}
+k_1 \,\,\text{tiene m\'ax. local en p},\\
+k_2 \,\,\text{tiene m\'in. local en p},
+\end{array}}
+\end{array}$$
+entonces $p$ es un punto umb\'ilico.
+\end{lema}
+
+\begin{lema}
+Toda sup. compacta tiene al menos un punto el\'iptico (existe $p$ con $K(p)>0$).
+\end{lema}
+
+\begin{lema}
+Sean $\mathcal{S}$ sup. reg. y $ A \subseteq \mathcal{S}$. Entonces $A$ es  sup. reg. $\Leftrightarrow$ $A$ es abierto en $\mathcal{S}$.
+\end{lema}
+
+\begin{rem}
+$K \equiv$ cte se utiliza para deducir que $k_2$ es funci\'on decreciente de $k_1$.
+\end{rem}
+
+\begin{thm}
+Sea $\underbrace{\mathcal{S} \text{ sup. reg., conexa y compacta con } K>0}_{ovaloide}$ y $H$ cte. Entonces $\mathcal{S}$ es una esfera (i.e., todo ovaloide con $H$ cte es una esfera).
+\end{thm}
+
+\begin{thm}[\textbf{De Cohn-Vossen}]
+Dos ovaloides isom\'etricos difieren en un movimiento r\'igido.
+\end{thm}
+
+
+
+\chapter{Geometría computacional}
+
+\section{Herramientas Algorítmicas}
+
+\subsection{Definiciones}
+
+\begin{defn}
+Se dice que un \textbf{algoritmo} es un procedimiento constructivo para la resoluci\'{o}n de un problema que consta de: unos \emph{datos de entrada} de naturaleza precisamente definida, una cantidad finita de \emph{instrucciones} ordenadas que aplicadas a los datos de entrada ofrecen, tras una cantidad finita de operaciones, una soluci\'{o}n o \emph{datos de salida}.
+\end{defn}
+
+\begin{defn}
+Un algoritmo se dice que es \textbf{correcto} si produce el resultado deseado y lo hace en un n\'{u}mero finito de pasos.
+\end{defn}
+
+
+\subsubsection{\underline{El lenguaje de los algoritmos}}
+
+El lenguaje de los algoritmos en nuestro modelo computacional \emph{RAM} est\'{a} formado por:
+ \begin{itemize}
+   \item Los \textbf{datos de entrada}: son variables que se pueden sustituir por n\'{u}meros para que el algoritmo act\'{u}e sobre ellas. Normalmente se representan por letras.
+   \item Las \textbf{operaciones b\'{a}sicas}:
+    \begin{itemize}
+      \item \emph{Asignaci\'{o}n}: asignar a una variable $x$ un valor $a$ $$x:=a.$$
+      \item Las operaciones de \emph{suma, resta multiplicaci\'{o}n y divisi\'{o}n} para n\'{u}meros enteros, esto es, $a+b$, $a-b$,
+            $a*b,$ $a/b.$
+      \item \emph{Comparaci\'{o}n} de n\'{u}meros enteros representadas por $a<b,$ $a=b,$ $a>b,$ $a\neq b$...
+    \end{itemize}
+   \item Las \textbf{instrucciones}:
+      \begin{enumerate}
+        \item \textbf{Instrucci\'{o}n condicional}: ``\textsf{si} $\bolds{B}$ \textsf{entonces} $\bolds{C_1}$ \textsf{y en otro caso} $\bolds{C_2}$''. Su significado es: si $\bolds{B}$ es \emph{verdadero} se realiza la instrucci\'{o}n $\bolds{C_1}$ y si $\bolds{B}$ es \emph{falso} se efect\'{u}a $\bolds{C_2}$.
+        \item \textbf{Instrucci\'{o}n iterativa}: ``\textsf{mientras} $\bolds{B}$ \textsf{haz}  $\bolds{C}$'', que indica al ordenador que efect\'{u}e la instrucci\'{o}n $\bolds{C}$ repetidamente mientras la expresi\'{o}n $\bolds{B}$ sea \emph{verdadera}. La repetici\'{o}n cesa cuando $\bolds{B}$ sea \emph{falsa}.
+        \item ``\textsf{Desde} $\bolds{y=r}$ \textsf{hasta} $\bolds{t}$ \textsf{haz} $\bolds{C}$'', que implica la ejecuci\'{o}n de la ins\-truc\-ci\'{o}n $\bolds{C}$ para cada valor de $\bolds{y}$ entre $\bolds{r}$ y $\bolds{t}$. Es una abreviatura de una instrucci\'{o}n iterativa.
+      \end{enumerate}
+ \end{itemize}
+
+\subsubsection{\underline{N\'{u}mero combinatorio   $\binom{n}{2}$}}
+
+ \noindent\emph{Algoritmo 1}: \\ $\bolds{x:=n;\;\; z:= x-1;\;\; x:= x*z;\; \; s:= \frac{x}{2}}$
+
+\vspace{0.2cm}
+
+ \noindent\emph{Algoritmo 2}: \\ $\bolds{x:=n}$\\ \textsf{Si} $\bolds{x}$ \textrm{es par},\\
+        \hspace*{0.2cm} \textsf{entonces} $\bolds{y:=x-1; x:=\frac{x}{2}}$\\
+        \hspace*{0.2cm} \textsf{y en otro caso} $\bolds{y:=\frac{x-1}{2}}$\\
+        $\bolds{s:=xy}$
+
+\vspace{0.2cm}
+
+ \noindent\emph{Algoritmo 3}: \\ $\bolds{x:=n;\; y:=0;\; z:=0}$\\
+        \textsf{Mientras} $\bolds{y<x-1}$ \textsf{haz} $\bolds{y:=y+1;\; z:=z+y}$\\
+        $\bolds{s:=z}$
+
+
+
+\subsubsection{\underline{Complejidad de un algoritmo}}
+
+Sea un algoritmo cuyos datos de entrada tienen tama\~{n}o $n$:
+\vspace{0.4cm}
+
+\begin{defn}
+La \textbf{complejidad} (en tiempo) de un algoritmo es el n\'{u}\-me\-ro de operaciones $\bolds{T(n)}$ que realiza el algoritmo en el peor de los casos.
+
+
+\vspace{0.2cm}
+
+Es decir, el valor m\'{a}ximo del n\'{u}mero de operaciones realizadas para todas las aplicaciones del algoritmo a entradas de tama\~{n}o $n.$
+\end{defn}
+
+
+%\begin{eje}: Calcular el m\'{a}ximo de una lista de $n$ enteros $a_1,\ldots,a_n$
+%
+%        \begin{quotation}
+%            $\bolds{a:= a_1}$;\\
+%            $\bolds{i:= 1}$;\\
+%            \textsf{Mientras} $\bolds{i \leq n-1}$ \textsf{haz}\\
+%            \hspace*{0.5cm} $\bolds{i:= i+1}$;\\
+%            \hspace*{0.5cm} \textsf{Si} $\bolds{a < a_i}$ \textsf{entonces}
+%            $\bolds{a:= a_i}$;\\
+%
+%            $\bolds{s:= a}$.
+%        \end{quotation}
+%
+% Veamos ahora el n�mero de operaciones:
+%
+%        \begin{quotation}
+%            $\bolds{a:= a_1}$; \hfill{1 asignaci\'{o}n}\\
+%            $\bolds{i:= 1}$; \hfill{1 asignaci\'{o}n}\\
+%            \textsf{Mientras} $\bolds{i \leq n-1}$ \textsf{haz} \hfill{1 resta}\\
+%
+% \noindent{\textrm{Entramos en un bucle que se repite $n-1$ veces}}\\
+% \vspace{0.3cm}
+%                \hfill{ 1 comparaci\'{o}n (i con $n-1$)}
+%
+%            \hspace*{0.5cm} $\bolds{i:= i+1}$; \hfill{1 asignaci\'{o}n y 1 suma}\\
+%            \hspace*{0.5cm} \textsf{Si} $\bolds{a < a_i}$ \hfill{1 comparaci\'{o}n}\\
+%            \textsf{entonces} $\bolds{a:= a_i}$;
+%            \hfill{En el peor caso, 1 asignaci\'{o}n}\\
+% \noindent\textrm{Salimos del bucle: se han realizado $5(n-1)$ operaciones}\\
+%            \vspace{0.3cm}
+%            \textrm{Comparamos $i$ tomando el valor $n$ con
+%            $n-1$}}
+%            \hfill{1 comparaci\'{o}n}\\
+%            $\bolds{s:= a}$. \hfill{1 asignaci\'{o}n}
+%        \end{quotation}
+%
+%        $$\bolds{T(n)=3+5(n-1)+2=5n}$$
+%
+% \end{eje}
+
+\vspace{0.4cm}
+
+ Sean $\bolds{f,g:\mathbb{N}\rightarrow\mathbb{N}}$ dos funciones:
+
+ \vspace{0.3cm}
+
+ \begin{itemize}
+   \item $\bolds{f(n)$ es $O(g(n))}$ (" $\bolds{f}$ es \emph{O grande} de $\bolds{g}$ ") $\bolds{\equiv}$ existen una constante $\bolds{C>0}$ y un n\'{u}mero natural $\bolds{n_0>0}$ tales que $$\bolds{f(n)<Cg(n)\,,\,\forall n\geq n_0}$$
+
+   \vspace{0.3cm}
+
+   \item $\bolds{f(n)$ es $\Omega(g(n))}$ ("$\bolds{f}$ es \emph{omega} de $\bolds{g}$") $\bolds{\equiv}$ $\bolds{g(n)}$ es $\bolds{O(f(n))}$.
+
+   \vspace{0.3cm}
+
+   \item $\bolds{f(n)$ es $\theta(g(n))}$ ("$\bolds{f}$ es \emph{theta} de $\bolds{g}$") $\bolds{\equiv}
+            \left\{\begin{array}{c}
+                \bolds{f(n)} \mbox{  es  } \bolds{O(g(n))} \\
+                \mbox{ y }\\
+                \bolds{f(n)} \mbox{  es  } \bolds{\Omega(g(n))} \
+            \end{array}\right.$
+ \end{itemize}
+
+\vspace{1.5cm}
+
+Consideremos un algoritmo con complejidad $\bolds{f(n)=60n^2+5n+1}$,
+
+ \begin{itemize}
+    \item $\bolds{f(n)$ es $O(n^2)}$ pues
+            $$\bolds{60n^2+5n+1\leq 60n^2+5n^2+n^2\leq 66n^2,\,\forall n\geq 1},$$
+    \item $\bolds{f(n)$ es $\Omega(n^2)}$ pues
+            $$\bolds{60n^2+5n+1\geq 60n^2,\,\forall n\geq 1}$$
+    \item y, por tanto, $\bolds{f(n)$ es $\theta(n^2)}$.
+ \end{itemize}
+
+
+ A continuación tenemos la siguiente comparación entre las distintas $O$ grandes:
+
+ \vspace{0.4cm}
+
+        \begin{tabular}{ll}
+              \vspace{-0.2cm}
+            $\bolds{O(1)}$ & orden constante \\ \\
+              \vspace{-0.2cm}
+            $\bolds{O(\log n)}$ & orden logar\'{\i}tmico \\ \\
+              \vspace{-0.2cm}
+            $\bolds{O(n)}$ & orden lineal \\ \\
+              \vspace{-0.2cm}
+            $\bolds{O(n\log n)}$ &  \\ \\
+              \vspace{-0.2cm}
+            $\bolds{O(n^2)}$ & orden cuadr\'{a}tico \\ \\
+              \vspace{-0.2cm}
+            $\bolds{O(n^a)}$ & orden polinomial ($a>2$) \\ \\
+              \vspace{-0.2cm}
+            $\bolds{O(a^n)}$ & orden exponencial ($a>1$) \\ \\
+              \vspace{-0.2cm}
+            $\bolds{O(n!)}$ & orden factorial \\ \\
+              \vspace{-0.2cm}
+        \end{tabular}
+
+    {\small
+    $$\scriptsize
+        \begin{array}{|c|c|c|c|c|c|} \hline
+            \log(n)&n&n\log(n)&n^2&n^3&2^n\\ \hline
+            0& 1 &0& 1& 1& 2\\
+            1& 2 &2 &4 &8 &4\\
+            2& 4 &8 &16 &64 &16\\
+            3& 8 &24 &64 &512 &256\\
+            4& 16 &64 &256 &4096 &65536\\
+            5& 32 &160 &1024 &32768 &4294967296\\
+            6& 64 &384 &4096 &262144 &xxxxxxxxxx\\
+            7& 128 &896 &16384 &2097152 & \\
+            8& 256 &2048 &65536 &16777216 & \\
+            9& 512 &4608 &262144 &134217728 & \\
+            10& 1024 &10240 &1048576 &1073741824 & \\
+            15& 32768 &491520 &1073741824 &xxxxxxxxxx & \\
+            20& 1048576 &20971520 &xxxxxxxxxx & & \\
+            25& 33554432 &838860800 & & & \\ \hline
+        \end{array}
+    $$
+    }
+
+
+
+
+% \begin{eje} Producto de dos enteros positivos $m$ y $n$
+%        \vfill
+%        \begin{quotation}
+%        $\bolds{x:=m}$\\
+%        $\bolds{y:=n}$\\
+%        $\bolds{z:=0}$;\\
+%        \textsf{mientras} $\bolds{y>0}$ \textsf{haz}\\
+%        \hspace*{0.5cm}$\bolds{z:=z+x}$\\
+%        \hspace*{0.5cm}$\bolds{y:=y-1}$\\
+%        $\bolds{s:=z}$
+%        \end{quotation}
+% \end{eje}
+
+
+% \begin{eje}
+% \begin{enumerate}
+
+% \item Desarrollar este algoritmo para $n=12$ y $m=31$
+%        \vfill
+%        \noindent $\bolds{a:=0;\, b:=n;\, c:=m}$\\[1ex]
+%        \textsf{Mientras } $\bolds{b\neq 0}$ \textsf{ haz }\\[1ex]
+%        \quad \textsf{Mientras } $\bolds{b}$ es par \textsf{ haz }\\[1ex]
+%        \quad\quad $\bolds{b:=b/2;\, c:=2c}$\\[1ex]
+%        \quad $\bolds{a:=a + c;\, b:=b - 1}$\\[1ex]
+%        $\bolds{z:=a}$.
+
+% \item Desarrollar este algoritmo para $n=75$ y $m=15$
+%        \vfill
+%        \noindent $\bolds{a:=0;\, b:=n;\, c:=m}$\\[1ex]
+%        \textsf{Mientras } $\bolds{b\neq 0}$ \textsf{ haz }\\[1ex]
+%        \quad \textsf{Mientras } $\bolds{b}$ es par \textsf{ haz }\\[1ex]
+%        \quad\quad $\bolds{b:=b/2;\, c:=2c}$\\[1ex]
+%        \quad $\bolds{a:=a + c;\, b:=b - 1}$\\[1ex]
+%        $\bolds{z:=a}$.
+
+% \item Producto de dos enteros positivos $m$ y $n$
+%        \vfill
+%        \noindent $\bolds{a:=0;\, b:=n;\, c:=m}$\\[1ex]
+%        \textsf{Mientras } $\bolds{b\neq 0}$ \textsf{ haz }\\[1ex]
+%        \quad \textsf{Mientras } $\bolds{b}$ es par \textsf{ haz }\\[1ex]
+%        \quad\quad $\bolds{b:=b/2;\, c:=2c}$\\[1ex]
+%        \quad $\bolds{a:=a + c;\, b:=b - 1}$\\[1ex]
+%        $\bolds{z:=a}$.
+%\end{enumerate}
+
+
+%        $\bolds{\azul{n=2^{k_1}+2^{k_1+k_2}+\cdots+2^{k_1+k_2+\cdots+k_p}}\,\,;\,\,\,\,k_1<k_2<\ldots<k_p}$
+%        \noindent$\bolds{a_0=0;\,b_0=n; c_0=m}$
+%        \medskip
+
+
+
+%        \noindent $\bolds{b\neq 0}$
+%        \bigskip
+%        \begin{description}
+%        \item[\underline{Paso 1:}]$\mbox{ }$
+%            \begin{itemize}
+%                \item $\bolds{b \mbox{ es par ($k_1\neq0$)}}$\\
+%                    \quad$\bolds{b\leftarrow b/2; c\leftarrow 2c \quad (k_1 \mbox{ veces })}$
+%                \item $\bolds{b \mbox{ es impar ($k_1=0$)}}$
+%            \end{itemize}
+%            \quad$\bolds{a\leftarrow a+c; b\leftarrow b-1}$
+%            \medskip
+
+%            $\bolds{\left\{\begin{array}{l}
+%            a_1=c_1=2^{k_1}m \\
+%            b_1=b_0/2^{k_1}-1=2^{k_2}+\cdots+2^{k_2+\cdots+k_p}\end{array}\right.}$
+%        \end{description}
+%        $$\bolds{a_1+b_1c_1=nm}$$
+
+
+
+
+%        \begin{description}
+%            \item[\underline{Paso 2:}] $\mbox{ }$
+%            \begin{itemize}
+%                \item $\bolds{b \mbox{ es par ($k_2\neq0$)}}$\\
+%                     \quad$\bolds{b\leftarrow b/2; c\leftarrow 2c \quad (k_2 \mbox{ veces })}$
+%                %\item $\bolds{b \mbox{ es impar ($k_2=0$)}}$
+%            \end{itemize}
+%            \quad$\bolds{a\leftarrow a+c; b\leftarrow b-1}$
+%            \medskip
+
+%            $\bolds{\left\{\begin{array}{l}
+%            c_2=2^{k_2}c_1=2^{k_1+k_2}m \\
+%            a_2=a_1+c_2=2^{k_1}m+2^{k_1+k_2}m \\
+%            b_2=b_1/2^{k_2}-1\end{array}\right.}$
+%        \end{description}
+%        \bigskip
+%        $$\bolds{a_2+b_2c_2=a_1+2^{k_2}c_1+\left(b_1/2^{k_2}-1\right)2^{k_2}c_1=}$$
+%        $$\bolds{=a_1+b_1c_1=nm}$$
+
+
+
+
+%    \begin{description}
+%        \item[\underline{Paso $\bolds{h-1:}$}]
+%        $\bolds{a_{h-1}+b_{h-1}c_{h-1}=nm}$
+%        \medskip
+%        \item[\underline{Paso $\bolds{h:}$}] $\mbox{ }$
+%        \begin{itemize}
+%            \item $\bolds{b \mbox{ es par ($k_h\neq0$)}}$\\
+%                \quad$\bolds{b\leftarrow b/2; c\leftarrow 2c \quad (k_h \mbox{ veces })}$
+%            %\item $\bolds{b \mbox{ es impar ($k_h=0$)}}$\\
+%        \end{itemize}
+%        \quad$\bolds{a\leftarrow a+c; b\leftarrow b-1}$
+%        \medskip
+
+%        $\bolds{\left\{\begin{array}{l}
+%        c_h=2^{k_h}c_{h-1}\\
+%        a_h=a_{h-1}+c_h=a_{h-1}+2^{k_h}c_{h-1}\\
+%        b_h=b_{h-1}/2^{k_h}-1\end{array}\right.}$
+%    \end{description}
+%    \bigskip
+%    $$\bolds{a_h+b_hc_h=a_{h-1}+2^{k_h}c_{h-1}+\left(b_{h-1}/2^{k_h}-1\right)2^{k_h}c_{h-1}=}$$
+%    $$\bolds{=a_{h-1}+b_{h-1}c_{h-1}=nm}$$
+
+
+
+
+%    \begin{description}
+%        \item[\underline{Paso $\bolds{p}$}] $\mbox{ }$
+%        \begin{itemize}
+%            \item $\bolds{b \mbox{ es par ($k_p\neq0$)}}$\\
+%                \quad$\bolds{b\leftarrow b/2; c\leftarrow 2c \quad (k_p \mbox{ veces })}$
+%            %\item $\bolds{b \mbox{ es impar ($k_p\neq0$)}}$\\
+%        \end{itemize}
+%        \quad$\bolds{a\leftarrow a+c; b\leftarrow b-1}$
+%        \medskip
+
+%        $\bolds{\left\{\begin{array}{l}
+%        c_p=2^{k_p}c_{p-1}\\
+%        a_p=a_{p-1}+c_p\\
+%        b_p=b_{p-1}/2^{k_p}-1=0\end{array}\right.}$
+%    \end{description}
+%    %\bigskip
+
+%    $$\bolds{a_p+b_pc_p=nm\mbox{ (inducci\'{o}n) }\Rightarrow\,\,\,a_p=nm\,\,\,(b_p=0)}$$
+
+%    \noindent \underline{\underline{$\bolds{z\leftarrow a=nm}$}}
+
+%    \vfill
+%    %\noindent\rojo{$\bolds{b=0}$}
+
+\subsection{Algoritmos de ordenaci\'{o}n}
+
+El problema de \emph{ordenaci\'{o}n} es el siguiente:
+    \begin{quotation}
+        ``\emph{Dada una lista de n\'{u}meros enteros distintos }$\bolds{\{x_1,\,x_2,\ldots,\,x_n\}}$,
+        \emph{que\-re\-mos ordenarla en orden creciente}''.
+    \end{quotation}
+
+    \begin{enumerate}
+        %\item \celeste{\textbf{Intercambio}}\bigskip
+        \item \textbf{Burbuja}
+        \item \textbf{Selecci\'{o}n}
+        \item \textbf{Inserci\'{o}n}
+       %\item \celeste{\textbf{QuickSort}}
+    \end{enumerate}
+
+
+
+
+\textbf{1. Algoritmo de ordenaci\'{o}n de Burbuja}
+
+ \vspace{0.5cm}
+ El Algoritmo de Ordenaci\'{o}n de burbuja consiste en lo siguiente:
+        \begin{itemize}
+            \item En el primer paso, se compara $\bolds{x_1}$ con $\bolds{x_2}$, y se intercambia si $\bolds{x_1>x_2}$. Despu\'{e}s $\bolds{x_2}$ con $\bolds{x_3}$, y as\'{\i} sucesivamente hasta $\bolds{x_{n-1}}$ con $\bolds{x_n}$.
+            \item Al final de la primera pasada, en $\bolds{x_n}$ est\'{a} el mayor elemento.
+            \item En la segunda pasada, se comparan igual $\bolds{x_1}$ con $\bolds{x_2}$, hasta $\bolds{x_{n-2}}$ con $\bolds{x_{n-1}}$, intercambiando cuando sea necesario. Al final de esta pasada, $\bolds{\{x_{n-1},x_n\}}$ est\'{a} ordenado.
+            \item En el \'{u}ltimo paso, se realiza la comparaci\'{o}n de $\bolds{x_1}$ con $\bolds{x_2}$, y la lista resultante ya est\'{a} ordenada.
+        \end{itemize}
+
+\vspace*{0.5cm}
+
+ Ordenemos la lista $\bolds{\{7, 3, 5, 1\}}$  por este m\'{e}todo:
+ \vspace{0.2cm}
+
+        \begin{minipage}{.6\textwidth}
+        Orden inicial
+        \end{minipage}\hfill
+        \begin{minipage}{.3\textwidth}
+        $\bolds{7\quad 3\quad 5\quad 1}$
+        \end{minipage}
+
+        \vspace*{0.2cm}
+
+        \begin{minipage}{.6\textwidth}
+        Despu\'{e}s de la $1$\raisebox{1ex}{\underline{$\scriptstyle a$}\hspace*{.5ex}} comparaci\'{o}n:
+        \end{minipage}\hfill
+        \begin{minipage}{.3\textwidth}
+        $\bolds{3\quad 7}$
+        \end{minipage}
+
+        \vspace*{-0.1cm}
+
+        \begin{minipage}{.6\textwidth}
+        Despu\'{e}s de la $2$\raisebox{1ex}{\underline{$\scriptstyle  a$}\hspace*{.5ex}} comparaci\'{o}n:
+        \end{minipage}\hfill
+        \begin{minipage}{.3\textwidth}
+        $\bolds{\quad\;\, 5\quad 7}$
+        \end{minipage}
+
+        \vspace*{-0.1cm}
+
+        \begin{minipage}{.6\textwidth}
+        Despu\'{e}s de la $3$\raisebox{1ex}{\underline{$\scriptstyle  a$}\hspace*{.5ex}} comparaci\'{o}n:
+        \end{minipage}\hfill
+        \begin{minipage}{.3\textwidth}
+        $\bolds{\quad\;\, \quad\;\, 1\quad 7}$
+        \end{minipage}
+
+        \vspace*{-0.1cm}
+
+        \begin{minipage}{.6\textwidth}
+        Despu\'{e}s de la $1$\raisebox{1ex}{\underline{$\scriptstyle  a$}\hspace*{.5ex}} pasada:
+        \end{minipage}\hfill
+        \begin{minipage}{.3\textwidth}
+        $\bolds{3\quad 5\quad 1\quad 7}$
+        \end{minipage}
+
+        \vspace*{0.2cm}
+
+        \begin{minipage}{.6\textwidth}
+        Despu\'{e}s de la $4$\raisebox{1ex}{\underline{$\scriptstyle  a$}\hspace*{.5ex}} comparaci\'{o}n:
+        \end{minipage}\hfill
+        \begin{minipage}{.3\textwidth}
+        $\bolds{3\quad 5}$
+        \end{minipage}
+
+        \vspace*{-0.1cm}
+
+        \begin{minipage}{.6\textwidth}
+        Despu\'{e}s de la $5$\raisebox{1ex}{\underline{$\scriptstyle  a$}\hspace*{.5ex}} comparaci\'{o}n:
+        \end{minipage}\hfill
+        \begin{minipage}{.3\textwidth}
+        $\bolds{\quad\;\, 1\quad 5}$
+        \end{minipage}
+
+        \vspace*{-0.1cm}
+
+        \begin{minipage}{.6\textwidth}
+        Despu\'{e}s de la $2$\raisebox{1ex}{\underline{$\scriptstyle  a$}\hspace*{.5ex}} pasada:
+        \end{minipage}\hfill
+        \begin{minipage}{.3\textwidth}
+        $\bolds{3\quad 1\quad 5\quad 7}$
+        \end{minipage}
+
+        \vspace*{0.2cm}
+
+        \begin{minipage}{.6\textwidth}
+        Despu\'{e}s de la $6$\raisebox{1ex}{\underline{$\scriptstyle  a$}\hspace*{.5ex}} comparaci\'{o}n:
+        \end{minipage}\hfill
+        \begin{minipage}{.3\textwidth}
+        $\bolds{1\quad 3}$
+        \end{minipage}
+
+        \vspace*{-0.1cm}
+
+        \begin{minipage}{.6\textwidth}
+        Despu\'{e}s de la \'{u}ltima pasada:
+        \end{minipage}\hfill
+        \begin{minipage}{.3\textwidth}
+        $\bolds{1\quad 3\quad 5\quad 7}$
+        \end{minipage}
+
+        \vspace*{0.2cm}
+
+        \begin{minipage}{.6\textwidth}
+        Orden final:
+        \end{minipage}\hfill
+        \begin{minipage}{.3\textwidth}
+        $\bolds{1\quad 3\quad 5\quad 7}$
+
+        \end{minipage}
+
+\vspace*{0.5cm}
+
+    \begin{quotation}
+        \hspace*{0cm} \textsf{Desde} $\bolds{i=1}$ \textsf{hasta} $\bolds{n-1}$ \textsf{haz} \\[1ex]
+        \hspace*{0.8cm} \textsf{Desde} $\bolds{j=1}$ \textsf{hasta} $\bolds{n-i}$ \textsf{haz} \\[1ex]
+        \hspace*{1.2cm} \textsf{Si} $\bolds{x_j>x_{j+1}}$, \textsf{entonces} intercambia $\bolds{x_j}$ y $\bolds{x_{j+1}}$ \\[1ex]
+%        \hspace*{0.3cm} $\bolds{y_{n-i+1}:=x_{n-i+1}}$; \\[1ex]
+%        $\bolds{y_1:=x_1}$.
+    \end{quotation}
+
+
+\textbf{2.Algoritmo de ordenaci\'{o}n por Selecci\'{o}n}
+
+\vspace{0.5cm}
+El Algoritmo de Ordenaci\'{o}n por Selecci\'{o}n consiste en lo siguiente:
+
+        \begin{enumerate}
+            \item Seleccionar el elemento m\'{a}s peque\~{n}o de la lista, e intercambiar con $\bolds{x_1}$.
+            \item Seleccionar el elemento m\'{a}s peque\~{n}o de la lista $\bolds{\{x_2,\ldots,x_n\}}$, e intercambiar con $\bolds{x_2}$.
+            \item En cada paso $\bolds{k}$ del proceso, la lista de los primeros $\bolds{k}$ elementos est\'{a} ya ordenada.
+            \item En el \'{u}ltimo paso, la lista resultante est\'{a} ordenada.
+        \end{enumerate}
+
+
+Ordenemos la lista $\bolds{L=\{1, 3, 2, 9, 5, 4\}}$  por este m\'{e}todo:
+
+        \vspace*{0.7cm}
+
+        \begin{minipage}{.6\textwidth}
+        M\'{\i}nimo de la lista $\bolds{L}$ es $\bolds{x_1=1}$
+        \end{minipage}\hfill
+        \begin{minipage}{.3\textwidth}
+         $\bolds{L:=\{3,2,9,5,4\}}$
+        \end{minipage}
+
+        \vspace*{0.5cm}
+
+        \begin{minipage}{.6\textwidth}
+        M\'{\i}nimo de $\bolds{L}$ es $\bolds{x_3}$ entones $\bolds{x_2=2
+        \mbox{ y } x_3=3}$
+        \end{minipage}\hfill
+        \begin{minipage}{.3\textwidth}
+        $\bolds{L:=\{3,9,5,4\}}$
+        \end{minipage}
+
+        \vspace*{0.5cm}
+
+        \begin{minipage}{.6\textwidth}
+        M\'{\i}nimo de $\bolds{L}$ es $\bolds{x_3}$ entones no se hace
+        ninguna operaci\'{o}n
+        \end{minipage}\hfill
+        \begin{minipage}{.3\textwidth}
+        $\bolds{L:=\{9,5,4\}}$
+        \end{minipage}
+
+        \vspace*{0.5cm}
+
+        \begin{minipage}{.6\textwidth}
+         M\'{\i}nimo de $\bolds{L}$ es $\bolds{x_6}$ entones $\bolds{x_6=9
+        \mbox{ y } a_x=4}$
+        \end{minipage}\hfill
+        \begin{minipage}{.3\textwidth}
+        $\bolds{L:=\{5,9\}}$
+        \end{minipage}
+
+        \vspace*{0.5cm}
+
+        \begin{minipage}{.6\textwidth}
+         M\'{\i}nimo de $\bolds{L}$ es $\bolds{x_5}$ entones no se hace
+         ninguna operaci\'{o}n y el algoritmo ha terminado
+        \end{minipage}
+
+        \vspace*{0.5cm}
+
+        \begin{minipage}{.6\textwidth}
+        $Salida: \bolds{\{1,2,3,4,5,9\}}$
+        \end{minipage}
+
+\vspace*{0.5cm}
+
+\textbf{3.Algoritmo por Inserci\'{o}n}
+\vspace*{0.2cm}
+
+Hay dos tipos de inserci\'{o}n: la secuencial y la bisecci\'{o}n
+\vspace{0.5cm}
+
+\textbf{Inserci\'{o}n secuencial}
+\vspace{0.2cm}
+
+ El Algoritmo de Intersecci\'{o}n secuencial consiste en lo siguiente:
+
+        \begin{enumerate}
+            \item En el primer paso, se comienza con la lista $\bolds{\{x_1\}}$ y se inserta $\bolds{x_2}$ en el lugar adecuado respecto de $\bolds{\{x_1\}}$.
+            \item En cada paso $\bolds{k}$, se inserta $\bolds{x_{k+1}}$ en la lista parcialmente ordenada $\bolds{\{x_1,\ldots,x_k\}}$, coloc\'{a}ndolo en su lugar correspondiente.
+            \item En el \'{u}ltimo paso ($\bolds{n-1}$), la lista queda ordenada.
+        \end{enumerate}
+
+ \vspace{0.6cm}
+Ordenemos la lista $\bolds{\{7, 3, 5, 1, 4, 6\}}$ por este método:
+ \vspace{0.3cm}
+
+
+        $\bolds{7}$\\
+
+        $\bolds{3\quad 7}$ \hspace*{0.5cm} pues $3<7$\\
+
+        $\bolds{3\quad 5\quad 7}$ \hspace*{0.5cm} pues $5>3$ y $5<7$\\
+
+        $\bolds{1\quad 3\quad 5\quad 7}$ \hspace*{0.5cm} pues $1<3$\\
+
+        $\bolds{1\quad 3\quad 4\quad 5\quad 7}$ \hspace*{0.5cm} pues $4>1$, $4>3$ y $4<5$\\
+
+        \medskip
+
+        $\bolds{1\quad 3\quad 4\quad 5\quad 6\quad 7}$ \hspace*{0.5cm} pues $6>1$, $6>3$, $6>4$, $6>5$ y $6<7$\\
+
+
+\vspace{3cm}
+
+
+%\begin{frame}
+%    \frametitle{\magenta{\textbf{Algoritmo de ordenaci\'{o}n por inserci\'{o}n}}}
+%    \begin{quotation}
+%        \textsf{Desde} $\bolds{i=2}$ \textsf{hasta} $\bolds{n}$ \textsf{haz} \\[1ex]
+%        \hspace*{0.3cm} $\bolds{j:=i}$;\\[1ex]
+%        \hspace*{0.3cm} $\bolds{aux:=x_i}$;\\[1ex]
+%        \hspace*{0.3cm} \textsf{Mientras} $\bolds{(j>1}$ \textsf{y} $\bolds{aux<x_{j-1})}$ \textsf{haz} \\[1ex]
+%        \hspace*{0.8cm} $\bolds{x_j=x_{j-1}}$; \\[1ex]
+%        \hspace*{0.8cm} $\bolds{x_{j-1}=aux}$; \\[1ex]
+%        \hspace*{0.8cm} $\bolds{j=j-1}$; \\[1ex]
+%        \hspace*{0.3cm} $\bolds{a_j=aux}$;
+%    \end{quotation}
+
+
+
+
+\textbf{Inserci\'{o}n por bisecci\'{o}n}
+\vspace{0.2cm}
+
+
+        Ordenemos la lista $\bolds{\{7, 3, 5, 1, 4, 6\}}$
+\vspace{0.2cm}
+
+        $\bolds{\{\emph{7}\}}$
+        \medskip
+
+        $\bolds{3\hookrightarrow\{7\}:}$\par
+            $\bolds{\qquad 3<7 \Rightarrow \{3\;,\;7\}}$
+        \medskip
+
+        $\bolds{\{\emph{3}\;,\;\emph{7}\}}$
+        \medskip
+
+        $\bolds{5\hookrightarrow\{3\;\mid\;7\}:}$\par
+            $\bolds{\qquad5<7\Rightarrow5\hookrightarrow\{3\}:}$\par
+                    $\bolds{\qquad\qquad\qquad5>3\Rightarrow\{3\;,\;5\}}$
+        \medskip
+
+
+        $\bolds{\{\emph{3}\;,\;\emph{5}\;,\;\emph{7}\}}$
+        \medskip
+
+        $\bolds{1\hookrightarrow\{3\;,\;5\;\mid\;7\}:}$\par
+            $\bolds{\qquad1<7\Rightarrow1\hookrightarrow\{3\;\mid\;5\}:}$\par
+                $\bolds{\qquad\qquad1<5\Rightarrow1\hookrightarrow\{3\}:}$\par
+                    $\bolds{\qquad\qquad\qquad1<3\Rightarrow\{1\;,\;3\}}$
+        \medskip
+
+        $\bolds{\{\emph{1}\;,\emph{3}\;,\;\emph{5}\;,\;\emph{7}\}}$
+        \medskip
+
+        $\bolds{4\hookrightarrow\{1\;,3\;\mid\;5\;,\;7\}:}$\par
+            $\bolds{\qquad4<5\Rightarrow4\hookrightarrow\{1\;\mid\;3\}:}$\par
+                $\bolds{\qquad\qquad4>3\Rightarrow4\hookrightarrow\{3\}:}$\par
+                    $\bolds{\qquad\qquad\qquad4>3\Rightarrow\{3\;,\;4\}}$
+        \medskip
+
+        $\bolds{\{\emph{1}\;,\emph{3}\;,\;\emph{4}\;,\;\emph{5}\;,\;\emph{7}\}}$
+        \medskip
+
+        $\bolds{6\hookrightarrow\{1\;,3\;,\;4\,\mid\;5\;,\;7\}:}$\par
+            $\bolds{\qquad6>5\Rightarrow6\hookrightarrow\{5\;\mid\;7\}:}$\par
+                $\bolds{\qquad\qquad6<7\Rightarrow6\hookrightarrow\{5\}:}$\par
+                    $\bolds{\qquad\qquad\qquad6>5\Rightarrow\{5\;,\;6\}}$
+        \medskip
+
+        $\bolds{\{\emph{1}\;,\emph{3}\;,\;\emph{4}\;,\;\emph{5}\;,\;\emph{6}\;,\;\emph{7}\}}$
+
+
+
+
+\subsubsection{\underline{Complejidad de los algoritmos de ordenaci\'{o}n}}
+\vspace{0.4cm}
+
+\noindent\textbf{Algoritmo de ordenaci\'{o}n de Burbuja}:
+
+ \begin{itemize}
+    \item \emph{Comparaciones}: Para cada $i\in \{1,\ldots, n-1\}$ se realizan $n-i$ comparaciones
+    $$\bolds{(n-1)+(n-2)+\cdots+2+1=\frac{n(n-1)}{2} \mbox{es} O(n^2)}$$
+
+    \item \emph{Intercambios}: $\bolds{O(n^2)}$ pues, en el peor de los casos, despu\'{e}s de cada comparaci\'{o}n habr\'{a} un intercambio.
+ \end{itemize}
+\vspace{0.4cm}
+
+ \noindent\textbf{Algoritmo de ordenaci\'{o}n por selecci\'{o}n}:
+
+\vspace{0.4cm}
+Para cada $i\in \{1,\ldots, n-1\}$ se ejecuta el algoritmo de
+c\'{a}lculo del m\'{\i}nimo (m\'{a}ximo) cuya complejidad es lineal. Por tanto
+el orden de este algoritmo es cuadr\'{a}tico $\bolds{O(n^2)}.$
+\vspace{1.5cm}
+
+ \noindent\textbf{Algoritmo de ordenaci\'{o}n por inserci\'{o}n (secuencial)}:
+    \begin{itemize}
+       \item \emph{Comparaciones}: Para cada $i\in \{1,\ldots, n-1\}$ se compara $x_i$ con cada elemento de la lista parcial que tiene $n-i$ elementos $$\bolds{1+2+\cdots +(n-2)+(n-1) \mbox{es} O(n^2)}$$
+
+       \item \emph{Intercambios}: $\bolds{O(n^2)}$ pues, en el peor de los casos, para insertar $x_i$ hay que desplazar los $i-1$ n\'{u}meros de la lista parcial.
+    \end{itemize}
+
+
+ \noindent\textbf{Algoritmo de ordenaci\'{o}n por inserci\'{o}n (bisecci\'{o}n)}:
+    \begin{itemize}
+        \item \emph{Comparaciones}: $$\bolds{\log_22+\log_23+\cdots+\log_2n\leq (n-1)\log_2n \mbox{es} O(n\log n)}$$
+        \item \emph{Intercambios}: $\bolds{�O(n^2)}$ igual que en la inserci\'{o}n secuencial
+    \end{itemize}
+
+
+\subsection{Algoritmo Voraz}
+
+El esquema algor\'{\i}tmico conocido como \emph{algoritmos voraces} (tambi\'{e}n \emph{\'{a}vidos}; \emph{greedy} en ingl\'{e}s) es el que menos dificultades plantea a la hora de dise\~{n}ar y comprobar su funcionamiento. Normalmente, este esquema se aplica a los problemas de optimizaci\'{o}n.
+\vspace{0.2cm}
+
+Lo aplicaremos a dos conocidos problemas en Geometr\'{\i}a Computacional:
+        \begin{enumerate}
+            \item Coloraci\'{o}n de V\'{e}rtices.
+            \item \'{A}rbol Spanning Minimal
+        \end{enumerate}
+
+\noindent\underline{\textbf{Funcionamiento:}}
+\vspace{0.2cm}
+
+Si llamamos $\bolds{C}$ al conjunto de candidatos posibles, y $\bolds{S}$ al conjunto soluci\'{o}n deseado, el algoritmo escoge en cada paso al mejor
+elemento de $\bolds{C}$ posible, llam\'{e}moslo $\bolds{a}$. Acto seguido comprueba si al a\~{n}adirle a $\bolds{S}$ dicho elemento $\bolds{a}$, el conjunto
+resultante verifica la condici\'{o}n deseada; en caso contrario lo elimina. Contin\'{u}a el algoritmo hasta que $\bolds{S}$ es la soluci\'{o}n buscada.
+
+
+        \begin{quotation}
+        AlgoritmoVoraz(C: ConjuntoCandidatos) \\[1ex]
+        $\bolds{S:=\emptyset}$; \\[1ex]
+        \textsf{Mientras} ($\bolds{C\neq\emptyset}$ \textsf{y} $\bolds{S\neq}$\texttt{SolucionDeseada}) \textsf{haz} \\[1ex]
+            \hspace*{1cm} $\bolds{a}$:=\texttt{SeleccionaCandidato}($\bolds{C}$); \\[1ex]
+            \hspace*{1cm} \textsf{Si} \texttt{EsFactible($\bolds{a\cup S}$)} \textsf{entonces} \\[1ex]
+                \hspace*{2cm} $\bolds{S:=S\cup a}$; \\[1ex]
+                \hspace*{2cm} \textsf{Si} \texttt{EsSolucion($\bolds{S}$)} \\[1ex]
+                    \hspace*{3cm} $\bolds{S}$:=\texttt{SolucionDeseada}; \\[1ex]
+        \end{quotation}
+
+
+
+\subsubsection{\underline{Coloraci\'{o}n de v\'{e}rtices}}
+\vspace{0.2cm}
+
+Supongamos que organizamos un congreso con $\bolds{6}$ conferencias. Cada uno de los participantes ha seleccionado aquellas conferencias a las que le
+gustar\'{\i}a asistir. El problema consiste en hacer un horario de forma que todos los participantes puedan asistir a las conferencias que han elegido.
+\vspace{0.2cm}
+
+Este problema podemos representarlo mediante un grafo, donde los v\'{e}rtices son las conferencias y las aristas unen aquellas con\-fe\-ren\-cias a las que quieren ir las mismas personas. Para resolver el problema tenemos que asignar sesiones distintas a v\'{e}rtices adyacentes.
+
+
+           \begin{figure}[h!]\centering
+           \includegraphics[scale=0.3]{color6.pdf}
+           \begin{tabular}{cccc}
+                  Sesi\'{o}n 1 & Sesi\'{o}n 2 & Sesi\'{o}n 3 & Sesi\'{o}n 4 \\
+                  $\bolds{C_1}$ y $\bolds{C_3}$ & $\bolds{C_2}$ y $\bolds{C_4}$ & $\bolds{C_5}$ & $\bolds{C_6}$
+            \end{tabular}
+%           \caption{\label{...}...}
+           \end{figure}
+
+Los problemas que pueden resolverse mediante coloraci\'{o}n de v\'{e}rtices tienen la siguiente estructura:
+\vspace{0.2cm}
+
+``\emph{Dado el grafo} $\bolds{G=(V,A)}$, \emph{se busca una partici\'{o}n de }$\bolds{V}$ \emph{en subconjuntos }$\bolds{V_i}$; \emph{es decir,}
+$$\bolds{V=\bigsqcup_{i=1}^{n}V_i},$$ \emph{de modo que los v\'{e}rtices de cada} $\bolds{V_i}$ \emph{no sean adyacentes y minimizando el tama\~{n}o de la partici\'{o}n }($n$).''
+\vspace{0.4cm}
+
+\begin{defn}
+Una Coloraci\'{o}n de V\'{e}rtices de un grafo $\bolds{G=(V,A)}$ es una funci\'{o}n $\bolds{c:V\rightarrow\mathbb{N}}$ tal que
+$\bolds{xy\in A\,\,\Leftrightarrow\,\,c(x)\neq c(y)}$
+\end{defn}
+
+\begin{defn}
+Si $\bolds{k=\mbox{m\'{a}x}\{c(v)/v\in V\}}$, decimos que  $\bolds{G}$ puede colorearse con $\bolds{k}$ colores.
+\end{defn}
+
+\begin{defn}
+El N\'{u}mero Crom\'{a}tico de $\bolds{G}$ es:
+        $$\bolds{\chi(G)=\mathrm{min}\{k\,|\,G \mbox{ puede colorearse con } k \mbox{ colores}\}}$$
+\end{defn}
+
+\vspace{0.4cm}
+\noindent Sabemos el n�mero crom�tico de algunos grafos elementales:
+
+\begin{itemize}
+\item Grafo completo $\bolds{K_n}$: $\bolds{\chi(K_n)=n}$
+
+\item Ciclos $\bolds{C_n}$: $\bolds{\chi(C_{2p})=2}$, $\bolds{\chi(C_{2p+1})=3}$
+
+\item \'{A}rboles $\bolds{T}$ con, al menos, dos v\'{e}rtices: $\bolds{\chi(T)=2}$
+\end{itemize}
+\vspace{3cm}
+
+\noindent\textbf{Algoritmo voraz aplicado a la coloraci�n de un grafo:}
+\vspace{0.2cm}
+
+Este algoritmo, aplicado a la coloraci\'{o}n de un grafo, consiste en asignar a cada v\'{e}rtice el primer color que no ha sido asignado a sus
+vecinos. Si ordenamos los v\'{e}rtices del grafo como $\bolds{v_1,\,\ldots,\,v_n}$:
+\vspace{0.2cm}
+
+        \begin{enumerate}
+            \item Asignamos el primer color a $\bolds{v_1}$.
+            \item Para los siguientes v\'{e}rtices $\bolds{v_i,\,(i=2\cdots n)}$ formamos el conjunto $\bolds{S}$ de colores asignados a los v\'{e}rtices anteriores que son adyacentes a $\bolds{v_i}$
+            \item Damos a $\bolds{v_i}$ el primer color que no est\'{a} en $\bolds{S}$
+        \end{enumerate}
+
+\vspace{0.2cm}
+Veamos dicho algoritmo:
+\vspace{0.2cm}
+
+        \noindent $\bolds{c(v_1):=1}$;\\[1ex]
+        \textsf{Desde} $\bolds{i=2}$ \textsf{hasta} $\bolds{n}$ \textsf{haz}\\[1ex]
+        \hspace*{5ex} $\bolds{S:=\emptyset}$\\
+        \hspace*{5ex} \textsf{Desde} $\bolds{j=1}$ \textsf{hasta} $\bolds{i-1}$ \textsf{haz}\\[1ex]
+        \hspace*{10ex} \textsf{Si} $\bolds{v_j}$ es adyacente a $\bolds{v_i}$ \textsf{entonces} $\bolds{S:=S\cup\{c(v_j)\}}$\\[1ex]
+        \hspace*{5ex} $\bolds{k:=1}$\\[1ex]
+        \hspace*{5ex} \textsf{Mientras} $\bolds{k\in S}$ \textsf{haz} $\bolds{k:=k+1}$\\[1ex]
+        \hspace*{5ex} $\bolds{c(v_i):=k}$
+
+\vspace{0.4cm}
+Al aplicar el algoritmo voraz al grafo del ejemplo del congreso con $\bolds{6}$ conferencias, con el orden de los v\'{e}rtices $\bolds{v_i=C_i}$,
+obtenemos la coloraci\'{o}n con cuatro colores anterior.
+\vspace{0.4cm}
+
+      \begin{center}
+            \begin{tabular}{cccc}
+                  Sesi\'{o}n 1 & Sesi\'{o}n 2 & Sesi\'{o}n 3 & Sesi\'{o}n 4 \\
+                  $\bolds{C_1}$ y $\bolds{C_3}$ & $\bolds{C_2}$ y $\bolds{C_4}$ & $\bolds{C_5}$ & $\bolds{C_6}$
+            \end{tabular}
+      \end{center}
+
+\vspace{0.4cm}
+Pero si consideramos el orden de los v\'{e}rtices\\
+$\bolds{v_1=C_1,\,v_2=C_4,\,v_3=C_6,\,v_4=C_3,\,v_5=C_2,\,v_6=C_2}$\\
+obtenemos la siguiente coloraci\'{o}n:
+\vspace{0.4cm}
+
+           \begin{figure}[h!]\centering
+           \includegraphics[scale=0.3]{color7.pdf}
+           \begin{tabular}{ccc}
+            Color 1 & Color 2 & Color 3 \\
+            $\bolds{C_1}$ y $\bolds{C_3}$ & $\bolds{C_4}$ y $\bolds{C_6}$ & $\bolds{C_2}$ y $\bolds{C_5}$
+           \end{tabular}
+%           \caption{\label{...}...}
+           \end{figure}
+
+
+\vspace{0.4cm}
+N�tese que no podemos obtener una coloraci\'{o}n con menos colores pues el n\'{u}mero crom\'{a}tico de este grafo tiene que ser $\bolds{\geq 3}$ al contener a $\bolds{K_3}$.
+\vspace{0.4cm}
+
+\textbf{Complejidad del algoritmo voraz}
+\vspace{0.3cm}
+
+        \noindent En el paso $\bolds{i}$ tenemos las operaciones:
+        \begin{itemize}
+        \item Adyacencias: $\bolds{i-1}$
+%        \vspace{-0.2cm}
+        \item Pertenencias: $\bolds{i-1}$
+%        \vspace{-0.2cm}
+        \item Sumas: $\bolds{i-1}$
+%        \vspace{-0.2cm}
+        \item Asignaciones: $\bolds{1+(i-1)+1+(i-1)+1}$
+        \end{itemize}
+\vspace{0.3cm}
+        \noindent En total tenemos:
+        \begin{itemize}
+        \item Adyacencias:
+        $\bolds{1+2+\cdots+(n-2)+(n-1)=\frac{n(n-1)}{2} \mbox{  es  } O(n^2)}$
+%        \vspace{-0.1cm}
+        \item Pertenencias: $\bolds{1+2+\cdots+(n-2)+(n-1)\mbox{  es  }O(n^2)}$
+%        \vspace{-0.1cm}
+        \item Sumas: $\bolds{1+2+\cdots+(n-2)+(n-1) \mbox{  es  }O(n^2)}$
+%        \vspace{-0.1cm}
+        \item Asignaciones: $\bolds{1+3(n-1)+2\left(1+2+\cdots+(n-2)+(n-1)\right)=}$\\
+        $\bolds{1+3n-3+n(n-1)=n^2+2n-2 \mbox{  es  }O(n^2)}$
+        \end{itemize}
+
+\vspace{0.4cm}
+\subsubsection{\underline{\'{A}rbol Spanning Minimal (A.S.M.)}}
+
+Supongamos que queremos construir carreteras entre varias ciudades. Formalmente tenemos un grafo $\bolds{G=(V,A)}$ cuyos v\'{e}rtices son las ciudades y las aristas las carreteras, y una funci\'{o}n $\bolds{w:A\rightarrow\mathbb{N}}$ de forma que $\bolds{w(a)}$ representa el coste de la carretera $\bolds{a}$. Decimos que $\bolds{G}$ y $\bolds{w}$ constituyen un grafo ponderado y que $\bolds{w}$ es una funci\'{o}n de peso.
+\vspace{0.2cm}
+
+El objetivo pr\'{a}ctico es obtener una red de carreteras de coste m\'{\i}nimo, que se corresponde con el problema de obtener un \'{a}rbol spanning $\bolds{T=(V,A')}$ de $\bolds{G}$ cuyo peso total $$\bolds{w(T)=\sum_{a\in A'}w(a)}$$ sea el menor posible. Este problema tiene soluci\'{o}n, sin embargo, pueden existir varios \'{a}rboles spanning distintos cuyo peso total sea m\'{\i}nimo.
+\vspace{0.6cm}
+
+\noindent\textbf{Algoritmo voraz aplicado a un \'{A}rbol Spanning Minimal:}
+\vspace{0.3cm}
+
+        \begin{enumerate}
+            \item Primero tomamos la arista de menor peso.
+            \item Despu\'{e}s, en cada paso, se a\~{n}ade la arista de menor peso que a\~{n}ada un nuevo v\'{e}rtice al \'{a}rbol parcial
+            (si hay varias aristas posibles con el mismo peso, se elige cualquiera de ellas).
+            \item As\'{\i} con\-ti\-nua\-mos el proceso hasta completar los v\'{e}rtices del grafo de partida y teniendo cuidado de que no se formen ciclos
+            para que el resultado final sea un \'{a}rbol.
+        \end{enumerate}
+
+\vspace{0.2cm}
+
+      \begin{center}
+           \begin{figure}[h!]\centering
+           \noindent Apliquemos el algoritmo voraz al siguiente grafo:
+           \includegraphics[scale=0.2]{ASMb.pdf}
+%           \caption{\label{...}...}
+           \end{figure}
+      \end{center}
+
+
+      \begin{center}
+           \begin{figure}[h!]
+           \includegraphics[scale=0.2]{ASM.pdf}
+           \noindent Partimos de la arista $\bolds{de}$ (menor peso). Podemos a\~{n}adir las aristas $\bolds{dc}$ \'{o} $\bolds{ev}$ (peso 3)
+           y las aristas, en este orden, $\bolds{dc}$, $\bolds{cb}$, $\bolds{cv}$, $\bolds{ba}$, $\bolds{af}$.
+%           \caption{\label{...}...}
+           \end{figure}
+      \end{center}
+
+\vspace{-2cm}
+\begin{thm}
+Sea $\bolds{G=(V,A)}$ un grafo ponderado conexo con funci\'{o}n de peso $\bolds{w:A\rightarrow\mathbb{N}}$. Supongamos que $\bolds{T}$ es un \'{a}rbol
+spanning de $\bolds{G}$ que resulta de aplicarle el algoritmo voraz. Entonces se verifica:
+
+        $$\bolds{w(T)\leq w(U)}$$
+
+para cualquier otro \'{a}rbol $\bolds{U}$ spanning de $\bolds{G}$.
+\end{thm}
+
+\subsection{Algoritmos de b\'{u}squeda}
+
+Supongamos que hemos de llevar a cabo la b\'{u}squeda de los v\'{e}rtices de un grafo em\-pe\-zan\-do en un v\'{e}rtice concreto.
+Podemos emplear dos estrategias distintas:
+        \begin{itemize}
+            \item podr\'{\i}amos ``profundizar'', movi\'{e}ndonos a un nuevo v\'{e}rtice siempre que fuera posible, o
+            \vspace{-0.2cm}
+            \item podr\'{\i}amos ``desplegarnos'' comprobando todos los v\'{e}rtices en un ``nivel'' antes de pasar al siguiente.
+        \end{itemize}
+
+\vspace{0.2cm}
+La primera estrategia se conoce con el nombre de \textbf{b\'{u}squeda en profundidad} (B.E.P.) y la segunda con el nombre de
+\textbf{b\'{u}squeda en anchura} (B.E.A.).
+\vspace{0.2cm}
+
+La siguiente figura representa una habitaci\'{o}n con siete juguetes escondidos, el problema consiste en encontrar los juguetes representados por las
+letras $\bolds{a}$, $\bolds{b}$, $\bolds{c}$, $\bolds{d}$, $\bolds{e}$, $\bolds{f}$ y $\bolds{g}$.
+
+%\vspace*{0.5cm}
+
+      \begin{center}
+           \begin{figure}[h!]\centering
+           \includegraphics[scale=0.14]{B1.pdf}
+%           \caption{\label{...}...}
+           \end{figure}
+      \end{center}
+
+
+\vspace{2.5cm}
+Podemos representar esta situaci\'{o}n mediante un grafo, donde los v\'{e}rtices ser\'{a}n los juguetes y las aristas representan las rutas disponibles entre los juguetes.
+\vspace{0.2cm}
+
+Para el ejemplo dado tendr\'{\i}amos el siguiente grafo:
+
+      \begin{center}
+           \begin{figure}[h!]\centering
+           \includegraphics[scale=0.15]{B1.pdf}
+           \includegraphics[scale=0.2]{B2.pdf}
+%           \caption{\label{...}...}
+           \end{figure}
+      \end{center}
+
+
+\vspace{0.2cm}
+\noindent\underline{\textbf{Algoritmo B\'{u}squeda en Profundidad (B.E.P.)}}:
+
+        \begin{quotation}
+        \noindent $\bolds{Q:=v}$\\[1ex]
+        \textsf{Mientras} $\bolds{Q\neq\emptyset}$ \textsf{haz}\\[1ex]
+        \hspace*{5ex} $\bolds{x:=\mbox{ Ultimo}(Q)}$\\[1ex]
+        \hspace*{5ex} \textsf{Si} $\bolds{x}$ es adyacente a un nuevo v\'{e}rtice $\bolds{y}$\\[1ex]
+        \hspace*{10ex} \textsf{entonces} $\bolds{Q:=(Q\mbox{ seguida de }y)}$\\[1ex]
+        \hspace*{10ex} \textsf{y en otro caso} $\bolds{Q:=(Q\mbox{ con }x\mbox{ eliminado})}$
+        \end{quotation}
+
+\vspace{0.4cm}
+        B.E.P. $\rightarrow$ D.F.S. = Depth First Search
+\vspace{0.4cm}
+
+        \begin{center}
+        \begin{figure}[h!]\centering
+        \includegraphics[scale=0.2]{B2.pdf}
+        \begin{minipage}{.4\textwidth}\begin{tabular}{|ccl|} \hline
+            A\~nadir & Quitar & $\bolds{Q}$ \\ \hline
+            $\bolds{a}$ & -- & $\bolds{a}$ \\
+            $\bolds{b}$ & -- & $\bolds{ab}$ \\
+            $\bolds{c}$ & -- & $\bolds{abc}$ \\
+            $\bolds{e}$ & -- & $\bolds{abce}$ \\
+            $\bolds{f}$ & -- & $\bolds{abcef}$ \\
+            -- & $\bolds{f}$ & $\bolds{abce}$ \\
+            -- & $\bolds{e}$ & $\bolds{abc}$ \\
+            -- & $\bolds{c}$ & $\bolds{ab}$ \\
+            $\bolds{d}$ & -- & $\bolds{abd}$ \\
+            -- & $\bolds{d}$ & $\bolds{ab}$ \\
+            $\bolds{g}$ & -- & $\bolds{abg}$ \\
+            -- & $\bolds{g}$ & $\bolds{ab}$ \\
+            -- & $\bolds{b}$ & $\bolds{a}$ \\
+            -- & $\bolds{a}$ & $\bolds{\emptyset}$ \\ \hline
+        \end{tabular}\end{minipage}
+        \end{figure}
+        \end{center}
+
+\vspace{1cm}
+\noindent\underline{\textbf{Algoritmo B\'{u}squeda en Anchura (B.E.A.)}}:
+
+        \begin{quotation}
+        \noindent $\bolds{Q:=v}$\\[1ex]
+        \textsf{Mientras} $\bolds{Q\neq\emptyset}$ \textsf{haz}\\[1ex]
+        \hspace*{5ex} $\bolds{x:=\mbox{ Primero}(Q)}$\\[1ex]
+        \hspace*{5ex} \textsf{Si} $\bolds{x}$ es adyacente a un nuevo v\'{e}rtice $\bolds{y}$\\[1ex]
+        \hspace*{10ex} \textsf{entonces} $\bolds{Q:=(Q\mbox{ seguida de }y)}$\\[1ex]
+        \hspace*{10ex} \textsf{y en otro caso} $\bolds{Q:=(Q\mbox{ con }x\mbox{ eliminado})}$
+        \end{quotation}
+
+\vspace{0.4cm}
+        B.E.A. $\rightarrow$ B.F.S. = Breadth First Search
+\vspace{0.4cm}
+
+        \begin{center}
+        \begin{figure}[h!]\centering
+        \includegraphics[scale=0.2]{B2.pdf}
+        \begin{minipage}{.4\textwidth}\begin{tabular}{|ccl|} \hline
+            A\~nadir & Quitar & $\bolds{Q}$ \\ \hline
+            $\bolds{a}$ & -- & $\bolds{a}$ \\
+            $\bolds{b}$ & -- & $\bolds{ab}$ \\
+            $\bolds{d}$ & -- & $\bolds{abd}$ \\
+            -- & $\bolds{a}$ & $\bolds{bd}$ \\
+            $\bolds{c}$ & -- & $\bolds{bdc}$ \\
+            $\bolds{e}$ & -- & $\bolds{bdce}$ \\
+            $\bolds{f}$ & -- & $\bolds{bdcef}$ \\
+            $\bolds{g}$ & -- & $\bolds{bdcefg}$ \\
+            -- & $\bolds{b}$ & $\bolds{dcefg}$ \\
+            -- & $\bolds{d}$ & $\bolds{cefg}$ \\
+            -- & $\bolds{c}$ & $\bolds{efg}$ \\
+            -- & $\bolds{e}$ & $\bolds{fg}$ \\
+            -- & $\bolds{f}$ & $\bolds{g}$ \\
+            -- & $\bolds{g}$ & $\bolds{\emptyset}$ \\ \hline
+        \end{tabular}\end{minipage}
+        \end{figure}
+        \end{center}
+
+
+\vspace{0.2cm}
+        En la B.E.P. la lista de v\'{e}rtices se conoce con el nombre de pila, ya que se comporta como una pila de platos,
+        s\'{o}lo se pueden a\~{n}adir o quitar v\'{e}rtices (platos) en la cima de la pila.
+\vspace{0.2cm}
+
+        La B.E.A. se comporta como una cola, ya que recuerda a una cola de personas esperando en una tienda a ser atendidos. Los nuevos
+        v\'{e}rtices se a\~{n}aden al final de la cola y los antiguos se eliminan del principio.
+\vspace{0.2cm}
+
+        \begin{itemize}
+            \item B.E.P. $\rightarrow$ LIFO=Last in, first out (la \'{u}ltima que llega es la primera que sale)
+            \item B.E.A. $\rightarrow$ FIFO=First in, first out (la primera que llega es la primera que sale)
+        \end{itemize}
+
+\vspace{0.2cm}
+Los procedimientos de b\'{u}squeda pueden u\-ti\-li\-zar\-se para ver si un grafo $\bolds{G}$ es conexo o no. Ya que si al final hemos pasado por todos
+los v\'{e}rtices de $\bolds{G}$, es decir, hemos obtenido un \'{a}rbol spanning, entonces $\bolds{G}$ es conexo.
+
+\vspace{0.2cm}
+Los \'{a}rboles spanning (en trazo de color) que se obtienen para el grafo del ejemplo son:
+
+      \begin{center}
+           \begin{figure}[h!]\centering
+           \includegraphics[scale=0.2]{BEP.pdf}
+           \includegraphics[scale=0.2]{BEA.pdf}
+%           \caption{\label{...}...}
+           \end{figure}
+      \end{center}
+
+\vspace{0.2cm}
+Los \'{a}rboles anteriores, si los consideramos enraizados con ra\'{\i}z en $\bolds{a}$, quedar\'{\i}an:
+
+      \begin{center}
+           \begin{figure}[h!]\centering
+           \includegraphics[scale=0.22]{BEP2.pdf}
+           \includegraphics[scale=0.22]{BEA2.pdf}
+%           \caption{\label{...}...}
+           \end{figure}
+      \end{center}
+
+\section{Cierre Convexo de una nube de puntos. Algoritmos.}
+
+\subsection{Cierre Convexo (Convex Hull).}
+
+\begin{defn} Un conjunto $A \subseteq \mathbb{R}^d$ se dice
+\textbf{convexo} si $\overline{xy} \subseteq A$, $\forall x,y \in A$.
+\end{defn}
+
+\begin{prop} La intersecci\'{o}n de una familia de
+conjuntos convexos es un conjunto convexo.
+\end{prop}
+
+\begin{defn} El \textbf{cierre convexo} de un conjunto $S$
+es el menor convexo que contiene a $S$. Lo notaremos: $\textbf{CH(S)}$.
+\end{defn}
+
+\begin{prop} $CH(S)$ es la intersecci\'{o}n de todos los
+conjuntos convexos que contienen a $S$.
+\end{prop}
+
+\begin{rem} A continuaci�n, veamos el cierre convexo para:
+$$S \ = \ \mbox{nube de $n$ puntos en } \mathbb{R}^2$$
+\end{rem}
+
+\begin{prop} Si $P$ es un pol\'{\i}gono convexo cuyos
+v\'{e}rtices son puntos de $S$, entonces $P\subseteq CH(S)$.
+\end{prop}
+
+\begin{prop} Sea $P$ un pol\'{\i}gono convexo que contiene
+a $S$ y cuyos v\'{e}rtices son puntos de $S$. Entonces $P=CH(S)$. En
+particular, $P$ es \'{u}nico.
+\end{prop}
+
+\begin{prop} La \textbf{envolvente convexa} de $S$ es la
+frontera de $CH(S)$.
+\end{prop}
+
+\begin{defn} Dados un conjunto $A \subseteq \mathbb{R}^2$ y un
+punto $p \in A$, se dice que una recta que pasa por $p$ es
+\textbf{soporte} de $A$ si todos los puntos de $A$ quedan en uno de los
+semiplanos cerrados determinados por dicha recta.
+\end{defn}
+
+\begin{thm} Sea $P$ un pol\'{\i}gono cuyos v\'{e}rtices est\'{a}n
+ordenados con orientaci\'{o}n positiva. Son equivalentes:
+\begin{enumerate}
+  \item $P$ es convexo.
+  \item Toda recta que pase por dos v\'{e}rtices consecutivos deja a $P$
+en el semiplano de la izquierda.
+  \item Toda recta que pase por dos v\'{e}rtices consecutivos deja al
+siguiente v\'{e}rtice de $P$ en el semiplano de la izquierda.
+  \item Todo \'{a}ngulo interior en cada v\'{e}rtice de $P$ es menor o igual
+que $\pi$.
+  \item Todo v\'{e}rtice admite una recta soporte de $P$ que pasa por
+\'{e}l.
+\end{enumerate}
+\end{thm}
+
+
+\subsubsection{\'Area signada de un tri\'angulo}
+
+\noindent Dados tres puntos $$p_1=(x_1,y_1), \quad p_2=(x_2,y_2), \quad p_3=(x_3,y_3)$$ en el plano, el \'area del tri\'angulo que determinan viene dada por
+$$\mbox{\'Area} \ = \ \frac{1}{2} { abs}\left(\Delta(p_1,p_2,p_3)\right),$$
+siendo $$\Delta(p_1,p_2,p_3) \ = \ \left| \begin{array}{ccc}
+1 & 1 & 1 \\
+x_1 & x_2 & x_3 \\
+y_1 & y_2 & y_3
+\end{array}
+\right|$$
+el \textbf{\'area signada}. Su signo coincide con el del vector $\overrightarrow{p_1p_2}\wedge\overrightarrow{p_1p_3}$ y sirve para orientar el tri\'angulo
+de v\'ertices $p_1p_2p_3$:
+\begin{itemize}
+   \item Si $\Delta(p_1,p_2,p_3)>0$, entonces $(p_1,p_2,p_3)$ tiene orientaci\'on positiva.
+   \item Si $\Delta(p_1,p_2,p_3)<0$, entonces $(p_1,p_2,p_3)$ tiene orientaci\'on negativa.
+\end{itemize}
+
+\subsection{Algoritmos.}
+
+\subsubsection{\underline{Algoritmo de {\textit \textbf{fuerza bruta}}}}
+
+{\textbf Descripci\'on:}
+
+\begin{itemize}
+  \item \textbf{Paso 1:} Para cada par de puntos de $S$ se comprueba si todos los
+dem\'{a}s est\'{a}n en un mismo semiplano de los dos que determina la
+recta que pasa por ellos. Si es as\'{\i}, determinan un lado de la
+envolvente y si no, no.
+  \item \textbf{Paso 2:} Se ordenan los lados para que aparezcan tal y
+como lo hacen al recorrer la frontera.
+\end{itemize}
+
+
+{\textbf Complejidad:}
+
+\begin{itemize}
+  \item \textbf{Paso 1:} $O(n)$ para cada par de puntos. Como hay
+$\left(\begin{array}{c}n\\2\end{array}\right)$ pares, $O(n^3)$
+para encontrar el conjunto de v\'{e}rtices de la envolvente convexa.
+  \item \textbf{Paso 2:} $O(n\log n)$ en el peor de los casos.
+  \item \textbf{Total:} $O(n^3)$.
+\end{itemize}
+
+
+\subsubsection{\underline{Marcha de Jarvis}}
+
+{\textbf Idea:} Partiendo de un v\'{e}rtice de la envolvente, se
+busca otro v\'{e}rtice que con \'{e}l determine una recta soporte de $S$.
+
+\vspace{0.5cm}
+
+{\textbf Descripci\'{o}n:}
+\begin{itemize}
+  \item \textbf{Entrada:} $S=(p_1,\dots,p_n)$.
+  \item \textbf{Salida:} Lista c\'{\i}clica con los v\'{e}rtices de la envolvente
+convexa de $S$: $C=(v_1,\dots,v_k)$.
+  \item \textbf{Paso 0:} Encontrar el punto de $S$ con abscisa m\'{\i}nima (si
+hubiera m\'{a}s de uno, el de menor ordenada): ser\'{a} $v_1$ que
+insertaremos en $C$, inicialmente vac\'{\i}a.
+  \item \textbf{Paso i:} Localizar en $S$ el punto de menor \'{a}ngulo positivo
+respecto a $v_i$ y al rayo $r_i$ que emana de $v_i$ con la
+direcci\'{o}n $\overrightarrow{v_{i-1}v_i}$, si $i\neq 1$, y si $i=1$,
+al rayo vertical $r_1$ que emana de $v_1$ en la direcci\'{o}n de
+$-\infty$ (si hubiera m\'{a}s de uno, el que est\'{e} m\'{a}s alejado de
+$v_i$). Ese punto ser\'{a} $v_{i+1}$. Si $v_{i+1}\neq v_1$, lo
+insertamos en $C$ y continuamos. En caso contrario, hemos acabado.
+\end{itemize}
+
+{\textbf Correcci\'{o}n:}
+
+\begin{itemize}
+%\item Para cada $i$, $v_i$ es un v\'{e}rtice de la envolvente convexa
+%y $r_i$ es recta soporte de $S$.
+  \item $C$ es la frontera de un pol\'{\i}gono convexo con v\'{e}rtices en
+$S$ y que contiene a $S$.
+\end{itemize}
+
+
+{\textbf Complejidad:}
+
+\begin{itemize}
+  \item \textbf{Paso 0:} Puede hacerse en tiempo $O(n)$.
+  \item \textbf{Paso i:} Para cada $i$, puede hacerse en tiempo $O(n)$.
+  \item \textbf{Total}: $O(n\cdot k)$, donde $k$ es el n\'{u}mero de v\'{e}rtices en la
+envolvente convexa. $O(n^2)$ en el peor de los casos.
+\end{itemize}
+
+
+{\textbf Observaciones:}
+
+\begin{itemize}
+\item El c\'{a}lculo para encontrar el m\'{\i}nimo angular puede hacerse
+usando \'{a}reas signadas.
+\end{itemize}
+$$\angle (\overrightarrow{v_ip_j},r_i) <
+\angle (\overrightarrow{v_ip_k},r_i) \Leftrightarrow
+\Delta(v_i,p_j,p_k)>0$$
+
+
+\subsubsection{\underline{Scan de Graham}}
+
+\begin{itemize}
+  \item Un pol\'{\i}gono convexo es estrellado. Por tanto, los v\'{e}rtices
+aparecen ordenados angularmente respecto a cualquier punto del
+n\'{u}cleo.
+  \item Un pol\'{\i}gono convexo es mon\'{o}tono respecto a cual\-quier
+direcci\'{o}n. Por tanto, su frontera puede des\-com\-po\-ner\-se en
+dos cadenas mon\'{o}tonas respecto de OX. En cada una, los v\'{e}rtices
+est\'{a}n ordenados por abscisas.
+  \item Todos los v\'{e}rtices de un pol\'{\i}gono convexo son convexos.
+\end{itemize}
+
+\vspace{0.6cm}
+
+{\textbf Idea:}
+
+\begin{enumerate}
+  \item \textbf{Ordenaci\'{o}n:} Obtener una lista c\'{\i}clica $L$ con todos los puntos de
+$S$ de manera que describa un pol\'{\i}gono estrellado o mon\'{o}tono.
+  \item \textbf{Scan:} Quitar de $L$ los puntos que no formen con sus dos
+adyacentes un \'{a}ngulo menor que $\pi$.
+\end{enumerate}
+
+
+{\textbf Descripci\'{o}n:}
+
+Suponemos que en $S$ no hay m\'{a}s de dos puntos alineados.
+
+\begin{itemize}
+  \item\textbf{Entrada:} $S=(p_1,\dots,p_n)$.
+  \item\textbf{Salida:} Lista c\'{\i}clica con los v\'{e}rtices de la envolvente
+convexa de $S$: $C=(v_1,\dots,v_k)$.
+  \item\textbf{Paso 1:} Encontrar el punto de $S$ con abscisa m\'{\i}nima (si
+hubiera m\'{a}s de uno, el de menor ordenada): ser\'{a} $v_1$ que
+insertaremos en $C$, inicialmente vac\'{\i}a.
+  \item\textbf{Paso 2:} Ordenar angularmente el resto de puntos de $S$
+res\-pec\-to a $v_1$ y en sentido positivo respecto al rayo
+vertical que emana de \'{e}l en direcci\'{o}n a $-\infty$. Sea
+$L=(v_1,\dots,v_n)$ el resultado.
+  \item\textbf{Paso 3:} Insertar $v_2$ en $C$. Hacer $q=v_2$.
+  \item\textbf{Paso 4:} (Scan) Desde $i=3$ hasta $n$, hacer
+\begin{enumerate}
+  \item $p=ant(q)$ (anterior en $C$).
+  \item Mientras $\Delta(p,q,v_i) \leq 0$,
+\begin{enumerate}
+  \item Borrar $q$ de $C$.
+  \item Actualizar $q=p$ y $p=ant(q)$.
+\end{enumerate}
+  \item Insertar $v_i$ en $C$ y actualizar $q=v_i$.
+\end{enumerate}
+\end{itemize}
+
+\begin{itemize}
+  \item Obs\'{e}rvese que con la ordenaci\'{o}n del Paso 2, tanto $v_2$ como
+$v_n$ son v\'{e}rtices de la envolvente.
+\end{itemize}
+\vspace{0.2cm}
+
+{\textbf Nota:}
+
+Si en $S$ hay m\'{a}s de dos puntos alineados, basta
+modificar el algoritmo de modo que en el paso de ordenaci\'{o}n
+angular, cuando haya varios puntos con el mismo \'{a}ngulo, nos
+quedemos s\'{o}lo con el m\'{a}s alejado de $v_1$.
+\vspace{1cm}
+
+{\textbf Correcci\'{o}n:}
+
+\begin{itemize}
+  \item Los puntos que elimina el algoritmo no son v\'{e}rtices de la
+envolvente convexa.
+  \item Al finalizar el algoritmo, $C$ es un pol\'{\i}gono convexo, pues
+todos sus v\'{e}rtices son convexos. Adem\'{a}s, sus v\'{e}rtices son puntos
+de $S$. Para probar que $C=CH(S)$, basta ver que $S \subseteq C$.
+\end{itemize}
+
+{\textbf Complejidad:}
+
+\begin{itemize}
+  \item\textbf{Paso 1:} Puede hacerse en tiempo $O(n)$.
+  \item\textbf{Paso 2:} Puede hacerse en tiempo $O(n\log n)$.
+  \item\textbf{Scan:} El coste es $O(n)$ (el n\'{u}mero m\'{a}ximo de test de
+\'{a}reas signadas es $2n-4$).
+  \item\textbf{Total:} $O(n\log n)$.
+\end{itemize}
+
+\subsubsection{Algoritmos: Scan de Graham - Variante}
+
+\begin{itemize}
+  \item\textbf{Entrada:} $S=(p_1,\dots,p_n)$.
+  \item\textbf{Salida:} Lista c\'{\i}clica con los v\'{e}rtices de la envolvente
+convexa de $S$: $C=(v_1,\dots,v_k)$.
+  \item\textbf{Paso 1:} Ordenar lexicogr\'{a}ficamente los puntos de $S$
+obteniendo la lista $L$.
+  \item\textbf{Paso 2:} Aplicar el scan a $L$ y obtener $C_1$, que es
+cadena inferior de la envolvente convexa.
+  \item\textbf{Paso 3:} Invertir el orden en $L$ obteniendo $L'$. Aplicar
+el scan a $L'$ y obtener $C_2$, que es cadena superior de la
+envolvente convexa.
+  \item\textbf{Paso 4:} Concatenar $C_1$ y $C_2$ eliminando las
+repeticiones de los extremos para obtener la lista $C$.
+\end{itemize}
+
+\subsubsection{Algoritmos: Scan de Graham - Variante de Akl-Toussaint}
+
+\begin{itemize}
+  \item Antes de ordenar, localizar los puntos extremales (abscisas
+y ordenadas m\'{\i}nimas y m\'{a}ximas). Estos puntos determinan un convexo
+contenido en $CH(S)$.
+  \item Eliminar los puntos de $S$ que est\'{a}n en el interior de dicho
+convexo.
+  \item Con los que quedan, se contin\'{u}a como en el algoritmo
+anterior, actuando sobre listas parciales.
+  \item El coste del paso adicional es $O(n)$, por lo que la
+complejidad sigue siendo $O(n\log n)$.
+\end{itemize}
+
+
+\section{C\'{a}lculo del di\'{a}metro de una nube de puntos.}
+
+\subsection{Di\'{a}metro de una nube de puntos}
+
+\begin{defn} El \textbf{di\'{a}metro} de una nube de $n$
+puntos es la mayor distancia entre dos de ellos. Es decir, si
+$S=\{p_1,\dots,p_n\}$, $$diam(S) \ = \ \displaystyle{{ max}_{1\leq i,j \leq
+n}}d(p_i,p_j)$$
+\end{defn}
+
+{\textbf Algoritmo de ``fuerza bruta":}
+
+\begin{enumerate}
+  \item Para cada par de puntos $p_i,p_j$, hallar $d(p_i,p_j)$.
+  \item Tomar el mayor de los valores obtenidos.
+\end{enumerate}
+
+{\textbf Complejidad:} $O(n^2)$.
+
+\begin{prop} El di\'{a}metro de $S$ se alcanza en v\'{e}rtices
+de $CH(S)$.
+\end{prop}
+
+\subsection{Di\'{a}metro de un pol\'{\i}gono convexo}
+
+Sea $P$ un pol\'{\i}gono convexo de $n$ v\'{e}rtices.
+
+ $$diam(P)\ = \ { max}\{d(p,q)\ / \ p,q \in P\}$$
+
+\
+
+\begin{prop} $diam(P) \ = \  diam(\{\mbox{v\'{e}rtices de
+}P\})$.
+\end{prop}
+
+\begin{defn} Se dice que dos v\'{e}rtices $p,q$ de $P$ son
+\textbf{ant\'{\i}podas} si existen dos rectas paralelas distintas que
+pasan por esos puntos y son soporte de $P$.
+\end{defn}
+
+\begin{prop} Si $diam(P)=d(p,q)$, entonces $p$ y $q$
+son ant\'{\i}podas.
+\end{prop}
+
+{\textbf Algoritmo:}
+
+\begin{enumerate}
+  \item Hallar todos los pares de ant\'{\i}podas de $P$.
+  \item Hallar la distancia entre los puntos de cada par.
+  \item Tomar el mayor de los valores obtenidos.
+\end{enumerate}
+
+
+\subsection{Algoritmo de girar calibres}
+
+
+\begin{rem} La comparaci\'{o}n entre los \'{a}ngulos $\alpha$ y $\beta$ se puede hacer
+usando \'{a}reas signadas
+
+ $$\alpha<\beta \Leftrightarrow \Delta(p,SIG(p),x)<0$$
+
+ $$x=p+\overrightarrow{qSIG(q)}$$
+
+\end{rem}
+
+\begin{itemize}
+  \item\textbf{Entrada:} Lista c\'{\i}clica $P$ con los $n$ v\'{e}rtices de un pol\'{\i}gono
+convexo en orientaci\'{o}n positiva.
+  \item\textbf{Salida:} Lista $Q$ con las parejas de ant\'{\i}podas de $P$.
+  \item\textbf{Paso 1:} Hacer $Q:=\emptyset$.
+  \item\textbf{Paso 2:} Localizar en $P$ los puntos m\'{\i}nimo y m\'{a}ximo con orden
+lexicogr\'{a}fico: $x_{min}$ y $x_{max}$.
+  \item\textbf{Paso 3:} Hacer $p:=x_{min}$ y $q:=x_{max}$.
+  \item\textbf{Paso 4:} Mientras $q\neq x_{min}$ o $p\neq x_{max}$ repetir:
+\begin{itemize}
+  \item Introducir en $Q$ el par $(p,q)$.
+  \item Hacer $x:=p+\overrightarrow{qSIG(q)}=p+SIG(q)-q$.
+  \item Si $\Delta(p,SIG(p),x)<0$, hacer $p:=SIG(p)$
+  \item Si $\Delta(p,SIG(p),x)>0$, hacer $q:=SIG(q)$
+  \item Si $\Delta(p,SIG(p),x)=0$, a\~{n}adir a $Q$ los pares $(p,SIG(q))$ y
+$(SIG(p),q)$ y hacer $p:=SIG(p)$ y $q:=SIG(q)$.
+\end{itemize}
+  \item\textbf{Paso 5:} Acabar devolviendo $Q$.
+\end{itemize}
+
+{\textbf Correcci\'{o}n:} El algoritmo acaba.
+
+{\textbf Complejidad:} $O(n)$.
+
+\section{Problemas de proximidad}
+
+Dada una nube $S$ con $n$ puntos, se plantean los si\-guien\-tes
+problemas:
+
+
+\begin{enumerate}
+
+  \item Fijado un punto de $S$, encontrar la regi\'{o}n del plano
+formada por los puntos que est\'{a}n m\'{a}s pr\'{o}ximos a \'{e}l que a cualquier
+otro de $S$.
+
+  \item \textbf{Todos los vecinos m\'{a}s cercanos:} Para cada punto de $S$ encontrar cu\'{a}l es su punto m\'{a}s cercano.
+
+  \item \textbf{El par m\'{a}s cercano:} Encontrar el par de puntos de $S$ cuya distancia entre s\'{\i} sea m\'{\i}nima.
+
+  \item \textbf{El vecino m\'{a}s cercano:} Dado un nuevo punto $p$,
+encontrar el elemento de $S$ m\'{a}s cercano a $p$.
+
+  \item \textbf{Mayor c\'{\i}rculo vac\'{\i}o:} Encontrar el mayor c\'{\i}rculo que no contenga ning\'{u}n punto de $S$ y cuyo centro est\'{e} dentro de $CH(S)$.
+
+  \item \textbf{Triangulaci\'{o}n:} Encontrar una triangulaci\'{o}n que contenga a los puntos de $S$ como v\'{e}rtices.
+
+  \item \textbf{\'{A}rbol spanning m\'{\i}nimo:} Construir un \'{a}rbol de longitud m\'{\i}nima que tenga a los puntos de $S$ como v\'{e}rtices.
+
+\end{enumerate}
+
+\subsection{Diagrama de Voronoi}
+
+$$S = \{ p_1, \dots ,p_n \} \subset \mathbb{R}^2$$
+
+\begin{defn}Se llama \textbf{regi\'{o}n}, \textbf{c\'{e}lula} o \textbf{pol\'{\i}gono de Voronoi} de  $p_i$ al conjunto
+
+\vspace{-0.2cm}
+
+$$Vor(p_i)=\{q\in \mathbb{R}^2 | d(q,p_i) \leq d(q,p_j), \forall j \neq i \}$$.
+
+\end{defn}
+
+\vspace{-0.1cm}
+
+Denotamos por $h(p_i,p_j)$ al semiplano que contiene a $p_i$ y
+tiene por borde la mediatriz $m_{ij}$ del segmento
+$\overline{p_ip_j}$.
+
+\begin{lema} Se verifica:
+
+$$Vor(p_i)= \bigcap _{j\neg i} h(p_i,p_j)$$
+
+
+\end{lema}
+
+\begin{defn} Se llama \textbf{diagrama de Voronoi} de $S$,
+$Vor(S)$, a la teselaci\'{o}n del plano determinada por la familia
+$\{Vor(p_i)\}_{i=1,\dots,n}$. Los puntos $p_i$ se llaman \textbf{generadores} del diagrama, y los v\'{e}rtices y segmentos o
+semirrectas de $Vor(S)$ se llaman \textbf{v\'{e}rtices} y \textbf{aristas de Voronoi} de $S$, respectivamente.
+\end{defn}
+
+\begin{rem}
+\begin{itemize}
+
+  \item El diagrama de Voronoi constituye una partici\'{o}n del plano en pol\'{\i}gonos convexos (los pol\'{\i}gonos de Voronoi), tal que cada punto de $S$ pertenece a un \'{u}nico pol\'{\i}gono.
+
+  \item Cada arista de $Vor(S)$ es com\'{u}n a dos pol\'{\i}gonos y es perpendicular al segmento que une los puntos de $S$ que est\'{a}n en estos pol\'{\i}gonos.
+
+  \item $Vor(S)$ contiene toda la informaci\'{o}n de proximidad relativa a $S$.
+
+  \item El diagrama de Voronoi se puede definir en dimensiones superiores.
+
+\end{itemize}
+\end{rem}
+
+\vspace{0.3cm}
+\noindent Adem�s, suponiendo que los puntos de $S$ est�n en posici\'on general:
+
+\begin{itemize}
+
+  \item Los puntos de $S$ no est\'{a}n todos alineados.
+
+  \item No hay cuatro puntos de $S$ que sean cocirculares.
+
+\end{itemize}
+
+\begin{thm} Cada v\'{e}rtice del diagrama de Voronoi es la intersecci\'{o}n de tres aristas del diagrama.
+\end{thm}
+
+\begin{rem} Los v\'{e}rtices de Voronoi son los centros de
+circunferencias definidas por tres puntos de $S$.
+\end{rem}
+
+
+\begin{thm} Para cada v\'{e}rtice $v$ de $Vor(S)$, la
+circunferencia correspondiente no contiene a ning\'{u}n otro punto de
+$S$.
+\end{thm}
+
+\begin{thm} Para cada $p_i \in S$, cada vecino m\'{a}s
+pr\'{o}ximo a $p_i$ define una arista en el pol\'{\i}gono $Vor(p_i)$.
+\end{thm}
+
+\begin{thm} El pol\'{\i}gono $Vor(p_i)$ es no acotado si y
+s\'{o}lo si $p_i$ es un punto de la envolvente convexa de $S$.
+\end{thm}
+
+\begin{coro} Las semirrectas de $Vor(S)$ corresponden a
+pares de puntos adyacentes de la envolvente convexa de $S$.
+\end{coro}
+
+\subsection{Triangulaci\'on de Delaunay}
+
+\begin{defn} El grafo dual de $Vor(S)$ recibe el nombre de \textbf{grafo de Delaunay} de $S$.
+\end{defn}
+
+\begin{thm} Si los puntos de $S$ est\'an en posici\'on
+ge\-ne\-ral, el grafo dual de $Vor(S)$ es una triangulaci\'on de
+$S$, llamada \textbf{triangulaci\'on de Delaunay} de $S$.
+\end{thm}
+
+\textbf{\underline{Soluci\'{o}n de los problemas de proximidad}}
+
+\begin{itemize}
+
+  \item Fijado un punto de $S$, encontrar la regi\'{o}n del plano formada por los puntos que est\'{a}n m\'{a}s pr\'{o}ximos a \'{e}l que a cualquier otro de $S$.
+
+  \item[\textbf{Sol.:}] Dado $p_i \in S$, dicha regi\'{o}n es $Vor(p_i)$.
+
+
+  \item \textbf{Todos los vecinos m\'{a}s cercanos:} Para cada punto de $S$ encontrar cu\'{a}l es su punto m\'{a}s cercano.
+
+  \item[\textbf{Sol.:}] Los vecinos m\'{a}s pr\'{o}ximos a $p_i$ definen las aristas de $Vor(p_i)$, por lo que bastar\'{a} conocer dichas aristas.
+
+
+  \item \textbf{El par m\'{a}s cercano:} Encontrar el par de puntos de $S$ cuya distancia entre s\'{\i} sea m\'{\i}nima.
+
+  \item[\textbf{Sol.:}] Se resuelve en tiempo lineal una vez conocida la soluci\'{o}n del
+problema anterior.
+
+
+  \item \textbf{El vecino m\'{a}s cercano:} Dado un nuevo punto $p$,
+encontrar el elemento de $S$ m\'{a}s cercano a $p$.
+
+  \item[\textbf{Sol.:}] Basta determinar en qu\'{e} regi\'{o}n de $Vor(S)$ se encuentra $p$.
+
+
+  \item \textbf{Mayor c\'{\i}rculo vac\'{\i}o:} Encontrar el mayor c\'{\i}rculo que no contenga ning\'{u}n punto de $S$ y cuyo centro est\'{e} dentro de $CH(S)$.
+
+  \item[\textbf{Sol.:}] Se define la funci\'{o}n $f(x,y)$ como la distancia del punto $(x,y)$ a su punto m\'{a}s cercano de $S$ y se prueba que $f$ (restringida a $CH(S)$) alcanza su m\'{a}ximo en un v\'{e}rtice de uno de los pol\'{\i}gonos que se obtienen al hallar $Vor(S)\cap CH(S)$.
+
+
+  \item \textbf{Triangulaci\'{o}n:} Encontrar una triangulaci\'{o}n que contenga a los puntos de $S$ como v\'{e}rtices.
+
+  \item[\textbf{Sol.:}] Considerar la Triangulaci\'on de Delaunay.
+
+
+  \item \textbf{\'{A}rbol spanning m\'{\i}nimo:} Construir un \'{a}rbol de longitud m\'{\i}nima que tenga a los puntos de $S$ como v\'{e}rtices.
+
+  \item[\textbf{Sol.:}] Puede obtenerse a partir de la Triangulaci\'on de Delaunay, con el siguiente procedimiento: elegido un �rbol $T$, localizar la arista $(u',v')$ tal que $d(u',v')={ min}\{d(u,v) \ / \ u\in T, \ v\in S\setminus T\}$.
+
+\end{itemize}
+
+
+\subsection{Algoritmos}
+
+\textbf{1. \underline{Divide y vencer\'{a}s}:}
+
+\begin{itemize}
+
+  \item \textbf{Paso 1:} Dividir el conjunto $S$ en dos subconjuntos $S_1$ y $S_2$ (con igual n\'{u}mero de puntos, aproximadamente) se\-pa\-ra\-dos por una recta vertical, de manera que $S_1$ quede a la izquierda de dicha recta.
+
+  \item \textbf{Paso 2:} Construir $Vor(S_1)$ y $Vor(S_2)$.
+
+  \item \textbf{Paso 3:} Construir la cadena poligonal $\sigma$ que separa $S_1$ y $S_2$.
+
+  \item \textbf{Paso 4:} Obtener $Vor(S)$ como $$(Vor(S_1)\cap\pi_L)\cup (Vor(S_2)\cap\pi_R)$$ donde $\pi_L$ (resp. $\pi_R$) es la regi\'{o}n del plano que queda a la izquierda (resp. derecha) de $\sigma$.
+
+\end{itemize}
+
+ Para detalles sobre el Paso 3, la correcci\'{o}n y la
+complejidad de este algoritmo, v\'{e}ase: {\small F. P. Preparata, M. I.
+Shamos}. {\textit Computational Geometry. An Introduction.}
+Springer-Verlag, New York, 1985. P\'{a}ginas 205-214.
+
+\vspace{0.3cm}
+
+\textbf{2. \underline{Fortune}:}
+
+\vspace{0.3cm}
+
+V\'{e}ase: {\small M. Berg et al.} {\textit Computational
+Geometry: Algorithms and Applications.} Springer-Verlag, Berlin,
+2000.
+
+\chapter{Modelado Geométrico}
+
+
+\section{Introducción Al Modelado}
+
+\subsection{Curvas Paramétricas}
+
+\begin{defn}
+Una curva parametrizada regular de clase $C^k$  es una aplicación
+\begin{center}
+\begin{tabular}{cccl}
+$\alpha:$ & $I$ & $\longrightarrow$ &$\mathbb{R}^3$ \\
+ & $t$ & $\mapsto$ & $\alpha (t)
+=(x(t),y(t),z(t))$
+\end{tabular}
+\end{center}
+
+donde $I\subseteq {\mathbb{R}}$ es un intervalo abierto ($I=\mathbb{R} $ es posible), que verifica las siguientes condiciones:
+
+\begin{enumerate}
+\item $\alpha$ es diferenciable de clase $C^k$ para alg\'{u}n $k\geq1$;
+\item  $\alpha '(t)=(x'(t),y'(t),z'(t)) \neq 0, \; \forall t\in I$.
+\end{enumerate}
+El vector $\alpha '(t)$ se de\-no\-mina vector velocidad o vector tangente de $\alpha$ en el instante $t.$
+\end{defn}
+
+%{\textbf Ejemplo:}
+%\begin{itemize}
+%\item Curvas planas formuladas expl\'{\i}citamente $y=f(x)$:
+%$$\alpha(t)=(t, f(t))$$
+%\item Recta que pasa por  $P_0,\; P_1\in \mathbb{R}^3$:
+%$$\alpha_1(t)=P_0+t(P_1-P_0)$$
+%$$\alpha_2(t)=P_0+t^3(P_1-P_0)$$
+%\item Arcos de circunferencia:
+%$$\beta_1(t)=(cos(t), sen(t))\quad \quad t\in [0,\pi/2]$$
+%$$\beta_2(s)=\left(\frac{1-s^2}{1+s^2}, \frac{2s}{1+s^2} \right) \quad \quad s\in [0,1]$$
+%\end{itemize}
+
+\subsubsection{Vector Velocidad:}
+
+\begin{itemize}
+
+\item Recta que pasa por  $P_0,\; P_1\in \mathbb{R}^3$:
+\begin{center}
+\begin{tabular}{lr}
+	\includegraphics[scale=0.35]{segmento1.pdf} &         \includegraphics[scale=0.35]{segmento2.pdf}  \\
+$\alpha'_1(t)=P_1-P_0$ &  $\alpha'_2(t)=3t^2(P_1-P_0)$
+\end{tabular}
+\end{center}
+
+\item Arcos de circunferencia:
+\begin{center}
+\begin{tabular}{lr}
+\includegraphics[scale=0.35]{circmf1.pdf} &  \includegraphics[scale=0.35]{circmf2.pdf}\\
+$\beta'_1(t)=(-sen(t), cos(t))$ &
+$\beta'_2(s)=\left(\frac{-4}{(1+s^2)^2}, \frac{2(1-s^2)}{(1+s^2)^2}\right)$
+\end{tabular}
+\end{center}
+
+\end{itemize}
+
+\subsubsection{Triedro De Frenet:}
+
+\begin{center}
+\begin{tabular}{|c||c|}
+\hline
+$\alpha(t)$ & $\alpha(s)$ \quad $s$=p.n. \\
+\hline \hline
+ & \\
+$\displaystyle \mathbf{t}(t)=\frac{\alpha'(t)}{\parallel \alpha'(t)\parallel }$ & $ \mathbf{t}(s)= \dot{\alpha}(s)$ \\
+ & \\
+$\displaystyle \mathbf{b}(t)=
+\frac{\alpha'(t)\times\alpha''(t)}{\parallel\alpha'(t)\times\alpha''(t)\parallel}$
+& $\mathbf{n} (s)=\displaystyle \frac{\ddot{\alpha}(s)}{\parallel
+\ddot{\alpha} (s)\parallel}$  \\
+ & \\
+$\mathbf{n}(t)=\mathbf{b}(t)\times\mathbf{t}(t)$  & $\mathbf{b}
+(s)=\mathbf{t} (s)\times \mathbf{n} (s)$ \\
+ & \\
+ \hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Ecuaciones de Frenet-Serret:}
+
+$$\left\{\begin{array}{llll}
+{\dot{\mathbf{t}}}=&&\kappa\mathbf{n}& \\ {\dot{\mathbf{n}}}=&-\kappa{\textbf t}&&+\tau{\textbf b}\\
+{\dot{\mathbf{b}}}=&&-\tau {\textbf n}& \end{array}\right\} \sim
+\left(
+\begin{array}{c} \dot{\mathbf{t}}\\ \dot{\mathbf{n}}\\ \dot{\mathbf{b}}\end{array}\right)=
+\left(
+\begin{array}{lcr} 0&\kappa&0\\-\kappa&0&\tau \\0&-\tau &0
+\end{array}\right)
+ \left(\begin{array}{c}
+\mathbf{t}\\\mathbf{n}\\\mathbf{b}\end{array}\right)$$
+
+\subsubsection{Curvatura Y Torsión:}
+
+\begin{center}
+\begin{tabular}{|c||c|}
+\hline
+$\alpha(t)$ & $\alpha(s)$ \quad $s$=p.n. \\
+\hline \hline
+ & \\
+$\displaystyle \kappa(t)= \frac{\parallel \alpha'(t)\times\alpha''
+(t)\parallel}{\parallel
+\alpha'(t)\parallel ^3}$ & $\displaystyle \kappa(s)=\parallel \ddot{\alpha}(s)\parallel$\\
+ & \\
+$\displaystyle \tau (t)= \frac{(\alpha' (t),\alpha'' (t),\alpha'''
+(t))}{\parallel\alpha' (t)\times\alpha'' (t)\parallel^2}$ &
+$\displaystyle \tau (s)=\frac{( \dot{\alpha}(s),\ddot{\alpha}(s),
+\stackrel{...}{\alpha}(s))}{\parallel \ddot{\alpha}(s)\parallel^2 }$ \\
+ & \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsubsection{Continuidad Geométrica:}
+
+\begin{tabular}{cc}
+$\alpha(t)=\left\{\begin{array}{ccc}
+(t,0,0) & si & t\in [-1,0]\\
+ & & \\
+(2t,4t^2,0) & si & t\in (0, \frac{1}{2}]
+\end{array}\right.$ &  \includegraphics[scale=0.2]{partes.pdf}
+\end{tabular}
+
+\vspace{0.3cm}
+
+\begin{tabular}{cc}
+$\alpha'(t)=\left\{\begin{array}{ccc}
+(1,0,0) & si & t\in [-1,0]\\
+ & & \\
+(2,8t,0) & si & t\in (0, \frac{1}{2}]
+\end{array}\right.$ & \hspace{1cm} $\alpha'(0^{-})\neq \alpha'(0^{+})$
+\end{tabular}
+
+\vspace{0.3cm}
+
+Por tanto $$\alpha\in {\mathcal  C}^0([-1,\frac{1}{2}]), \quad \alpha\notin {\mathcal  C}^1([-1,\frac{1}{2}])$$
+
+Sin embargo la direcci\'{o}n del vector tangente si se desplaza de forma continua a lo largo de la curva.
+
+$\mathbf{t}(t)=\frac{\alpha'(t)}{\parallel\alpha'(t)\parallel}=\left\{\begin{array}{ccc}
+(1,0,0) & si & t\in [-1,0]\\
+ & & \\
+\displaystyle \frac{1}{\sqrt{1+16t^2}}(1,4t,0) & si & t\in (0,
+\frac{1}{2}]
+\end{array}\right.$
+
+\vspace{0.3cm}
+
+
+Entonces, $\mathbf{t}(t)$ es continua: $\mathbf{t}(0^{-})= \mathbf{t}(0^{+})$
+
+\vspace{0.3cm}
+
+\begin{defn} Una curva continua $\alpha(t)$ para la que la direcci\'{o}n del vector tangente, es decir $\mathbf{t}(t)$, es continua se dice que posee continuidad visual o geom\'{e}trica de clase ${\mathcal  G}^1$.
+\end{defn}
+
+\vspace{0.3cm}
+
+{\textbf Consecuencias:}
+\begin{itemize}
+\item ${\mathcal  C}^1 \Rightarrow {\mathcal  G}^1,$ \hspace{0.5cm} $ {\mathcal  G}^1 \nRightarrow {\mathcal  C}^1.$ (Aunque es posible reparametrizar naturalmente la curva para obtener una parametrizaci\'{o}n $ {\mathcal  C}^1$)
+\item ${\mathcal  G}^1$ es una propiedad intr\'{\i}nseca  de la geometr\'{\i}a de la curva.
+\end{itemize}
+
+\vspace{0.3cm}
+
+\begin{defn} Una curva $\alpha(t)$ se dice que posee continuidad geom\'{e}trica de clase ${\mathcal  G}^2$ si el vector curvatura, $V(t)=\kappa(t) \; {\textbf n}(t),$ es continuo.
+\end{defn}
+
+\vspace{0.5cm}
+
+{\textbf Consecuencias:}
+\begin{itemize}
+\item ${\mathcal  C}^2 \Rightarrow {\mathcal  G}^2$
+\item $\alpha(s)$ parametrizada naturalmente, entonces $\alpha(s)$ es ${\mathcal  G}^2$ $\Leftrightarrow$  $\ddot{\alpha}(s)$ es continua.
+\item $\alpha(t)$ es una curva con $\kappa(t)$ y $\mathbf{n}(t)$ continuas $\Rightarrow$ $\alpha$ es ${\mathcal  G}^2$.
+
+%\item $\Leftrightarrow$ la curva {\textit lugar geom\'{e}trico de los
+%centros de curvatura de $\alpha(t)$} es continua (siempre que
+%$\kappa(t)\neq 0$).
+\end{itemize}
+
+\subsection{Espacios Vectoriales De Funciones}
+
+Estudiaremos: $y=f(x)$
+
+\vspace{0.5cm}
+
+$f(x)\in {\mathcal  F}(x)$ siendo ${\mathcal  F}(x)$ un $\mathbb{R}$-espacio vectorial de dimensi\'{o}n finita.
+
+$$f(x)=a_1 B_1(x)+a_2 B_2(x)+\cdots+a_n B_n(x)$$
+
+%{\textbf Ejemplo:}
+%${\mathcal  P}(x)=\{\mbox{polinomios de grado menor o igual a n}\}$
+%\begin{itemize}
+%\item La base ${\mathcal  B}=\{1,x,\ldots,x^n\}$:
+%$$P(x)=a_0+a_1 \;x+a_2\; x^2+\cdots+a_n \;x^n$$
+%\item  La base de Lagrange asociada a $n+1$ abscisas $x_0<\cdots <x_n$: $$L_k(x)=\frac{(x-x_0)\cdots (x-x_{k-1})(x-x_{k+1})\cdots %(x-x_n)}{(x_k-x_0)\cdots (x_k-x_{k-1})(x_k-x_{k+1})\cdots (x_k-x_n)}$$ $P(x)=a_0\;L_0(x)+a_1\;L_1(x)+\cdots+a_n\;L_n(x)$.\hfill$0\leq k\leq n$
+%\item La base de Newton asociada a $n+1$ abscisas:
+%
+%\vspace{0.5cm}
+%
+%$N_0(x)=1$
+%
+%$N_k(x)=(x-x_0)(x-x_1)\cdots(x-x_{k-1}) \hfill 1\leq k\leq n$
+%
+%$$P(x)=a_0+a_1 \;N_1(x)+a_2\;N_2(x)+\cdots+a_n \;N_n(x)$$
+%
+%\item La base de polinomios de Bernstein de grado $n$:
+%
+%$$B^n_k(x)=\binom{n}{k} x^k (1-x)^{n-k}$$
+%
+%para $x\in [0,1],$ \quad $0\leq k\leq n$.
+%$$P(x)=a_0 \;B^n_0(x)+a_1 \;B^n_1(x)+a_2\;B^n_2(x)+\cdots+a_n \;B^n_n(x)$$
+%\end{itemize}
+%
+\subsection{Interpolaci�n Polinomial}
+
+Sean $(x_0,y_0), (x_1,y_1),\ldots,(x_n,y_n),$ $n+1$ puntos de $\mathbb{R}^2.$ O bien $y=f(x)$ de c\'{a}lculo costoso o complejo, entonces elegimos $n+1$ puntos $\{(x_i,f(x_i))\},$ con $0\leq i\leq n.$
+
+Podemos considerar $x_0<x_1<\cdots <x_n$.
+
+{\textbf Objetivo:} Dibujar una curva, lo m\'{a}s simple o sencilla posible, que intuitivamente siga la forma de  estos puntos.
+
+Posible soluci\'{o}n: Polinomio de Interpolaci\'{o}n
+
+\begin{center}
+        \includegraphics[scale=0.55]{puntos.pdf}
+\end{center}
+
+Sean $(x_0,y_0), (x_1,y_1),\ldots,(x_n,y_n),$ $n+1$ puntos de $\mathbb{R}^2.$  O bien $y=f(x)$ de c\'{a}lculo costoso o complejo, entonces elegimos $n+1$ puntos $\{(x_i,f(x_i))\},$ con $0\leq i\leq n.$
+
+Podemos considerar $x_0<x_1<\cdots <x_n$.
+
+{\textbf Objetivo:} Dibujar una curva, lo m\'{a}s simple o sencilla posible, que intuitivamente siga la forma de  estos puntos.
+
+Posible soluci\'{o}n: Polinomio de Interpolaci\'{o}n
+
+\begin{center}
+        \includegraphics[scale=0.55]{polinomioInterpolacion.pdf}
+%\colocapdf{puntos}{0.55\textwidth}
+\end{center}
+
+El polinomio de interpolaci\'{o}n $P(x)$ que pasa por $\{(x_i,y_i)\}$ con $0\leq i \leq n,$ es de grado menor o igual que $n,$ por tanto $P(x)\in {\mathcal  P}(x).$
+
+Si consideramos la base ${\mathcal  B}=\{1,x,\ldots,x^n\}$:
+$$P(x)=a_0+a_1 \;x+a_2\; x^2+\cdots+a_n \;x^n$$
+
+\begin{center}
+\begin{tabular}{cccc} $\left[ \begin{array}{ccccc}
+1&x_0&x_0^2&\cdots&x_0^n\\
+1&x_1&x_1^2&\cdots&x_1^n\\
+\cdots&\cdots&\cdots&\cdots&\cdots\\
+1&x_n&x_n^2&\cdots&x_n^n\\
+\end{array} \right]$ & $\left[ \begin{array}{c} a_0\\a_1\\ \vdots \\ a_n \\ \end{array} \right] $& $=$ &
+$\left[ \begin{array}{c} y_0\\y_1\\ \vdots \\ y_n \\
+\end{array}\right]$
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+
+$det(B)=\prod_ {i>j}(x_i-x_j)\neq 0 \Rightarrow$ El polinomio de interpolaci\'{o}n existe y es \'{u}nico.
+
+\subsubsection{Lagrange:}
+
+Del sistema anterior $Ba=y,$ la soluci\'{o}n $a=B^{-1}y=Ly$
+
+$$P(x)=[1\;x\;x^2\; \cdots\; x^n]\left[\begin{array}{c} a_0\\a_1\\
+\vdots \\a_n \end{array}\right]=[1\;x\;x^2\; \cdots\; x^n]\quad L\quad \left[\begin{array}{c} y_0\\y_1\\
+\vdots \\y_n \end{array}\right]=$$
+$$=[L_0(x)\;L_1(x)\;L_2(x)\; \cdots\; L_n(x)]\left[\begin{array}{c} y_0\\y_1\\
+\vdots \\y_n
+\end{array}\right]=$$
+$$=y_0\;L_0(x)+y_1\;L_1(x)+\cdots+y_n\;L_n(x).$$
+
+Se deduce: $L_i(x_i)=1,\quad L_i(x_j)=0, \;i\neq j.$ Por tanto $P(x)$ es combinaci\'{o}n de la base de Lagrange con coeficientes las ordenadas de los puntos.
+
+\subsubsection{Newton:}
+
+No es necesario que las abscisas de los puntos a interpolar est\'{e}n en orden creciente.
+
+\begin{itemize}
+\item $P_0(x)=y_0$
+\item $P_1(x)$ polinomio de interpolaci\'{o}n de $(x_0,y_0), (x_1,y_1).$ Y as\'{\i} hasta
+\item $P(x):=P_n(x)$ polinomio de interpolaci\'{o}n de $(x_0,y_0),$ $(x_1,y_1),$ $\ldots,$ $(x_n,y_n)$
+\end{itemize}
+
+\begin{defn}
+$P_i(x)=P_{i-1}(x)+r_i(x) \quad 1\leq i\leq n$
+\end{defn}
+
+\vspace{0.3cm}
+
+$y_j=P_{i-1}(x_j)=P_i(x_j), \; 0\leq j\leq i-1 \Rightarrow r_i(x_j)=0,\; 0\leq j\leq i-1.$
+
+Usando la Base de Newton, se tiene que:
+$$r_i(x)=c_i(x-x_0)(x-x_1)\cdots (x-x_{i-1})=c_iN_i(x)$$
+Adem\'{a}s $y_i=P_i(x_i)=P_{i-1}(x_i)+c_i N_i(x_i).$ Por tanto
+$$c_i=\frac{y_i-P_{i-1}(x_i)}{N_i(x_i)}=\frac{y_i-P_{i-1}(x_i)}{\prod_{j=0}^{i-1} (x_i-x_j)}$$
+
+\subsubsection{Problemas:}
+
+\begin{itemize}
+\item La obtenci\'{o}n de $P(x)$ requiere coste computacional elevado.
+\item Manejar y operar con polinomios de grado elevado.
+\item $P(x)$ no sigue la forma dictada por los puntos de interpolaci\'{o}n.
+
+\begin{tabular}{r}
+        \includegraphics[scale=0.55]{forma.pdf}
+\end{tabular}
+
+% DIBUJO 2.16 (1) o bien 2.10
+\item Oscilaci\'{o}n del polinomio a ambos lados de la curva te\'{o}rica.
+
+%  DIBUJO 2.16 (2) o bien 2.9
+\item Car\'{a}cter global del polinomio de interpolaci\'{o}n: Es inviable retocar localmente el polinomio.
+
+\begin{center}
+\begin{tabular}{lr}
+        \includegraphics[scale=0.35]{polinomioInterpolacion.pdf} \\  \includegraphics[scale=0.35]{local.pdf}
+\end{tabular}
+\end{center}
+
+Si $P(x)= a_0 B_0(x)+\cdots+a_kB_k(x)+\cdots +a_n B_n(x)$ y $\overline{P}(x)= a_0 B_0(x)+\cdots+\overline{a}_kB_k(x)+\cdots +a_n B_n(x)$ son los polinomios de interpolaci\'{o}n. Entonces la variaci\'{o}n entre ellos es:
+
+$$P(x)-\overline{P}(x)= (a_k-\overline{a}_k) B_k(x)$$
+
+Para que $P(x)$ y $\overline{P}(x)$ se diferencien s\'{o}lo en un peque\~{n}o intervalo (siendo id\'{e}nticos en el resto), nos interesan bases que sean nulas en gran parte de $[x_0,x_n]$.
+\end{itemize}
+
+\subsection{Spline C�bico}
+
+\subsubsection{Minimizando Oscilaci�n:}
+
+\begin{defn}
+Spline c\'{u}bico es una funci\'{o}n de clase $C^2$ constituida por polinomios de $3^{er}$ grado definidos en cada subintervalo $[x_i,x_{i+1}]$ y con segunda derivada nula en sus extremos.
+\end{defn}
+
+%DIBUJos 2.18 y 2.19
+\begin{center}
+\begin{tabular}{cc}
+\includegraphics[scale=0.2]{2_18.pdf} &  \includegraphics[scale=0.2]{2_19.pdf}
+\\ Polinomio de Interpolaci\'{o}n &  Spline C\'{u}bico
+\end{tabular}
+\end{center}
+
+%\begin{center}
+%\begin{tabular}{lc}
+%Polinomio de Interpolaci\'{o}n & \quad \quad \quad \quad  Spline
+%C\'{u}bico
+%\end{tabular}
+%\end{center}
+
+\subsection{Interpolaci�n De Hermite}
+
+%\noindent\celeste{\Large\underline{\textbf{:}}}
+Dados los puntos $(x_0,y_0),\ldots,(x_n,y_n)$ buscamos un polinomio $P(x)$ que adem\'{a}s de interpolar, lo haga con pendientes especificadas $y'_0,\ldots,y'_n$.
+
+\begin{center}
+\includegraphics[scale=0.5]{hermite.pdf}
+\end{center}
+
+Tal polinomio existe y es \'{u}nico (ver Cordero y Cort\'{e}s, {\textit Curvas y Superficies para el modelado geom\'{e}trico}, Ed. Ra-Ma)
+
+\subsubsection{Construcci�n:}
+
+$P(x)$ ha de verificar:
+$\left\{\begin{array}{cc}
+P(x_i)=y_i & \\
+& 0\leq i \leq n\\
+P'(x_i)=y'_i & \\
+\end{array} \right.$
+
+Tenemos $2n+2$ condiciones $\Rightarrow$ Grado de $P(x)\leq 2n+1.$
+
+$$P(x)=a_{2n+1}x^{2n+1}+a_{2n} x^{2n}+\cdots+a_1 x+a_0$$
+$$P'(x)=(2n+1)a_{2n+1}x^{2n}+2na_{2n}x^{2n-1}+\cdots+2a_2x+a_1$$
+
+\begin{center}
+\begin{tabular}{cccc} $\left[ \begin{array}{cccccc}
+1&x_0&x_0^2&x_0^3&\cdots&x_0^{2n+1}\\
+1&x_1&x_1^2&x_1^3&\cdots&x_1^{2n+1}\\
+\cdots&\cdots&\cdots&\cdots&\cdots&\cdots\\
+1&x_n&x_n^2&x_n^3&\cdots&x_n^{2n+1}\\
+0&1&2x_0&3x_0^2&\cdots&(2n+1)x_0^{2n}\\
+0&1&2x_1&3x_1^2&\cdots&(2n+1)x_1^{2n}\\
+\cdots&\cdots&\cdots&\cdots&\cdots&\cdots\\
+0&1&2x_n&3x_n^2&\cdots&(2n+1)x_n^{2n}\\
+\end{array} \right]$ & $\left[ \begin{array}{c} a_0\\a_1\\ \vdots \\ \vdots \\ \vdots \\ a_{2n+1} \\ \end{array} \right] $& $=$ &
+$\left[ \begin{array}{c} y_0\\y_1\\ \vdots \\y_n\\ y'_0\\y'_1\\ \vdots \\ y'_n \\
+\end{array}\right]$
+\end{tabular}
+\end{center}
+
+\section{Curvas De Bezier}
+
+\subsection{Polinomios De Bernstein:}
+
+Fijado $n\in \mathbb{N}$ existen $n+1$ polinomios de Bernstein de grado $n$:
+
+$$B_k^n(x)=\binom{n}{k} x^k (1-x)^{n-k},\quad \quad 0\leq k\leq n$$
+definidos generalmente para $x\in [0,1].$
+
+%\vspace{0.2cm}
+%
+%{\textbf Ejemplo:}
+%\begin{minipage}{.7\textwidth}
+%\begin{tabular}{cc}
+%Para $n=1:$ & $ \left\{\begin{array}{l} B_0^1(x)=1-x \\ B_1^1(x)=x
+%\end{array} \right.$ \end{tabular} \end{minipage} \begin{minipage}{.15\textwidth}\colocapdf{3.1(1)}{\textwidth}\end{minipage}
+%
+%\begin{minipage}{.7\textwidth}
+%\begin{tabular}{cc}
+%Para $n=2:$ & $\left\{ \begin{array}{l} B_0^2(x)=(1-x)^2 \\
+%B_1^2(x)=2x(1-x) \\ B_2^2(x)=x^2 \end{array} \right.$
+%\end{tabular} \end{minipage}
+%\begin{minipage}{.15\textwidth}\colocapdf{3.1(2)}{\textwidth}\end{minipage}
+%
+%\vspace{0.2cm}
+%
+%\begin{minipage}{.7\textwidth}
+%\begin{tabular}{cc}
+%Para $n=3:$ & $\left\{ \begin{array}{l} B_0^3(x)=(1-x)^3 \\
+%B_1^3(x)=3x(1-x)^2 \\ B_2^3(x)=3x^2(1-x) \\ B_3^3(x)=x^3
+%\end{array} \right.$
+%\end{tabular}
+%\end{minipage}
+%\begin{minipage}{.15\textwidth}\colocapdf{3.1(3)}{\textwidth}
+%\end{minipage}
+%
+%\vspace{1cm}
+%
+%\begin{minipage}{.7\textwidth}
+%\begin{tabular}{cc}
+%
+%Para $n=4:$ & $\left\{ \begin{array}{l} B_0^4(x)=(1-x)^4 \\
+%B_1^4(x)=4x(1-x)^3 \\ B_2^4(x)=6x^2(1-x)^2 \\ B_3^4(x)=4x^3(1-x)
+%\\ B_4^4(x)=x^4
+%\end{array} \right.$
+%\end{tabular}
+%\end{minipage}
+%\begin{minipage}{.15\textwidth}\colocapdf{3.1(4)}{\textwidth}
+%\end{minipage}
+%
+\subsubsection{Propiedades:}
+
+\begin{itemize}
+\item $B_k^n(x)\geq 0,$ \quad  \quad $\forall x,n,k$
+
+\vspace{0.2cm}
+
+\item $B_k^n(x)$ alcanza exactamente un m\'{a}ximo en $x=\frac{k}{n}$
+
+\vspace{0.2cm}
+
+\item $\sum_{k=0}^{n}B_k^n(x)=1, \quad\quad \forall x$
+
+\vspace{0.2cm}
+
+Partici\'{o}n de la Unidad
+
+\vspace{0.2cm}
+
+\item Recurrencia: $B_k^n(x)=(1-x)B_k^{n-1}(x)+xB_{k-1}^{n-1}(x), \quad \forall n\geq 2, \quad 1\leq k\leq n.$
+
+\vspace{0.2cm}
+
+\item Derivada: $\displaystyle \frac{d}{dx} B_k^n(x)= n( B_{k-1}^{n-1}(x)-B_k^{n-1}(x))$
+\end{itemize}
+
+\subsection{Curvas De Bezier}
+
+\subsubsection{Curvas Simples:}
+
+\begin{defn}
+Lamamos curva de B\'{e}zier simple o de un tramo a la curva en forma param\'{e}trica donde cada coordenada es expresada como combinaci\'{o}n lineal de la base de Bernstein:
+
+$$C(t)=\sum_{k=0}^n P_k \; B_k^n(t), \quad \quad t\in [0,1]$$
+con $P_k=(x_k,y_k)$ si es una curva en $\mathbb{R}^2$ o $P_k=(x_k,y_k,z_k)$ si es una curva en $\mathbb{R}^3$.
+
+\vspace{0.3cm}
+
+Los coeficientes $P_k$ se denominan puntos de control de la curva de B\'{e}zier.
+\end{defn}
+
+%{\textbf Ejemplo:}
+%
+%\begin{itemize}
+%\item Para $n=1:$
+%$$C(t)=\sum_{k=0}^1 P_k B_k^1(t)=P_0B_0^1(t)+P_1 B_1^1(t)=(1-t)P_0+tP_1$$
+%
+%\begin{center}
+%\colocapdf{3.2}{0.35\textwidth}
+%\end{center}
+%
+%\item Para $n=2:$
+%$$C(t)=\sum_{k=0}^2 P_k B_k^2(t)=P_0B_0^2(t)+P_1 B_1^2(t)+P_2B_2^2(t)=$$ $$=(1-t)^2P_0+2t(1-t)P_1+t^2P_2$$
+%
+%\begin{minipage}{.35\textwidth}\colocapdf{3.3}{\textwidth}
+%\end{minipage}
+%\begin{minipage}{0.55\textwidth}
+%\begin{tabular}{c} $C'(t)=-2(1-t)P_0+2(1-2t)P_1+2tP_2$ \\  \\ \\ $C'(0)=2(P_1-P_0)$ \\ $C'(1)=2(P_2-P_1)$
+%\end{tabular}
+%\end{minipage}
+%
+%\item Para $n=3:$
+%$$C(t)=P_0B_0^3(t)+P_1
+%B_1^3(t)+P_2B_2^3(t)+P_3B_3^3(t)=$$
+%$$=(1-t)^3P_0+3t(1-t)^2P_1+3t^2(1-t)P_2+t^3P_3$$
+%
+%\begin{minipage}{.35\textwidth}\colocapdf{3.4}{\textwidth}
+%\end{minipage}
+%\begin{minipage}{0.55\textwidth}
+%\begin{tabular}{c} $C'(t)=-3(1-t)^2P_0+3(1-t)(1-3t)P_1+$ \\ $+3t(2-3t)P_2+3t^2P_3$ \\ \\ $C'(0)=3(P_1-P_0)$ \\ $C'(1)=3(P_3-P_2)$
+%\end{tabular}
+%\end{minipage}
+%\end{itemize}
+%
+{\textbf Variaci\'{o}n de un punto de control}
+$$C(t)=(1-t)^3P_0+3t(1-t)^2P_1+3t^2(1-t)P_2+t^3P_3$$
+$$\overline{C}(t)=(1-t)^3P_0+3t(1-t)^2\overline{P}_1+3t^2(1-t)P_2+t^3P_3$$
+Entonces:
+$$C(t)-\overline{C}(t)=3t(1-t)^2(P_1-\overline{P}_1)=B_1^3(t)(P_1-\overline{P}_1)$$
+\begin{center}
+\begin{minipage}{.2 \textwidth}
+	\includegraphics[scale=0.2]{3_6.pdf}
+\end{minipage}
+\begin{minipage}{0.55 \textwidth}
+\begin{tabular}{c} $max_{t\in[0,1]}B_1^3(t)=\frac{4}{9}$
+\end{tabular}
+\end{minipage}
+\end{center}
+Por tanto
+$$max_{t\in[0,1]}\parallel C(t)-\overline{C}(t)\parallel
+=\frac{4}{9}\parallel P_1-\overline{P}_1\parallel$$
+
+\vspace{0.3cm}
+
+\begin{center}
+\includegraphics[scale=0.4]{3_7.pdf}
+\end{center}
+
+Las curvas difieren a lo sumo en algo menos de la mitad de la norma de la diferencia de los puntos de control y es nula al aproximarnos a los extremos.
+
+\subsubsection{Propiedades:}
+
+\begin{itemize}
+\item Interpola s\'{o}lo los puntos extremos: $C(0)=P_0,\quad C(1)=P_n$
+\item Tangencia al pol\'{\i}gono de control en los extremos: $C'(0)=n(P_1-P_0),\quad C'(1)=n(P_n-P_{n-1})$
+\item Derivadas: $C'(t)=n\sum_{k=0}^{n-1}(P_{k+1}-P_k)B_k^{n-1}(t).$ Denotamos $\Delta P_j=P_{j+1}-P_j,$
+$$C'(t)=n\sum_{k=0}^{n-1}\Delta P_kB_k^{n-1}(t)$$ $C'(t)$ es a su vez una curva de B\'{e}zier de grado $n-1$ con puntos de control $n\Delta P_k.$
+
+Es f\'{a}cil calcular derivadas sucesivas:
+$$C''(t)=n(n-1)\sum_{k=0}^{n-2} \Delta(\Delta P_k)B_k^{n-2}(t)$$
+\end{itemize}
+
+Denotamos: $\Delta^2 P_k=\Delta(\Delta P_k)=\Delta P_{k+1}-\Delta P_k=(P_{k+2}-P_{k+1})-(P_{k+1}-P_k)$ y en general $\Delta^r P_k=\Delta^{r-1} P_{k+1}-\Delta^{r-1} P_k$ se tiene:
+$$C^{r)}(t)=n(n-1)\cdots(n-r+1)\sum_{k=0}^{n-r} \Delta^r P_k B_k^{n-r}(t)$$
+
+\begin{itemize}
+\item Control seudolocal: $C(t)-\overline{C}(t)=B_k^n(t) (P_k-\overline{P}_k)$
+\item  Restricci\'{o}n a la envolvente convexa. %Dibujo 3.8
+\item Invariancia af\'{\i}n: Si $f$ es una afinidad, la curva imagen por la afinidad $f(C(t))$ coincide con la curva de B\'{e}zier generada por los puntos $f(P_k)$, imagen por la afinidad de los puntos de control de $C(t)$.
+\item Recurrencia:  consideremos una curva de B\'{e}zier de $2^{o}$ grado
+$$C(t)=(1-t)^2 P_0+2t(1-t) P_1+t^2P_2$$
+Tambi\'{e}n es posible expresarla:
+$$C(t)=(1-t)[(1-t)P_0+tP_1]+t[(1-t)P_1+tP_2]$$
+si denotamos $P_0^{(1)}=(1-t)P_0+tP_1$ \;y\; $P_1^{(1)}=(1-t)P_1+tP_2$
+$$C(t)=(1-t)P_0^{(1)}+tP_1^{(1)}$$
+Los puntos $C(t)$ est\'{a}n tambi\'{e}n sobre una curva de B\'{e}zier de $1^{er}$ grado con puntos de control m\'{o}viles.
+\end{itemize}
+
+%{\textbf Ejemplo:}
+%$P_0=(-1,0),$\; $P_1=(0,2),$\; $P_2=(1,0)$
+%$$C(t)=(1-t)^2(-1,0)+2t(1-t)(0,2)+t^2(1,0)=$$
+%$$=(1-t)[(1-t)(-1,0)+t(0,2)]+t[(1-t)(0,2)+t(1,0)]$$
+%Para $t=\frac{1}{3}$ tenemos:
+%$$\displaystyle P_0^{(1)}=\left(1-\frac{1}{3}\right)(-1,0)+\frac{1}{3}(0,2)=\left(-\frac{2}{3},\frac{2}{3}\right)$$
+%$$\displaystyle P_1^{(1)}=\left(1-\frac{1}{3}\right)(0,2)+\frac{1}{3}(1,0)=\left(\frac{1}{3},\frac{4}{3}\right)$$
+%Entonces $$\displaystyle C\left(\frac{1}{3}\right)= \left(1-\frac{1}{3}\right)P_0^{(1)}+\frac{1}{3}P_1^{(1)}=\left(-\frac{3}{9},\frac{8}{9}\right)$$
+%
+%\begin{center}
+%\colocapdf{3.11}{0.45\textwidth}
+%\end{center}
+
+Veamos este proceso recursivo para curvas de B\'{e}zier de $3^{er}$ grado:
+$$C(t)=(1-t)^3P_0+3(1-t)^2tP_1+3(1-t)t^2P_2+t^3P_3$$
+Podemos expresarla por:
+$$C(t)=(1-t)[(1-t)^2P_0+2t(1-t)P_1+t^2P_2]+t[(1-t)^2P_1+2t(1-t)P_2+t^2P_3]$$
+tambi\'{e}n
+$$C(t)=(1-t)[(1-t)[(1-t)P_0+tP_1]+t[(1-t)P_1+tP_2]]+$$
+$$+t[(1-t)[(1-t)P_1+tP_2]+t[(1-t)P_2+tP_3]]$$
+Denotamos $P_0^{(1)}=(1-t)P_0+tP_1,$ \; $P_1^{(1)}=(1-t)P_1+tP_2$\; y \;$P_2^{(1)}=(1-t)P_2+tP_3,$
+$$C(t)=(1-t)[(1-t)P_0^{(1)}+tP_1^{(1)}]+t[(1-t)P_1^{(1)}+tP_2^{(1)}]$$
+y si denotamos $P_0^{(2)}=(1-t)P_0^{(1)}+tP_1^{(1)}$\; y \;$P_1^{(2)}=(1-t)P_1^{(1)}+tP_2^{(1)},$
+$$C(t)=(1-t)P_0^{(2)}+tP_1^{(2)}$$
+
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tabular}{lr}
+\includegraphics[scale=0.35]{3_12a.pdf} &  \includegraphics[scale=0.35]{3_12b.pdf}\\
+\end{tabular}
+\end{center}
+
+{\textbf Observaci\'{o}n:} En este dibujo los puntos $P_0^{(1)}, P_1^{(1)},P_2^{(1)},P_0^{(2)},P_1^{(2)}$ est\'{a}n fijados para $t=\frac{1}{3}.$
+
+\subsubsection{Algoritmo de De Casteljau:}
+$P_0,P_1,\ldots,P_n,$\; $n+1$ puntos en $\mathbb{R}^2$ \'{o} $\mathbb{R}^3$
+
+$$\begin{array}{ll}
+P_k^{(0)}=P_k&\quad k=0,\ldots,n\\
+ & \\
+P_k^{(1)}=(1-t)P_k^{(0)}+tP_{k+1}^{(0)}&\quad k=0,\ldots,n-1\\
+ & \\
+P_k^{(2)}=(1-t)P_k^{(1)}+tP_{k+1}^{(1)}&\quad k=0,\ldots,n-2\\
+\cdots\cdots&\quad \cdots\cdots\\
+P_k^{(n-1)}=(1-t)P_k^{(n-2)}+tP_{k+1}^{(n-2)}&\quad k=0,1\\
+ & \\
+P_k^{(n)}=(1-t)P_k^{(n-1)}+tP_{k+1}^{(n-1)}&\quad k=0\\
+
+\end{array}$$
+
+Se tiene que $$C(t)=P_0^{(n)}$$
+
+%\begin{frame}
+%\frametitle{\magenta{\textbf{Curvas de B\'{e}zier}}}
+%\noindent\celeste{\Large\underline{\textbf{Curvas simples:}}}
+%
+%\rojo{\textbf Algoritmo de De Casteljau}
+%
+%{\textbf Entrada:} $P_0,P_1,\ldots,P_n,$ puntos en $\mathbb{R}^2$ \'{o}
+%$\mathbb{R}^3$
+%
+%{\textbf Salida:} $C(t)$
+%
+%COMPROBAR!!!!!!!!!!!!!!!!!!!!!!
+%
+%
+%\end{frame}
+
+\subsubsection{Reparametrizaci�n:}
+Aunque las curvas de B\'{e}zier simples $C(t)$ est\'{a}n definidas para $t\in [0,1]$, es posible reparametrizarlas para que su intervalo de definici\'{o}n sea cualquier $[a,b]$ mediante un cambio de variable af\'{\i}n $t=\frac{s-a}{b-a}$:
+$$\displaystyle \overline{C}(s)=\sum_{k=0}^n P_k B_k^n \left(\frac{s-a}{b-a}\right),\quad \quad s\in[a,b]$$
+
+El vector tangente para cada parametrizaci\'{o}n de la curva es: $C'(t)=\sum_{k=0}^n P_k B_k^{n \prime} (t),$ \quad \quad $\overline{C}'(s)=\frac{1}{b-a}\sum_{k=0}^n P_k B_k^{n \prime} (\frac{s-a}{b-a})$
+
+\vspace{0.2cm}
+
+Por tanto: $\frac{1}{b-a}C'(t_0)=\frac{1}{b-a}\sum_{k=0}^n P_k B_k^{n \prime} (t_0)=\frac{1}{b-a}\sum_{k=0}^n P_k B_k^{n \prime} (\frac{s_0-a}{b-a})=\overline{C}'(s_0)$
+
+\vspace{0.2cm}
+
+Luego, en puntos correspondientes los dos vectores tangentes son el mismo salvo contante.
+
+\begin{defn}
+Una curva de B\'{e}zier compuesta es la uni\'{o}n sucesiva de varias curvas de B\'{e}zier simples de bajo grado (2 \'{o} 3).
+\end{defn}
+
+\subsubsection{Composici\'{o}n de dos curvas de B\'{e}zier simples:}
+
+Sean $P_0,P_1,\ldots,P_n$ y $Q_0,Q_1,\ldots,Q_m$ los puntos de control de dos curvas de B\'{e}zier simples. Simplificaremos la notaci\'{o}n si consideramos las dos curvas del mismo grado $m=n$.
+
+Si queremos que la curva compuesta sea continua $P_n=Q_0$
+
+\begin{center}
+\includegraphics[scale=0.55]{3_14.pdf}
+\end{center}
+
+Adem\'{a}s, podemos exigir que las dos curvas se unan manteniendo una cierta suavidad. Para ello, los vectores tangentes a las dos curvas han de tener la misma direcci\'{o}n en el punto de uni\'{o}n $P_n=Q_0.$
+
+\begin{center}
+\includegraphics[scale=0.55]{3_15.pdf}
+\end{center}
+
+Es decir, los vectores tangentes $P_n-P_{n-1}$ y $Q_1-Q_0=Q_1-P_n$ han de ser proporcionales. Cuando se verifique esta condici\'{o}n, diremos que la curva compuesta tiene continuidad geom\'{e}trica o visual de clase ${\mathcal  G}^1.$
+
+Para que la curva compuesta tenga continuidad de clase ${\mathcal  C}^1,$ es decir que el vector tangente sea continuo, en primer lugar hay parametrizar la curva compuesta con un par\'{a}metro global.
+
+\vspace{0.3cm}
+
+Tenemos $C_1(t)=\sum_{k=0}^n P_k B_k^n(t)$ y $C_2(s)=\sum_{k=0}^n Q_k B_k^n(s)$. Hemos de encontrar dos intervalos $[u_0,u_1]$ y $[u_1,u_2]$ tales que reparametrizando $C_1(t)$ y $C_2(s)$
+
+$$C_1(u)=\sum_{k=0}^n P_k B_k^n\left(\frac{u-u_0}{u_1-u_0}\right) \quad \quad \quad u\in [u_0,u_1]$$
+$$C_2(u)=\sum_{k=0}^n Q_k B_k^n\left(\frac{u-u_1}{u_2-u_1}\right)\quad \quad \quad u\in [u_1,u_2]$$
+
+La curva de B\'{e}zier compuesta $C(u)$ parametrizada por $u\in[u_0,u_2]$ queda definida por
+$$\begin{array}{cc} C(u)=& \left\{\begin{array}{cc} C_1(u), & \quad \quad u\in [u_0,u_1]\\ C_2(u), & \quad \quad u\in [u_1,u_2]\end{array}\right. \end{array}$$
+
+$C(u)$ es continua de clase ${\mathcal  C}^0$ ya que $C_1(u_1)=C_2(u_1)$ pues $P_n=Q_0.$
+
+Para que $C(u)$ sea de clase ${\mathcal  C}^1$ ha de verificar $C'(u_1^{-})=C'(u_1^{+}).$ Como sabemos:
+$$C'_1(u)=\frac{1}{u_1-u_0}\sum_{k=0}^n P_k B_k^{n \prime} \left(\frac{u-u_0}{u_1-u_0}\right)$$
+$$C'_2(u)=\frac{1}{u_2-u_1}\sum_{k=0}^n Q_k B_k^{n \prime} \left(\frac{u-u_1}{u_2-u_1}\right)$$
+
+Entonces ha de verificarse $C'(u_1^{-})=C^{\prime}_1(u_1)=C'(u_1^{+})=C'_2(u_1):$
+
+$$C'_1(u_1)=\frac{1}{u_1-u_0}\sum_{k=0}^n P_k B_k^{n \prime}(1)=\frac{1}{u_1-u_0} n(P_n-P_{n-1})$$
+$$C'_2(u_1)=\frac{1}{u_2-u_1}\sum_{k=0}^n Q_k B_k^{n \prime}(0)=\frac{1}{u_2-u_1} n (Q_1-Q_0)$$
+
+$C(u)$ es de clase $\displaystyle {\mathcal  C}^1 \Leftrightarrow \frac{1}{u_1-u_0} n(P_n-P_{n-1})=\frac{1}{u_2-u_1} n (Q_1-Q_0)$
+
+\vspace{0.2cm}
+
+$\displaystyle \Leftrightarrow Q_1-Q_0 = \lambda (P_n-P_{n-1})$ con $\displaystyle \lambda = \frac{u_2-u_1}{u_1-u_0} = \frac{\parallel Q_1-Q_0\parallel}{\parallel P_n-P_{n-1} \parallel}$
+
+\vspace{0.2cm}
+
+Si $P_{n-1}, P_n=Q_0, Q_1$ est\'{a}n alineados, la curva compuesta ser\'{a} ${\mathcal  G}^1.$ Si adem\'{a}s podemos encontrar $\{u_0,u_1,u_2\}$ verificando la relaci\'{o}n anterior, entonces la curva compuesta ser\'{a} ${\mathcal  C}^1$.
+
+%{\textbf Ejercicio:}
+%Consideramos la curva compuesta por las dos curvas de B\'{e}zier simples generadas por los puntos de control $P_0=(0,0),\;P_1=(-1,1),\; P_2=(1,3)$ y %$Q_0=(1,3),\;Q_1=(2,4),\;Q_2=(5,1)$. ?`Es ${\mathcal  G}^1$? ?`Es ${\mathcal  C}^1$?
+%
+%\vfill
+%
+Continuamos buscando condiciones sobre los puntos de control para que la curva compuesta  sea ${\mathcal  C}^2$. Para ello recordemos que si $C(t)$ con $t\in[0,1]$ es curva simple:
+
+$$C''(0)=n(n-1)\Delta^2P_0=n (n-1) (P_2-2P_1+P_0)$$
+$$C''(1)=n(n-1)\Delta^2P_{n-2}=n (n-1) (P_n-2P_{n-1}+P_{n-2})$$
+
+Entonces tenemos que encontrar $[u_0,u_1]$ y $[u_1,u_2]$ en los que reparametrizar las dos curvas simples, $C_1(t)$ y $C_2(s)$, y definir la curva compuesta. En el punto uni\'{o}n de las dos curvas simples:
+
+$$C''_1(u_1)=\frac{n(n-1)}{(u_1-u_0)^2}\Delta^2P_{n-2}=\frac{n(n-1)}{(u_1-u_0)^2}(P_n-2P_{n-1}+P_{n-2})$$
+$$C''_2(u_1)=\frac{n(n-1)}{(u_2-u_1)^2}\Delta^2Q_0=\frac{n(n-1)}{(u_2-u_1)^2}(Q_2-2Q_1+Q_0)$$
+
+Por tanto la derivada segunda ser\'{a} continua en $u=u_1$ si y s\'{o}lo si:
+$$\frac{1}{(u_1-u_0)^2}\Delta^2P_{n-2}=\frac{1}{(u_2-u_1)^2}\Delta^2Q_0$$
+o bien,
+$$\frac{1}{(u_1-u_0)^2}(P_n-2P_{n-1}+P_{n-2})=\frac{1}{(u_2-u_1)^2}(Q_2-2Q_1+Q_0)$$
+
+Pero $P_n=Q_0,$ $P_{n-1}$ y $Q_1$ est\'{a}n alineados y a cierta distancia.
+
+\vspace{0.2cm}
+
+As\'{\i}, de la expresi\'{o}n anterior obtenemos la siguiente restricci\'{o}n sobre $Q_2$ en funci\'{o}n de  $P_{n-2},$ $P_{n-1},$ $P_n=Q_0$ y $\displaystyle Q_1=\frac{u_2-u_1}{u_1-u_0}(P_n-P_{n-1})+Q_0$:
+$$Q_2=\frac{(u_2-u_1)^2}{(u_1-u_0)^2}(P_n-2P_{n-1}+P_{n-2})+2\frac{u_2-u_1}{u_1-u_0}(P_n-P_{n-1})+P_n$$
+
+%La interpretaci\'{o}n geom\'{e}trica de esta condici\'{o}n es menos intuitiva
+%que la que obten\'{\i}amos en el caso ${\mathcal  C}^1.$ \pause
+
+Podemos generalizar las condiciones para que la curva compuesta tenga continuidad de clase ${\mathcal  C}^n:$
+
+$$\frac{1}{(u_1-u_0)^r}\Delta^rP_{n-r}=\frac{1}{(u_2-u_1)^r}\Delta^r Q_0, \quad \quad \mbox{ para } 1\leq r\leq n$$
+
+En caso de que las dos curvas simples sean de grado $n$, estas condiciones nos determinan totalmente los puntos de control de la segunda curva $Q_i,$ \quad $0\leq i\leq n$ fijados los puntos de control de la primera curva. Por tanto, en este caso afirmar que de la curva compuesta es ${\mathcal  C}^n$ es equivalente a afirmar que es ${\mathcal  C}^{\infty}.$
+
+\vspace{0.2cm}
+
+Como vemos la composici\'{o}n de curvas simples con continuidad de clase mayor que $1$ nos proporcionar\'{a} cada vez mayor restricci\'{o}n sobre los puntos de control y por tanto p\'{e}rdida de flexibilidad. Entonces, en adelante consideraremos curvas compuestas de case ${\mathcal  C}^1$.
+
+\subsubsection{Curvas de B�zier compuestas ${\mathcal  C}^1$ de varios tramos:}
+
+% \vspace{0.2cm}
+Sean $m$ curvas de B\'{e}zier simples de grado $n$,
+
+$$\begin{array}{l}
+C_1(t)=\sum_{k=0}^n P_{k, (1)} B_k^n(t)\\
+C_2(t)=\sum_{k=0}^n P_{k, (2)} B_k^n(t) \quad \quad t\in [0,1]\\
+\cdots \cdots \cdots\\
+C_m(t)=\sum_{k=0}^n P_{k, (m)} B_k^n(t)\\
+\end{array}$$
+
+Para que la curva compuesta por estas sea de clase ${\mathcal  C}^1$ es necesario, en primer lugar, definirla con un par\'{a}metro
+global $u\in [u_0,u_m]$ y reparametrizar cada curva simple $C_i(u)$ con $u\in [u_{i-1},u_i]$.
+
+Debe verificarse la continuidad: $P_{n, (i)}=P_{0,(i+1)},$ para $i=1,\ldots,m-1$.
+
+Adem\'{a}s, la continuidad del vector tangente: $P_{n-1, (i)},$ $P_{n, (i)}=P_{0,(i+1)},$ $P_{1,(i+1)}$ alineados ( continuidad geom\'{e}trica ${\mathcal  G}^1$) y a cierta distancia, es decir,
+$$\frac{u_{i+1}-u_i}{u_i-u_{i-1}} = \frac{\parallel P_{1,(i+1)}-P_{0,(i+1)}\parallel}{\parallel P_{n, (i)}-P_{n-1,(i)} \parallel},\quad \quad i=1,\ldots,m-1$$
+
+\vspace{0.2cm}
+
+La curva compuesta ser\'{a} ${\mathcal  C}^1([u_0,u_m])$ sii podemos elegir una partici\'{o}n $u_0<u_1<\ldots<u_{m-1}<u_m$ verificando:
+
+$$u_{i+1}=u_i+(u_i-u_{i-1}) \frac{\parallel P_{1,(i+1)}-P_{0,(i+1)}\parallel}{\parallel P_{n, (i)}-P_{n-1,(i)}
+\parallel},\quad \quad i=1,\ldots,m-1$$
+
+\vspace{0.5cm}
+
+{\textbf Ejercicio:}
+Sean $P_{0,(1)}=(0,0),$ $P_{1,(1)}=(-1,1),$ $P_{2,(1)}=(1,3),$ $P_{0,(2)}=(1,3),$ $P_{1,(2)}=(2,4),$ $P_{2,(2)}=(5,1),$ $P_{0,(3)}=(5,1),$ $P_{1,(3)}=(6,0)$ y $P_{2,(3)}=(7,5)$ los puntos de control de tres curvas de B\'{e}zier simples. Construir la curva compuesta y probar que es ${\mathcal  C}^1$.
+
+\subsubsection{Curvas de Bezier compuestas ${\mathcal  C}^1$ de varios tramos: control de forma}
+
+Si modificamos un punto de una de las curvas simples $P_{k, (i)}$ por $\overline{P}_{k, (i)}=P_{k, (i)}+h,$ siendo $h$ un vector ?`qu\'{e} puntos tenemos que modificar tambi\'{e}n para la curva compuesta siga siendo ${\mathcal  C}^1$?
+
+\begin{itemize}
+\item Si el punto modificado es un punto uni\'{o}n de dos curvas simples:
+$$\begin{array}{rcl} \overline{P}_{0, (i+1)}&=&P_{0, (i+1)}+h\\ \overline{P}_{n, (i)}&=&P_{n, (i)}+h\\ \end{array}$$
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{cc}
+\includegraphics[scale=0.45]{3_21a.pdf} &
+\includegraphics[scale=0.45]{3_21b.pdf}
+\end{tabular}
+\end{center}
+
+%DIBUJ0 3.21
+
+Entonces $$\begin{array}{rcl} \overline{P}_{n-1, (i)}&=&P_{n-1, (i)}+h\\ \overline{P}_{1, (i+1)}&=&P_{1, (i+1)}+h \end{array}$$
+
+De forma que
+$$\overline{P}_{1, (i+1)}-\overline{P}_{0, (i+1)}=P_{1, (i+1)}-P_{0, (i+1)}$$
+$$\overline{P}_{n, (i)}-\overline{P}_{n-1, (i)}=P_{n, (i)}-P_{n-1, (i)}$$
+
+Y por tanto
+$$\frac{\parallel \overline{P}_{1,(i+1)}-\overline{P}_{0,(i+1)}\parallel}{\parallel \overline{P}_{n, (i)}-\overline{P}_{n-1,(i)} \parallel}=\frac{\parallel P_{1,(i+1)}-P_{0,(i+1)}\parallel}{\parallel P_{n, (i)}-P_{n-1,(i)} \parallel}$$
+con lo que la partici\'{o}n $u_0<u_1<\ldots<u_{m-1}<u_m$ sigue proporcionando que la nueva curva compuesta sea de clase ${\mathcal  C}^1([u_0,u_m])$.
+
+\begin{itemize}
+\item Si el punto modificado es el pen\'{u}ltimo punto de un tramo $\overline{P}_{n-1,(i)}=P_{n-1,(i)}+h$,
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{cc}
+\includegraphics[scale=0.45]{3_22a.pdf} \\
+\includegraphics[scale=0.45]{3_22b.pdf}
+\end{tabular}
+\end{center}
+
+esto obliga (salvo que se trate del \'{u}ltimo tramo, $i=m$) a modificar el segundo punto del tramo siguiente, $\overline{P}_{1,(i+1)}$, de tal forma que est\'{e} alineado con $P_{0,(i+1)}$ y $\overline{P}_{n-1,(i)}$  y se verifique la relaci\'{o}n entre los m\'{o}dulos.
+La partici\'{o}n $u_0<u_1<\ldots<u_{m-1}<u_m$ sigue haciendo que la nueva curva compuesta sea de clase ${\mathcal  C}^1([u_0,u_m]).$
+
+\begin{itemize}
+\item Si el punto modificado es el segundo punto de un tramo $\overline{P}_{1,(i+1)}=P_{1,(i+1)}+h$, esto obliga a modificar el pen\'{u}ltimo punto del tramo anterior, $\overline{P}_{n-1,(i)}$, de tal forma que est\'{e} alineado con $P_{0,(i+1)}$ y $\overline{P}_{1,(i+1)}$  y se verifique la relaci\'{o}n entre los m\'{o}dulos.
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{cc}
+\includegraphics[scale=0.45]{3_23a.pdf} &
+\includegraphics[scale=0.45]{3_23b.pdf}
+\end{tabular}
+\end{center}
+
+La partici\'{o}n $u_0<u_1<\ldots<u_{m-1}<u_m$ sigue proporcionando que la nueva curva compuesta sea de clase ${\mathcal  C}^1([u_0,u_m]).$
+
+\begin{itemize}
+\item Si el punto modificado no encuadrado en uno de los casos anteriores, no conlleva la modificaci\'{o}n de ning\'{u}n otro punto.
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{cc}
+\includegraphics[scale=0.45]{3_24a.pdf} &
+\includegraphics[scale=0.45]{3_24b.pdf}
+\end{tabular}
+\end{center}
+
+{\textbf Resumen:}
+
+\begin{enumerate}
+\item La modificaci\'{o}n de un punto de interpolaci\'{o}n (o de uni\'{o}n de tramos, excepto $P_{0,(1)}$  y $P_{n, (m)}$) afecta a los dos tramos de los que el punto es uni\'{o}n.
+\item La modificaci\'{o}n del pen\'{u}ltimo punto de un tramo (excepto el \'{u}ltimo) afecta a ese y al anterior tramo.
+\item La modificaci\'{o}n del segundo punto de un tramo (excepto el primero) afecta a ese y al siguiente tramo.
+\item La modificaci\'{o}n de cualquier otro punto s\'{o}lo afecta al tramo donde se encuentra dicho punto.
+\end{enumerate}
+
+En una curva de B\'{e}zier compuesta de curvas de tercer grado, todos los puntos de control excepto los dos primeros y los dos \'{u}ltimos se encuentran en alguna de las categor\'{\i}as $1,\;2$ \'{o} $3$ anteriores.
+
+\subsubsection{Curvas de B\'{e}zier compuestas: Interpolaci\'{o}n c\'{u}bica}
+
+Fijados unos puntos de interpolaci\'{o}n, estudiaremos como obtener la curva de B\'{e}zier compuesta de clase ${\mathcal  C}^1$ que interpole estos puntos discutiendo distintas alternativas en la elecci\'{o}n de los puntos de control intermedios.
+
+\vspace{0.2cm}
+
+Nos restringiremos a curvas de tercer grado, pues nos permiten bastante flexibilidad sin necesidad de manejar gran n\'{u}mero de puntos intermedios (s\'{o}lo dos por tramo).
+
+\vspace{0.2cm}
+
+Cambiaremos la notaci\'{o}n:
+$$\begin{array}{ll} P_0,P_1,P_2,P_3& \quad \mbox{tramo}\; 1\\P_3,P_4,P_5,P_6&\quad \mbox{tramo}\; 2\\ \cdots \cdots \cdots & \\ P_{3i-3},P_{3i-2},P_{3i-1},P_{3i} & \quad \mbox{tramo}\, i\\  \cdots \cdots \cdots & \\ P_{3m-3},P_{3m-2},P_{3m-1},P_{3m} & \quad \mbox{tramo}\; m \end{array}$$
+
+\vspace{0.2cm}
+
+Podemos parametrizar la curva compuesta para $u\in [0,1]$ y denotar $0=u_0<u_1< \cdots<u_m=1$ una partici\'{o}n del intervalo de definici\'{o}n.
+
+\vspace{0.2cm}
+
+Los puntos de interpolaci\'{o}n $Q_0,Q_1,\ldots,Q_m$ ser\'{a}n $Q_i=P_{3i}$ para $i=0,\ldots,m$
+
+Los puntos de control intermedios, exceptuando $P_1$ y $P_{3m-1}$, estar\'{a}n relacionados de dos en dos mediante la relaci\'{o}n de colinealidad de $P_{3i-1},P_{3i}=Q_i, P_{3i+1}$ y adem\'{a}s
+
+$$\frac{u_{i+1}-u_i}{u_i-u_{i-1}}= \frac{\parallel P_{3i+1}-P_{3i}\parallel}{\parallel P_{3i}-P_{3i-1} \parallel},\quad \quad i=1,\ldots,m-1$$
+
+\vspace{0.2cm}
+
+Consideremos el siguiente ejemplo para $m=4$:
+
+\vspace{0.2cm}
+
+\begin{minipage}{.4 \textwidth}
+\includegraphics[scale=0.45]{3_28.pdf}
+\end{minipage} \quad
+\begin{minipage}{.55\textwidth}
+Los puntos $P_1$ y $P_{11}$ son libres y los $P_0,P_3,P_6,P_9,P_{12}$ fijos.
+
+Los puntos $P_2$ y $P_4$ est\'{a} en una varilla r\'{\i}gida centrada en $P_3$ la cual puede girar y extenderse siempre que
+$$\frac{u_2-u_1}{u_1-u_0}= \frac{\parallel P_4-P_3\parallel}{\parallel P_3-P_2 \parallel}.$$
+Igual pasa con los pares $P_5,P_7$ y $P_8,P_{10}$.
+\end{minipage}
+
+\subsubsection{Curvas de B\'{e}zier compuestas: Interpolaci\'{o}n c\'{u}bica de Hermite}
+
+Construyamos la curva de B\'{e}zier compuesta $C(u)$ con continuidad de clase ${\mathcal  C}^1$ que interpola los puntos
+$Q_0,\ldots,Q_m,$ conocida la derivada de la curva $D_0,\ldots,D_m$ en esos puntos. Siguiendo la notaci\'{o}n anterior, $C(u_i)=Q_i$ y $C'(u_i)=D_i$.
+
+\vspace{0.2cm}
+
+Recordemos que la curva que describe el tramo $i$-\'{e}simo ser\'{a}
+$$C_i(t)=(1-t)^3P_{3i-3}+t(1-t)^2P_{3i-2}+t^2(1-t)P_{3i-1}+t^3P_{3i}$$
+Reparametrizando $t=\frac{u-u_i}{u_i-u_{i-1}}$ con $u\in [u_{i-1},u_i]$, la curva $C(u)$ verifica: $C'(u_i)=C'_{i}(u_i)=\frac{3}{u_i-u_{i-1}}(P_{3i}-P_{3i-1})=C'_{i+1}(u_i)=\frac{3}{u_{i+1}-u_{i}}(P_{3i+1}-P_{3i}),$
+
+\vspace{0.2cm}
+
+$C'(u_0)=\frac{3}{u_1-u_0}(P_1-P_0),$
+
+\vspace{0.2cm}
+$C'(u_m)=\frac{3}{u_m-u_{m-1}}(P_{3m}-P_{3m-1})$.
+
+\vspace{0.3cm}
+
+Luego
+$$P_{3i-1}=P_{3i}-\frac{u_i-u_{i-1}}{3} C'(u_i)=Q_i-\frac{u_i-u_{i-1}}{3} D_i, \quad \quad \quad i=1,\ldots,m-1$$
+
+y tambi\'{e}n
+$$P_{3i+1}=P_{3i}+\frac{u_{i+1}-u_{i}}{3} C'(u_i)=Q_i+\frac{u_{i+1}-u_{i}}{3} D_i, \quad \quad \quad i=1,\ldots,m-1$$
+
+Los puntos $P_1$ y $P_{3m-1}$ se obtienen:
+
+$$P_1=P_0+\frac{u_1-u_{0}}{3} C'(u_0)=Q_0+\frac{u_1-u_{0}}{3} D_0$$
+
+$$P_{3m-1}=P_{3m}-\frac{u_m-u_{m-1}}{3} C'(u_m)=Q_m-\frac{u_m-u_{m-1}}{3} D_m$$
+
+\vspace{0.3cm}
+
+{\textbf Ejercicio:}
+Calcular la curva de B\'{e}zier compuesta de grado tres interpolando
+$$Q_0=(0,1) , Q_1=(5,2),Q_2=(10,5),Q_3=(6,9),Q_4=(5,4)$$
+con tangentes
+$$D_0=[6,12] , D_1=[12,-12],D_2=[24,48],D_3=[-48,0],D_4=[48,-72]$$
+y partici\'{o}n
+$$\left\{0,\frac{1}{2}, \frac{3}{4},\frac{7}{8},1 \right\}$$
+
+
+{\textbf Soluci\'{o}n:}
+$$\begin{array}{ccccc} \mbox{Tramo }1:&
+P_0=(0,1)& P_1=(1,3)& P_2=(3,4)& P_3=(5,2)\\ \mbox{Tramo }2:&
+P_3=(5,2)& P_4=(6,1)& P_5=(8,1)& P_6=(10,5)\\ \mbox{Tramo }3:&
+P_6=(10,5)& P_7=(11,7)& P_8=(8,9)& P_9=(6,9)\\ \mbox{Tramo }4:&
+P_9=(6,9)& P_{10}=(4,9)& P_{11}=(3,7)& P_{12}=(5,4)\\
+\end{array}$$
+
+\vspace{0.3cm}
+
+\begin{center}
+\includegraphics[scale=0.45]{3_28.pdf}
+\end{center}
+
+Si cambiamos la partici\'{o}n por $\{0,\frac{1}{4},\frac{1}{2}, \frac{3}{4},1\}$ obtenemos
+
+\begin{center}
+\includegraphics[scale=0.45]{3_29.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+Tambi\'{e}n si cambiamos s\'{o}lo en m\'{o}dulo los $\overline{D}_i=10D_i$ para $i=0,\ldots,4$
+
+\begin{center}
+\includegraphics[scale=0.45]{3_30.pdf}
+\end{center}
+
+\section{Superficies de B\'{e}zier}
+
+\subsection{Introducci�n}
+
+Sean $(x_0,y_0),(x_1,y_1), \ldots,(x_n,y_n)$  \quad $n+1$ puntos en $\mathbb{R}^2$ y sean $z_0,z_1,\ldots,z_n$ los valores a interpolar. Buscamos un polinomio $P(x,y)$ tal que
+$$z_i=P(x_i,y_i), \quad \quad i=0,\ldots,n.$$
+
+?`Qu\'{e} grado tiene el polinomio $P(x,y)$?
+
+?`Qu\'{e} base de polinomios elijo para expresar $P(x,y)$ ?
+
+{\textbf Ejemplo:}
+
+Supongamos que tenemos $4$ puntos a interpolar, es decir $n=3$.
+
+\begin{itemize}
+\item Podemos tomar $B=\{1,x,y,xy\}$ y $P(x,y)=a_0+a_1x+a_2y+a_3xy$
+\item Si $P(x,y)$ es de grado $2$, podemos tomar una base m\'{a}s general $B=\{1,x,y,xy,x^2,y^2\}$ y entonces $P(x,y)=a_0+a_1x+a_2y+a_3xy+a_4x^2+a_5y^2$
+\item Si tenemos $5$ puntos, podemos tomar $B=\{1,x,y,x^2,y^2\},$ o bien la anterior base.
+\end{itemize}
+
+\subsection{Polinomio Interpolaci\'{o}n}
+
+Por razones de simetr\'{\i}a, para grados fijos $n$ y $m$ respectivamente de $x$ e $y$, vamos a considerar la base que resulta del producto tensorial de bases de potencias:
+
+$$B=[1 x \cdots x^n]\otimes[1 y \cdots y^m]=\{1,x,x^2, \ldots, x^n, y, yx, \ldots,yx^n, $$ $$y^2, xy^2, \ldots, y^2x^n, \ldots,y^m,xy^m, \ldots,x^ny^m\}$$
+
+Esta base tiene forma rectangular:
+
+$$\begin{array}{ccccc}
+1 & x & x^2& \cdots & x^n\\
+y & yx& yx^2 & \cdots& y x^n\\
+y^2 & y^2x& y^2x^2 & \cdots& y^2 x^n\\
+\cdots & \cdots& \cdots&\cdots&\cdots\\
+y^m & y^mx& y^mx^2 & \cdots& y^m x^n
+\end{array}$$
+
+El espacio que genera tiene dimensi\'{o}n $(n+1)(m+1)$.
+
+Cuando $m=n$ podemos considerar tambi\'{e}n la  base de potencias de polinomios de grado menor o igual que que $n$:
+
+$$B=\{1,x,x^2\ldots,x^n, y, xy, x^2y \ldots,x^{n-1}y,\ldots, y^2, xy^2,\ldots, x^{n-2}y,$$ $$\ldots, x^2y^{n-2}, y^{n-1}x,y^n \}$$
+
+Esta base posee forma triangular:
+
+$$\begin{array}{ccccccc}
+1 & x & x^2& \cdots &x^{n-2}&x^{n-1}& x^n\\
+y & yx& yx^2 & \cdots& yx^{n-2}& y x^{n-1} & \\
+y^2 & y^2x& y^2x^2 & \cdots& y^2 x^{n-2} & & \\
+\cdots & \cdots& \cdots&\cdots&& &  \\
+\cdots & \cdots& \cdots& & & & \\
+ y^{n-1} & xy^{n-1} &  & & & &\\
+ y^n & & & & & &
+\end{array}$$
+
+Genera un espacio de dimensi\'{o}n $\frac{(n+1)(n+2)}{2}.$
+
+\subsection{Superficies Producto Tensorial}
+
+Considerando la base rectangular de potencias
+$$P(x,y)=\sum_{i=0}^n \sum_{j=0}^m a_{ij} x^iy^j=\sum_{i=0}^n \left(\sum_{j=0}^m a_{ij}y^j \right) \;x^i=\sum_{i=0}^n c_i x^i$$
+
+Esto es, la superficie puede considerarse como una curva polinomial en la variable $x$ con coeficientes una curva polinomial en la variable $y$.
+
+\vspace{0.2cm}
+
+Podemos cambiar la base de polinomios: $B_x=\{B_0(x),\ldots,B_n(x)\},$ \; $B_y=\{C_0(y),\ldots,C_m(y)\}$. Entonces considerando la base producto tensorial $[B_0(x),\ldots,B_n(x)] \otimes [C_0(y),\ldots,C_m(y)]$ tenemos
+$$P(x,y)=\sum_{i=0}^n \sum_{j=0}^m b_{ij} B_i(x) C_j(y)$$
+
+En este caso $P(x,y)$ referida a esta nueva base puede no ser un polinomio arbitrario de grado $n+m$.
+
+Dado que la dimensi\'{o}n del espacio de polinomios que estamos considerando es $N=(n+1)(m+1)$, podemos interpolar este n\'{u}mero de puntos. Es decir, tenemos $(x_1,y_1),\ldots,(x_N,y_N)$ puntos del plano con sus correspondientes valores funcionales $z_1, \ldots,z_N$ que pueden expresarse como:
+
+$$\begin{array}{ccccc}
+(x_0,y_0,z_{00}) &(x_1,y_0,z_{10})&(x_2,y_0,z_{20})& \cdots&
+(x_n,y_0,z_{n0})\\
+(x_0,y_1,z_{01}) &(x_1,y_1,z_{11})&(x_2,y_1,z_{21})& \cdots&
+(x_n,y_1,z_{n1})\\
+\cdots & \cdots& \cdots& \cdots & \cdots \\
+(x_0,y_m,z_{0m}) &(x_1,y_m,z_{1m})&(x_2,y_m,z_{2m})& \cdots&
+(x_n,y_m,z_{nm})\\
+\end{array}$$
+
+De esta forma los argumentos $(x_i,y_j)$ son nodos de un malla rectangular
+
+\begin{center}
+\includegraphics[scale=0.55]{6_1.pdf}
+\end{center}
+
+Cada punto de la malla $(x_i,y_j)$ tiene asignado una altura $z_{ij}$.
+
+\begin{center}
+\includegraphics[scale=0.55]{6_2.pdf}
+\end{center}
+
+Buscamos un polinomio $P(x,y)$ que verifique:
+
+$$P(x_i,y_j)=z_{ij},\quad \quad 0\leq i\leq n,\quad 0\leq j\leq
+m.$$
+
+Las alturas $z_{00},z_{10},\ldots,z_{n0},$ correspondientes a los puntos $(x_0,y_0),(x_1,y_0),\ldots,(x_n,y_0),$ pueden ser interpoladas por un polinomio de grado menor o igual que $n$ :
+
+\begin{minipage}{.35 \textwidth}
+\includegraphics[scale=0.55]{6_3.pdf}
+\end{minipage} \quad \quad \quad
+\begin{minipage}{.4 \textwidth} $\left\{ \begin{array}{rl}
+z=P_0(x)=&\sum_{i=0}^n a_{i0} B_i(x)\\
+y=&y_0 \end{array} \right.$
+\end{minipage}
+
+verificando $P_0(x_k)=z_{k0}, \quad k=0,\ldots,n$ donde $B_i(x)$ es la base de polinomios a la que est\'{a} referida el polinomio $P_0(x)$
+
+Reiteramos el proceso para $(x_0,y_1),(x_1,y_1),\ldots,(x_n,y_1)$ obteniendo el polinomio $P_1(x)$ que interpola $z_{01},z_{11},\ldots,z_{n1}.$ As\'{\i} calculamos $m+1$ polinomios de interpolaci\'{o}n en la variable $x$:
+$$\begin{array}{c}
+P_0(x)=\sum_{i=0}^n a_{i0} B_i(x) \quad \mbox{ verifica } \quad
+P_0(x_k)=z_{k0}, \quad k=0,\ldots,n \\
+P_1(x)=\sum_{i=0}^n a_{i1} B_i(x) \quad \mbox{ verifica } \quad
+P_1(x_k)=z_{k1}, \quad k=0,\ldots,n \\
+\cdots \cdots \cdots \cdots \cdots \cdots \cdots \cdots \cdots \cdots \cdots \cdots \cdots \cdots \cdots \cdots \cdots \cdots \cdots \cdots\\
+P_m(x)=\sum_{i=0}^n a_{im} B_i(x) \quad \mbox{ verifica } \quad
+P_m(x_k)=z_{km}, \quad k=0,\ldots,n \\
+\end{array}$$
+\begin{center}
+\includegraphics[scale=0.45]{6_4.pdf}
+\end{center}
+
+Finalizada la fase de interpolaci\'{o}n en la variable $x$, comencemos con la interpolaci\'{o}n con respecto a la variable $y$. Denotemos $C_j(y)$ la base de polinomios de grado menor o igual que $m$. Consideramos
+$$Q_0(y)=\sum_{j=0}^m b_{0j}C_j(y),\quad  \mbox{tal que }\quad Q_0(y_k)=a_{0k},\quad k=0,\ldots,m$$
+que interpola los coeficientes $a_{0k}$. An\'{a}logamente,
+$$Q_1(y)=\sum_{j=0}^m b_{1j}C_j(y),\quad \mbox{tal que }\quad Q_1(y_k)=a_{1k},\quad k=0,\ldots,m$$
+Y as\'{\i} hasta
+$$Q_n(y)=\sum_{j=0}^m b_{nj}C_j(y),\quad \mbox{tal que }\quad
+    Q_n(y_k)=a_{nk},\quad k=0,\ldots,m$$
+
+Entonces el polinomio de interpolaci\'{o}n buscado ser\'{a}:
+
+$$P(x,y)=\sum_{i=0}^n Q_i(y) B_i(x)$$
+
+ya que para cualquier $(x_k,y_h),$ con $0\leq k\leq n, 0\leq h\leq m$:
+
+$$P(x_k,y_h)=\sum_{i=0}^n Q_i(y_h)B_i(x_k)=\sum_{i=0}^n a_{ih} B_i(x_k)=P_h(x_k)=z_{kh}$$
+
+%Observemos que
+%
+%$$P(x,y)=\sum_{i=0}^n \left( \sum_{j=0}^m b_{ij}C_j(y)\right)
+%B_i(x)=\left( \sum_{i=0}^n r_i B_i(x)\right) \left( \sum_{j=0}^m
+%s_j C_j(y)\right)$$ producto tensorial de un polinomio en la
+%variable $x$ y otro en la variable $y$.
+
+Este procedimiento se puede simplificar si en la segunda fase de la interpolaci\'{o}n utilizamos la base de Lagrange. Es decir,
+
+$$Q_i(y)=\sum_{j=0}^m a_{ij} L_j(y)$$
+entonces
+
+$$P(x,y)=\sum_{i=0}^n Q_i(y) B_i(x)=\sum_{i=0}^n \left( \sum_{j=0}^m a_{ij} L_j(y)\right) B_i(x)=$$ $$\sum_{j=0}^m \left( \sum_{i=0}^n a_{ij} B_i(x)\right) L_j(y)= \sum_{j=0}^m P_j(x)L_j(y)$$
+
+Por tanto, $P(x,y)$ interpola las curvas $P_k(x)$ en la variable $y$. Es decir, $P(x,y_k)=\sum_{j=0}^m P_j(x)L_j(y_k)= P_k(x)$.
+
+Si adem\'{a}s elegimos la base de Lagrange para la primera fase de la interpolaci\'{o}n, tenemos:
+
+$$P_j(x)=\sum_{i=0}^n z_{ij} \overline{L}_i(x)$$
+
+entonces,
+$$P(x,y)=\sum_{j=0}^m P_j(x) L_j(y)=\sum_{j=0}^m \left( \sum_{i=0}^n z_{ij} \overline{L}_i(x)\right) L_j(x)=\sum_{i=0}^n \sum_{j=0}^m z_{ij} \overline{L}_i(x) L_j(y)$$
+
+expresi\'{o}n en la que aparece expl\'{\i}citamente los valores interpolados $z_{ij}$.
+
+\subsection{Superficie bilineal}
+
+\begin{defn}
+Una superficie bilineal es la superficie que interpola $4$ puntos $(x_0,y_0,z_{00})$,\;$(x_0,y_1,z_{01})$,\;$(x_1,y_0,z_{10})$,\;$(x_1,y_1,z_{11})$; es decir, una superficie producto tensorial para $n=m=1$.
+\end{defn}
+
+\begin{center}
+\includegraphics[scale=0.45]{6_5.pdf}
+\end{center}
+
+Podemos construirla siguiendo el mismo procedimiento descrito anteriormente. Interpolamos en primer lugar con respecto a la variable $x$:
+\begin{itemize}
+\item Para $y=y_0$ interpolamos $(x_0,z_{00})$ y $(x_1,z_{10})$:
+$$P_0(x)=\frac{x_1 z_{00}-x_0 z_{10}}{x_1-x_0}+\frac{z_{10}-z_{00}}{x_1-x_0}x=a_{00}+a_{10}x$$
+\item Para $y=y_1$ interpolamos $(x_0,z_{01})$ y $(x_1,z_{11})$:
+$$P_1(x)=\frac{x_1 z_{01}-x_0 z_{11}}{x_1-x_0}+\frac{z_{11}-z_{01}}{x_1-x_0}x=a_{01}+a_{11}x$$
+\end{itemize}
+
+\begin{center}
+\includegraphics[scale=0.45]{6_6.pdf}
+\end{center}
+
+A continuaci\'{o}n interpolamos con respecto a $y$:
+\begin{itemize}
+\item Para $x=x_0$ interpolamos $(y_0,a_{00})$ y $(y_1,a_{01})$:
+
+$$Q_0(y)=\frac{y_1 a_{00}-y_0 z_{01}}{y_1-y_0}+\frac{a_{01}-a_{00}}{y_1-y_0}y$$
+\item Para $x=x_1$ interpolamos $(y_0,a_{10})$ y $(y_1,a_{11})$:
+
+$$Q_1(y)=\frac{y_1 a_{10}-y_0 a_{11}}{y_1-y_0}+\frac{a_{11}-a_{10}}{y_1-y_0}y$$
+
+\end{itemize}
+
+\begin{center}
+\includegraphics[scale=0.45]{6_5.pdf}
+\end{center}
+
+Entonces
+$$P(x,y)=Q_0(y)+Q_1(y)x=\frac{y_1 a_{00}-y_0 z_{01}}{y_1-y_0}+$$
+$$\frac{a_{01}-a_{00}}{y_1-y_0}y+\frac{y_1 a_{10}-y_0 a_{11}}{y_1-y_0}x+\frac{a_{11}-a_{10}}{y_1-y_0}yx.$$
+
+Si sustituimos las expresiones de $a_{ij}$ y agrupamos t\'{e}rminos:
+
+$$P(x,y)=z_{00}+\frac{z_{10}- z_{00}}{x_1-x_0}(x-x_0)+\frac{z_{01}-z_{00}}{y_1-y_0}(y-y_0)+$$
+$$+\frac{z_{00}-z_{01}-z_{10}+z_{11}}{(x_1-x_0)(y_1-y_0)}(x-x_0)(y-y_0).$$
+
+{\textbf Nota:} Los m\'{e}todos hasta hora descritos construyen superficies $z=P(x,y).$
+
+\subsection{Lofting}
+
+T\'{e}cnica basada en la construcci\'{o}n de una superficie recubridora de ciertas curvas planas (secciones de buques) posicionadas en $\mathbb{R}^3.$
+
+\begin{center}
+\includegraphics[scale=0.45]{6_27.pdf}
+\end{center}
+
+Con este procedimiento la superficie obtenida puede ser una superficie param\'{e}trica $S(u,v)=(x(u,v),y(u,v),z(u,v))$.
+
+\subsection{v-Lofting}
+
+Fijadas $n+1$ curvas, $C_0(u),C_1(u), \ldots, C_n(u)$,  para $u\in [u_0,u_1]$
+
+Se pretende construir una superficie $S(u,v)$ con  $v\in [v_0,v_n]$ tal que considerando la partici\'{o}n $v_0<v_1<\cdots <v_n$
+se verifique:
+
+$$S(u,v_i)=C_i(u),\quad \quad i=0,\ldots,n.$$
+
+Para la construcci\'{o}n de esta superficie $S(u,v)$ podemos generalizar el procedimiento utilizado en la interpolaci\'{o}n de superficies producto tensorial.
+
+Es decir, si consideramos $L_0(v), L_1(v), \cdots,L_n(v)$ polinomios de la base  de Lagrange de grado $n$ asociada a la partici\'{o}n fijada del intervalo $[v_0,v_n]$,
+
+$$\left\{ \begin{array}{l}
+L_k(v_i)=0,\quad \quad \mbox{si} \quad  i\neq k\\
+L_k(v_k)=1
+\end{array} \right.$$
+
+Tenemos que
+$$S(u,v)=\sum_{i=0}^n C_i(u) L_i(v)$$
+
+Observemos que las curvas fijadas $C_k(u)$ son curvas param\'{e}tricas de la superficie v-Lofting:
+$$S(u,v_k)=\sum_{i=0}^n C_i(u) L_i(v_k)=C_k(u)$$
+
+Tambi\'{e}n es posible utilizar otra base que no sea la de Lagrange. Sea  $B=\{B_0(v), \ldots,B_n(v)\}$  base de polinomios. Entonces
+$$S(u,v)=\sum_{i=0}^n a_i(u) B_i(v)$$
+
+Para determinar $a_i(u)$ imponemos las condiciones de interpolaci\'{o}n:
+
+$$S(u,v_k)=\sum_{i=0}^n a_i(u) B_i(v_k)=C_k(u), \quad \quad k=0,\ldots,n $$
+
+Podemos escribir estas condiciones matricialmente:
+
+$$\begin{array}{cccc}
+\left( \begin{array}{cccc} B_0(v_0)&B_1(v_0)& \cdots&
+B_n(v_0)\\B_0(v_1)&B_1(v_1)& \cdots& B_n(v_1)\\ \vdots& \vdots &
+\vdots & \vdots \\ B_0(v_n)&B_1(v_n)& \cdots & B_n(v_n)
+\end{array} \right) & \left( \begin{array}{c} a_0(u)\\a_1(u) \\
+\vdots \\ a_n(u)
+\end{array} \right) & = & \left( \begin{array}{c} C_0(u) \\ C_1(u) \\
+\vdots \\ C_n(u)
+\end{array} \right)
+\end{array}$$
+
+Las curvas $a_i(u)$ quedan determinadas como combinaciones lineales de las curvas $C_k(u)$ de partida.
+
+Esto es, si denotamos $L$ la matriz inversa de $B$:
+
+\vspace{0.5cm}
+
+$$\begin{array}{ccl}
+\left(
+\begin{array}{c} a_0(u)\\a_1(u) \\
+\vdots \\ a_n(u)
+\end{array}\right)&=&\left(
+\begin{array}{cccc} l_{00}&l_{01}& \cdots&
+l_{0n}\\l_{10}&l_{11}& \cdots& l_{1n}\\\vdots& \vdots&\vdots& \vdots\\
+l_{n0}&l_{1n}& \cdots& l_{nn}
+\end{array}\right) \left(
+\begin{array}{c} C_0(u)\\C_1(u) \\
+\vdots \\ C_n(u)
+\end{array}\right)=\\ & & \\
+&=&\left(
+\begin{array}{c} \sum_{j=0}^n l_{0j} \;C_j(u)\\\sum_{j=0}^n l_{1j}\;C_j(u) \\
+\vdots \\ \sum_{j=0}^n l_{nj}\; C_j(u)
+\end{array}\right)
+\end{array}$$
+
+%{\textbf Ejemplo:}
+%
+%Consideremos las siguientes curvas definidas para $u\in[0,2\pi]$:
+%
+%$$\begin{array}{ccl}
+%C_0(u)&=&(cos(u),0,sen(u))\\
+%C_1(u)&=&
+%\left(\frac{\sqrt{2}}{2}cos(u),-\frac{\sqrt{2}}{2}cos(u)+3,sen(u)\right) \\
+%C_3(u)&=&(3,-cos(u)+3,sen(u))
+%\end{array}$$
+%
+%\begin{center}
+%\colocapdf{6.29}{0.4\textwidth}
+%\end{center}
+%
+%Vamos a considerar $v\in[0,2]$ con partici\'{o}n $0<1<2$. Los polinomios de la base de Lagrange asociados son:
+%$$\begin{array}{cl}
+%L_0(v)=&\frac{1}{2} v^2-\frac{3}{2}v +1\\
+%L_1(v)=&- v^2+2v \\
+%L_2(v)=&\frac{1}{2} v^2-\frac{1}{2}v
+%\end{array}$$
+%
+%La superficie v-lofting:
+%
+%$$\begin{array}{cl}
+%S(u,v)&=C_0(u)L_0(v)+C_1(u)L_1(v)+C_2(u)L_2(v)=\\
+% & \\
+% &=\left(\frac{1}{2} v^2-\frac{3}{2}v +1
+% \right)(cos(u),0,sen(u))+\\
+% & \\
+%&(-v^2+2v)\left(\frac{\sqrt{2}}{2}cos(u),-\frac{\sqrt{2}}{2}cos(u)+3,sen(u)\right)+\\
+%& \\
+% &\left(\frac{1}{2} v^2-\frac{1}{2}v\right)(3,-cos(u)+3,sen(u))
+%\end{array}$$
+%
+%\begin{center}
+%\colocapdf{6.30}{0.55\textwidth}
+%\end{center}
+%
+%Tambi\'{e}n podemos construir la superficie v-lofting utilizando una base de polinomios que no sea la de Lagrange. Por ejemplo usemos la base de %potencias.
+%$$S(u,v)=a_0(u)+a_1(u) v+a_2(u)v^2$$
+%
+%Las condiciones de interpolaci\'{o}n son:
+%
+%$$\begin{array}{cl}
+%v=0:\quad& a_0(u)=C_0(u)\\
+%v=1:\quad& a_0(u)+a_1(u)+a_2(u)=C_1(u)\\
+%v=2:\quad& a_0(u)+2a_1(u)+4a_2(u)=C_2(u)
+%\end{array}$$
+%
+%Es decir:
+%$$\begin{array}{cccc}
+%\left(
+%\begin{array}{ccc} 1& 0 &0 \\ 1& 1& 1\\1 & 2&4
+%\end{array}\right)& \left(
+%\begin{array}{c}a_0(u) \\ a_1(u)\\a_2(u)
+%\end{array}\right) &=
+%&\left(
+%\begin{array}{c}C_0(u)\\C_1(u)\\C_2(u)
+%\end{array} \right)
+%\end{array}$$
+%
+%Si invertimos la matriz de coeficientes:
+%
+%$$\begin{array}{cccc}
+%\left(
+%\begin{array}{c}a_0(u) \\ a_1(u)\\a_2(u)
+%\end{array}\right)& =& \frac{1}{2} \left(
+%\begin{array}{ccc} 2& 0 &0 \\ -3& 4& -1\\1
+%& -2&1
+%\end{array}\right)&\left(
+%\begin{array}{c}C_0(u)\\C_1(u)\\C_2(u)
+%\end{array} \right)
+%\end{array}$$
+%
+%$$\begin{array}{rl}
+%a_0(u)&=C_0(u)=(cos(u),0,sen(u))\\
+%& \\
+%a_1(u)&=-\frac{3}{2}C_0(u)+2C_1(u)-\frac{1}{2}C_2(u)=\\
+% &=\frac{1}{2}\left((2\sqrt{2}-3)cos(u)-3,(1-2\sqrt{2})cos(u)+9,0
+% \right)\\
+% & \\
+%a_2(u)&=\frac{1}{2}C_0(u)-C_1(u)+\frac{1}{2}C_2(u)=\\
+% &=\frac{1}{2}\left((1-\sqrt{2})cos(u)+3,(\sqrt{2}-1)cos(u)-3,0
+% \right)\\
+%\end{array}$$
+%
+%La superficie resultante $S(u,v)=a_0(u)+va_1(u)+v^2a_2(u)$ es la misma superficies que obten\'{\i}amos utilizando la base de Lagrange.
+%
+\subsection{Superficies de B\'{e}zier}
+
+\begin{defn}
+Dados un conjunto de puntos de control
+$\{P_{ij}=(a_{ij},b_{ij},c_{ij})\}$ con $0\leq i\leq n,\quad 0\leq j\leq m,$ definimos la superficie de B\'{e}zier generada por estos puntos como la siguiente superficie param\'{e}trica:
+
+$$S(u,v)=\sum_{i=0}^n \sum_{j=0}^m P_{ij} B_i^n(u) B_j^m(v)$$
+para $u,v\in [0,1],$ \quad donde $$B_i^n(u)=\binom{n}{i} u^i(1-u)^{n-i},$$
+$$B_j^m(v)=\binom{m}{j} v^j (1-v)^{m-j}$$
+son polinomios de Bernstein de grado $n$ y $m$ respectivamente.
+
+Esto es:
+
+$$S(u,v)=\sum_{i=0}^n \sum_{j=0}^m (a_{ij},b_{ij},c_{ij}) B_i^n(u)B_j^m(v)=$$
+
+$$\left( \sum_{i=0}^n \sum_{j=0}^m a_{ij} B_i^n(u) B_j^m(v),\sum_{i=0}^n \sum_{j=0}^m b_{ij} B_i^n(u) B_j^m(v), \sum_{i=0}^n \sum_{j=0}^m c_{ij} B_i^n(u) B_j^m(v) \right)$$
+\end{defn}
+
+%{\textbf Ejemplo:}
+%
+%Si $n=m=1$ tenemos:
+%$$S(u,v)=P_{00}(1-u)(1-v)+P_{01}(1-u)v+P_{10}u(1-v)+P_{11}uv$$
+%
+%\begin{center}
+%\colocapdf{7.1}{0.45\textwidth}
+%\end{center}
+%
+%En este caso la superficie interpola los $4$ puntos $P_{00},P_{10},P_{01},P_{11}$.
+%
+Recordemos algunas de las propiedades de los polinomios de Bernstein:
+
+\begin{itemize}
+    \item $B_k^n(x)\geq 0,$ \quad  \quad $\forall x,n,k.$
+    \vspace{0.2cm}
+    \item $B_k^n(0)=0,$ para \quad$ k\neq 0,$\quad  $B_0^n(0)=1$ $B_k^n(1)=0,$ para\quad$ k\neq n,$\quad  $B_n^n(1)=1.$
+    \vspace{0.2cm}
+    \item $\sum_{k=0}^{n}B_k^n(x)=1, \quad\quad \forall x.$
+    \vspace{0.2cm}
+    \item Recurrencia: $B_k^n(x)=(1-x)B_k^{n-1}(x)+xB_{k-1}^{n-1}(x), \quad \forall n\geq 2, \quad 1\leq k\leq n.$
+    \vspace{0.2cm}
+    \item Derivada: $\displaystyle \frac{d}{dx} B_k^n(x)= n( B_{k-1}^{n-1}(x)-B_k^{n-1}(x))$
+\end{itemize}
+
+{\textbf Propiedades:}
+
+\begin{itemize}
+\item $S(u,v)$ interpola los puntos v\'{e}rtices de la malla de puntos de control:
+
+\begin{center}
+
+
+\end{center}
+\begin{minipage}{.3 \textwidth}
+$\begin{array}{c} S(0,0)=P_{00}\\ S(0,1)=P_{0m}\\
+S(1,0)=P_{n0}\\ S(1,1)=P_{nm}
+\end{array}$
+\end{minipage} \quad
+\begin{minipage}{.3 \textwidth}
+\includegraphics[scale=0.45]{7_2.pdf}
+\end{minipage}
+
+\item Derivadas parciales:
+$$\frac{\partial S(u,v)}{\partial u}=\sum_{i=0}^n \sum_{j=0}^m P_{ij} \frac{dB_i^n(u)}{d u} B_j^m(v)$$
+\end{itemize}
+
+Teniendo en cuenta la derivada de los polinomios de Bernstein y reagrupando t\'{e}rminos, tenemos:
+$$\frac{\partial S(u,v)}{\partial u}=n\sum_{i=0}^{n-1} \sum_{j=0}^m (P_{i+1,j}-P_{ij}) B_i^{n-1}(u) B_j^m(v)$$
+De la misma forma:
+$$\frac{\partial S(u,v)}{\partial v}=m\sum_{i=0}^{n} \sum_{j=0}^{m-1} (P_{i,j+1}-P_{ij}) B_i^{n}(u) B_j^{m-1}(v)$$
+Si consideremos la curva param\'{e}trica frontera $v=0$, es decir $\alpha(u)=S(u,0)$ tenemos:
+$$\alpha'(u)=\frac{\partial S(u,0)}{\partial u}=n\sum_{i=0}^{n-1} (P_{i+1,0}-P_{i0}) B_i^{n-1}(u)$$
+Por tanto, $\alpha'(0)=n(P_{10}-P_{00})$ y $\alpha'(1)=n(P_{n0}-P_{n-1,0}).$
+
+\begin{itemize}
+\item Los puntos $S(u,v)$ est\'{a}n en la envolvente convexa de los puntos $P_{ij}$.
+$$\sum_{i=0}^{n} \sum_{j=0}^m B_i^{n}(u) B_j^m(v)= \sum_{i=0}^{n}\left( \sum_{j=0}^m B_j^m(v) \right) B_i^{n}(u)=\sum_{i=0}^{n} B_i^{n}(u)=1$$
+\item Invariancia af\'{\i}n (igual que en caso de las curvas de B\'{e}zier).
+\item Si consideramos una curva param\'{e}trica $v=v_0$,
+$$\alpha(u)=S(u,v_0)=\sum_{i=0}^n \left( \sum_{j=0}^m P_{ij} B_j^m(v_0) \right) B_i^n(u)$$
+es una curva de B\'{e}zier de grado $n$ con puntos de control $Q_i=\sum_{j=0}^m P_{ij} B_j^m(v_0).$
+\end{itemize}
+
+\begin{itemize}
+\item Control seudolocal: si un punto de control $P_{kh}$ es modificado a $\overline{P}_{kh}$, entonces las superficies resultantes se diferencian en:
+    $$S(u,v)-\overline{S}(u,v)=(P_{kh}-\overline{P}_{kh})B_k^n(u)B_h^m(v)$$
+    y al igual que en el caso de las curvas es posible cuantificar esta deferencia en m\'{o}dulo.
+
+\begin{center}
+\includegraphics[scale=0.45]{7_4.pdf}
+\end{center}
+\end{itemize}
+
+\subsection{Superficies de B\'{e}zier Compuestas}
+
+{\textbf Propiedades:}
+
+Sean $\{P_{ij}\}$ con $0\leq i\leq n,\quad 0\leq j\leq m$ los puntos de control de una superficie de B\'{e}zier $S_1(u,v)$ definida en $[u_0,u_1] \times [v_0,v_1]$:
+
+$$S_1(u,v)=\sum_{i=0}^n \sum_{j=0}^m P_{ij} B_i^n(t) B_j^m(s)$$
+
+donde $t=\frac{u-u_0}{u_1-u_0},\quad s=\frac{v-v_0}{v_1-v_0}$.
+
+\vspace{0.2cm}
+
+Y sean $\{Q_{ij}\}$ con $0\leq i\leq n,\quad 0\leq j\leq m$ los puntos de control de una superficie de B\'{e}zier $S_2(u,v)$ definida en $[u_1,u_2] \times [v_0,v_1]$:
+
+$$S_2(u,v)= \sum_{i=0}^n \sum_{j=0}^m Q_{ij} B_i^n(r) B_j^m(s)$$
+
+donde $r=\frac{u-u_1}{u_2-u_1}.$
+
+\begin{center}
+\includegraphics[scale=0.45]{7_5.pdf}
+\end{center}
+
+La superficie compuesta, definida para $u\in [u_0,u_2],$ \quad $v\in [v_0,v_1]$, es continua con clase ${\mathcal  C}^k$ si lo es en los puntos de la curva param\'{e}trica $u=u_1$, uni\'{o}n de $S_1(u,v)$ y $S_2(u,v)$.
+
+$$S_1(u_1,v)= \sum_{i=0}^n \sum_{j=0}^m P_{ij} B_i^n(1) B_j^m(s)=\sum_{j=0}^m P_{nj} B_j^m(v)$$
+$$S_2(u_1,v)= \sum_{i=0}^n \sum_{j=0}^m Q_{ij} B_i^n(0) B_j^m(s)= \sum_{j=0}^m Q_{0j} B_j^m (v)$$
+$S(u,v)$ ser\'{a} ${\mathcal  C}^0$ sii $S_1(u_1,v)=S_2(u_1,v)$ sii, teniendo en cuenta que $B_j^m(v)$ es base,
+$$P_{nj=Q_{0j},\quad \quad j=0\ldots,m}$$
+$S(u,v)$ ser\'{a} ${\mathcal  C}^1$ sii $\frac{\partial S_1}{\partial v} (u_1,v)=\frac{\partial S_2}{\partial v}(u_1,v)$  y $\frac{\partial S_1}{\partial u} (u_1,v)=\frac{\partial S_2}{\partial u}(u_1,v)$:
+$$\frac{\partial S_1}{\partial v}(u_1,v)= \frac{m}{v_1-v_0} \sum_{j=0}^{m-1} (P_{n,j+1}-P_{nj}) B_j^{m-1}(s)$$
+$$\frac{\partial S_2}{\partial v}(u_1,v)= \frac{m}{v_1-v_0} \sum_{j=0}^{m-1} (Q_{0,j+1}-Q_{0j}) B_j^{m-1}(s)$$
+Lo que no a\~{n}ade condiciones nuevas.
+
+$$\frac{\partial S_1}{\partial u}(u_1,v)= \frac{n}{u_1-u_0} \sum_{j=0}^{m} (P_{nj}-P_{n-1,j}) B_j^{m}(s)$$
+$$\frac{\partial S_2}{\partial u}(u_1,v)= \frac{n}{u_2-u_1} \sum_{j=0}^{m} (Q_{1j}-Q_{0j}) B_j^{m}(s)$$
+
+Por tanto $S(u,v)$ ser\'{a} ${\mathcal  C}^1$ sii
+$$\frac{n}{u_1-u_0}(P_{nj}-P_{n-1,j})= \frac{n}{u_2-u_1}(Q_{1j}-Q_{0j}), \quad \quad j=0,\ldots,m$$
+
+Es decir, para cada $j=0,\ldots,m$ los puntos $P_{n-1,j}, P_{nj}=Q_{0j}, Q_{1j}$ tienen que estar alineados y a cierta distancia.
+
+\begin{center}
+\includegraphics[scale=0.45]{7_7.pdf}
+\end{center}
+
+Recordamos que el caso de curvas de B\'{e}zier compuestas, fijados los puntos de control, pod\'{\i}amos buscar una partici\'{o}n del intervalo global de definici\'{o}n y reparametrizar las curva simples para que la curva composici\'{o}n sea de clase ${\mathcal  C}^1$. En el caso de superficies, fijados los puntos de control, no podemos hacer lo mismo. Los puntos de control y la partici\'{o}n de los intervalos han de ser fijados a priori para que la superficie de B\'{e}zier compuesta sea ${\mathcal  C}^1$.
+
+\end{document} 
